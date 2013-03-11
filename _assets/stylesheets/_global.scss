@@ -84,9 +84,9 @@ a {
 
 p {
   code {
-    // @include border-radius(3px);
+    @include border-radius(3px);
     @include adjust-font-size-to(14px);
-    // font-family: ;
+    color: $gray;
     padding: 0 .3em;
     background-color: #fef9ec;
     border: solid 1px darken(#fef9ec, 5%);

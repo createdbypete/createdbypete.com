@@ -47,7 +47,12 @@ nav#thenav {
 
 body { 
   .container { padding-left: $navWidth + $gridGutter; padding-right: 3%; padding-top: $gridGutter; }
-  &>footer { text-align: center; padding: $gridColumn/4 $gridColumn; }
+  &>footer { 
+    text-align: center; 
+    padding-top: $gridColumn/4; 
+    padding-bottom: $gridColumn/4; 
+    padding-left: $navWidth + $gridGutter; 
+    padding-right: 3%; }
 }
 
 section#thegrid {
