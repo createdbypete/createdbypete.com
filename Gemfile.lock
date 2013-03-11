@@ -22,15 +22,10 @@ GEM
     jekyll-assets (0.3.5)
       jekyll
       sprockets (~> 2.9)
-    jekyll-minimagick (0.0.3)
-      jekyll (>= 0.10.0)
-      mini_magick (>= 3.3)
     kramdown (0.14.2)
     liquid (2.5.0)
     maruku (0.6.1)
       syntax (>= 1.0.0)
-    mini_magick (3.5.0)
-      subexec (~> 0.2.1)
     multi_json (1.6.1)
     posix-spawn (0.3.6)
     pygments.rb (0.3.7)
@@ -44,7 +39,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    subexec (0.2.2)
     syntax (1.0.0)
     tilt (1.3.5)
     uglifier (1.3.0)
@@ -59,7 +53,6 @@ DEPENDENCIES
   coffee-script
   jekyll (~> 0.12.1)
   jekyll-assets
-  jekyll-minimagick
   redcarpet (~> 2.2.2)
   sass
   uglifier
