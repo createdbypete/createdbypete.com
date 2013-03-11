@@ -19,7 +19,7 @@ pygments: true
 exclude: ["vendor","Gemfile","Gemfile.lock","Rakefile"]
 markdown: redcarpet
 date_format: "ordinal"
-titlecase: true
+titlecase: false
 
 # ----------------------- #
 #      Jekyll Assets      #
