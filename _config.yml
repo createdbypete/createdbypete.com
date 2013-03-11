@@ -2,10 +2,11 @@
 #      Main Configs       #
 # ----------------------- #
 url: http://createdbypete.com
-title: Created by Pete
+title: Created by Pete - Peter Rhoades
 subtitle: 
 author: Peter Rhoades
 description:
+email: hello@createdbypete.com
 
 
 # ----------------------- #
@@ -15,7 +16,14 @@ root:
 permalink: /:categories/:title
 auto: true
 pygments: true
+exclude: ["vendor","Gemfile","Gemfile.lock","Rakefile"]
+markdown: redcarpet
+date_format: "ordinal"
+titlecase: true
 
+# ----------------------- #
+#      Jekyll Assets      #
+# ----------------------- #
 assets:
   dirname: assets
   baseurl: /assets/
