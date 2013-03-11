@@ -1,0 +1,27 @@
+<ul {% if index %}id="filter"{% endif %}>
+  <li class="name">
+    <a href="{{ root_url }}/"
+     {% if index %}
+     title="Created by Pete" 
+     data-filter="*"
+     {% else %}
+     title="Back to homepage"
+     {% endif %}>
+      <img src="{{ root_url }}/images/cbp-logo.png" alt="Created by Pete">
+    </a>
+  </li>
+  {% if index %}
+  <li>
+    <a href="#" title="Articles" data-filter=".articles"><i class="icon-pencil"></i> Articles</a>
+  </li>
+  <li>
+    <a href="#" title="Work" data-filter=".work"><i class="icon-lightbulb"></i> Work</a>
+  </li>
+  <li>
+    <a href="#" title="Lab" data-filter=".lab"><i class="icon-beaker"></i> Lab</a>
+  </li>
+  <li>
+    <a href="#" title="Info" data-filter=".info"><i class="icon-user"></i> Info</a>
+  </li>
+  {% endif %}
+</ul>

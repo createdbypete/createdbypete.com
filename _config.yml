@@ -1,0 +1,18 @@
+# ----------------------- #
+#      Main Configs       #
+# ----------------------- #
+url: http://createdbypete.com
+title: Created by Pete
+subtitle: 
+author: Peter Rhoades
+description:
+
+
+# ----------------------- #
+#    Jekyll & Plugins     #
+# ----------------------- #
+root: 
+permalink: /:categories/:title
+auto: true
+pygments: true
+exclude: ["sass","config.rb"]

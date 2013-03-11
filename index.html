@@ -1,0 +1,16 @@
+---
+layout: default
+index: true
+---
+<section id="thegrid">
+{% for post in site.posts %}
+<article class="item {{ post.categories | first }} {{ post.grid | join: ' ' }}">
+  <header>
+    <h1 class="entry-title">
+      <a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
+    </h1>
+    <a rel="full-article" href="{{ root_url }}{{ post.url }}">Read this article</a>
+  </header>
+</article>
+{% endfor %}
+</section>

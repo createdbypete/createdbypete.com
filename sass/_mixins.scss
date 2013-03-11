@@ -1,0 +1,27 @@
+@function grid-width($n) {
+  @return $n * $gridColumn + ($n - 1) * $gridGutter;
+}
+
+@mixin link-colours($normal, $visited: false, $hover: false, $focus: false, $active: false) {
+  color: $normal;
+  @if $visited {
+    &:visited {
+      color: $visited; 
+    } 
+  }
+  @if $hover {
+    &:hover {
+      color: $hover; 
+    } 
+  }
+  @if $focus {
+    &:focus {
+      color: $focus; 
+    } 
+  }
+  @if $active {
+    &:active {
+      color: $active; 
+    } 
+  } 
+}
