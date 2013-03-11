@@ -25,3 +25,9 @@
     } 
   } 
 }
+
+@mixin section-borders($size: 3px) {
+  border-top: solid $size transparent;
+  &.articles { border-color: $articlesColour }
+  &.playground { border-color: $playgroundColour }
+}

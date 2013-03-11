@@ -6,12 +6,12 @@
 
 // Colours
 // -------------------------
-$mainColour: #3498db;
-$secondaryColour: #d3d2ce;
-$codeBackground: #fef9ec;
+$mainColour:            #3498db;
+$secondaryColour:       #d3d2ce;
+$codeBackground:        #fef9ec;
 
-$articlesColour: $mainColour;
-$labColour: #f1c40f;
+$articlesColour:        #3498db;
+$playgroundColour:      #f1c40f;
 
 // Grays
 // -------------------------
@@ -28,7 +28,7 @@ $textColour:            $grayDark;
 
 // Layout
 // -------------------------
-$navWidth: 100px;
+$navWidth:   100px;
 $gridColumn: 180px;
 $gridGutter: 10px;
 
@@ -40,6 +40,7 @@ $base-font-size: 16px;
 $base-line-height: 24px;
 $headingFontFamily: "Bitter", serif;
 $bodyFontFamily: "Open Sans", Helvetica,  sans-serif;
+$codeFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;
 
 
 
@@ -53,18 +54,19 @@ html, body {
   color: $textColour;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: $headingFontFamily; }
+h1, h2, h3, h4, h5, h6 { font-family: $headingFontFamily; font-weight: 700; }
 h1 { @include adjust-font-size-to(48px); }
-h2 {}
-h3 {}
-h4 {}
-h5 {}
-h6 {}
+h2 { @include adjust-font-size-to(36px); }
+h3 { @include adjust-font-size-to(24px); }
+h4 { @include adjust-font-size-to(18px); }
+h5 { @include adjust-font-size-to(14px); }
+h6 { @include adjust-font-size-to(14px); font-weight: 400; }
 
 
 pre {
   background-color: $codeBackground;
   color: $gray;
+  font-family: $codeFontFamily;
   code { background-color: transparent; }
 }
 
@@ -82,7 +84,7 @@ a {
 
 p {
   code {
-    @include border-radius(3px);
+    // @include border-radius(3px);
     @include adjust-font-size-to(14px);
     // font-family: ;
     padding: 0 .3em;
@@ -91,7 +93,7 @@ p {
   }
   a { 
     @include transition(background-color 200ms ease);
-    padding: 0 1px;
+    padding: 0 .2em;
 
     &:hover { 
       background-color: lighten($mainColour, 40%); 

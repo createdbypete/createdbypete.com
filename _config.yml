@@ -15,4 +15,16 @@ root:
 permalink: /:categories/:title
 auto: true
 pygments: true
-exclude: ["sass","config.rb"]
+
+assets:
+  dirname: assets
+  baseurl: /assets/
+  sources:
+    - _assets/images
+    - _assets/javascripts
+    - _assets/stylesheets
+  compress:
+    js:   ~
+    css:  ~
+  cachebust: none
+  gzip: false
