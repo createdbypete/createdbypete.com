@@ -1,8 +1,7 @@
 ---
 layout: default
 ---
-
-<article id="thepost" class="hentry {{ page.categories | first }}" role="article">
+<article id="thepost" class="hentry {{ page.categories | first }}" role="article" style="background-image: url('/media/{{ page.image }}')">
   <header>
     <h1 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
   </header>

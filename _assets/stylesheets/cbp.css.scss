@@ -67,6 +67,7 @@ section#thegrid {
     margin: $gridGutter/2;
     background-color: $white;
     text-align: center;
+    background-position: center;
 
     &.large { width: grid-width(2); height: grid-width(2); }
     &.tall { height: grid-width(2); }
@@ -74,6 +75,7 @@ section#thegrid {
 
     &>header { 
       position: absolute;
+      background-color: $white;
       bottom: 0;
       width: 100%;
       padding: $gridGutter*2;
@@ -102,10 +104,16 @@ article#thepost {
   margin: 0 auto;
   background-color: $white;
   padding: 0 $articlePadding ($articlePadding/2) $articlePadding;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  &>header { 
+    padding-top: 200px;
+  }
 
   &>footer { 
     @include rhythm-borders(0px);
-    @include leader(4);
+    @include leader(3);
     @include adjust-font-size-to(14px);
     border: 0;
     border-top: solid 1px $secondaryColour;

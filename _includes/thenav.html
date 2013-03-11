@@ -10,10 +10,10 @@
       <img src="{% asset_path cbp-logo.png %}" alt="Created by Pete">
     </a>
   </li>
-  {% if index %}
   <li>
     <a href="#" title="Articles" data-filter=".articles" class="category"><i class="icon-pencil"></i> Articles</a>
   </li>
+  {% comment %}
   <li>
     <a href="#" title="Work" data-filter=".work" class="category"><i class="icon-lightbulb"></i> Work</a>
   </li>
@@ -23,5 +23,5 @@
   <li>
     <a href="{{ root_url }}/peter-rhoades" title="About"><i class="icon-user"></i> Info</a>
   </li>
-  {% endif %}
+  {% endcomment %}
 </ul>
