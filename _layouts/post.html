@@ -1,14 +1,7 @@
 ---
 layout: default
 ---
-<!-- <nav class="paginator">
-  {% if page.previous.url %}
-    <a class="prev" href="{{page.previous.url}}" title="{{page.previous.title}}"><i class="icon-arrow-right"></i> Older posts</a>
-  {% endif %}
-  {% if page.next.url %}
-    <a class="next" href="{{page.next.url}}" title="{{page.next.title}}">Newer posts <i class="icon-arrow-left"></i></a>
-  {% endif %}
-</nav> -->
+
 <article id="thepost" class="hentry {{ page.categories | first }}" role="article">
   <header>
     <h1 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h1>
@@ -18,7 +11,11 @@ layout: default
   </section>
   <footer>
     <p class="meta">
-      <i class="icon-pencil"></i> Written by <a rel="me" href="https://plus.google.com/116964527372254202973?rel=author" target="_blank">{{ site.author }}</a> on {{ page.date | date: "%d %B %Y" }}
+      {% include post/date.html %}
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://plus.google.com/116964527372254202973?rel=author" target="_blank">{{ site.author }}</a> on {{ time }}
+      {% if was_updated != '0' %}
+        ({{ updated }})
+      {% endif %}
     </p>
   </footer>
 </article>
