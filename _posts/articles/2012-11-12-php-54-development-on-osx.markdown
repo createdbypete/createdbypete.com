@@ -3,6 +3,7 @@ layout: post
 title: PHP 5.4 Development on OSX
 categories: [articles]
 grid: [tall]
+alias: /blog/2012/11/php-54-development-on-osx.html
 ---
 For an industry that always craves the latest and greatest it baffles me why we always seems to be behind the times when it comes to versions of things. Having managed servers I certainly know why you follow the rule of "if it isn't broke don't upgrade it"; but when I still come across hosts offering PHP 5.2 when the lastest version of PHP at the time of writting is 5.4.9 it saddens me to think of what people are missing.
 

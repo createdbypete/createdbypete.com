@@ -3,6 +3,7 @@ layout: post
 title: Taking a look at Foundation
 categories: [articles]
 grid: [wide]
+alias: /blog/2012/10/taking-a-look-at-foundation.html
 ---
 
 Recently I've been been experimenting with [Foundation](http://foundation.zurb.com), from the talented people at [Zurb](http://zurb.com). Foundation is now at version 3 and claims to be "The most advanced responsive front-end framework in the world".

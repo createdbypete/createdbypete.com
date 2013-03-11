@@ -2,6 +2,7 @@
 layout: post
 title: Absolute relativity, sizing text with CSS
 categories: [articles]
+alias: /blog/2012/11/absolute-relativity-sizing-text-with-css.html
 ---
 Inspired by a recent Tweet from [@missrachilli](https://twitter.com/missrachilli) regarding the use of em and px values in CSS I thought a quick summary might help others. This is not a new discussion but with accepted opinions changing all the time I wanted to share how I deal with the decision.
 

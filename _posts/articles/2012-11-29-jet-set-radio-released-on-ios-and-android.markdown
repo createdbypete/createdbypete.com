@@ -3,6 +3,7 @@ layout: post
 title: Jet Set Radio released on iOS and Android!
 categories: [articles]
 grid: [wide]
+alias: /blog/2012/11/jet-set-radio-released-on-ios-and-android.html
 ---
 Today is a good day, Sega has released [Jet Set Radio](http://www.sega.co.uk/games/jet-set-radio/) on [iOS](https://itunes.apple.com/gb/app/jet-set-radio/id554531935?mt=8) and [Android](https://play.google.com/store/apps/details?id=com.sega.jetsetradio).
 

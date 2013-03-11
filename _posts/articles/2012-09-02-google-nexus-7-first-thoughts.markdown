@@ -2,6 +2,7 @@
 layout: post
 title: Google Nexus 7, first thoughts
 categories: [articles]
+alias: /blog/2012/09/google-nexus-7-first-thoughts.html
 ---
 
 <img src="/images/posts/2012-09-02-google-nexus-7-first-thoughts/tablet-n7-features-ushome-family.png" class="left">
