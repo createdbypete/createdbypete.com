@@ -4,7 +4,11 @@ index: true
 ---
 <section id="thegrid">
 {% for post in site.posts %}
-<article class="item {{ post.categories | first }} {{ post.grid | join: ' ' }}" style="background-image: url('/media/{{ post.image }}')">
+{% capture has_image %}{{ post.image | size }}{% endcapture %}
+<article class="item {{ post.categories | first }} {{ post.grid | join: ' ' }}" 
+{% if has_image != '0' and post.grid == 'large' %}
+  style="background-image: url('/media/370x370/{{ post.image }}')"
+{% endif %}>
   <header>
     <h1 class="entry-title">
       <a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
