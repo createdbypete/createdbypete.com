@@ -1,9 +1,8 @@
 <ul {% if index %}id="filter"{% endif %}>
   <li class="name">
-    <a href="{{ root_url }}/"
+    <a href="{{ root_url }}/#"
      {% if index %}
-     title="Created by Pete" 
-     data-filter="*"
+     title="Created by Pete" data-filter="*" class="category"
      {% else %}
      title="Back to homepage"
      {% endif %}>
@@ -11,14 +10,14 @@
     </a>
   </li>
   <li>
-    <a href="#" title="Articles" data-filter=".articles" class="category"><i class="icon-pencil"></i> Articles</a>
+    <a href="{{ root_url }}/#articles" title="Articles" class="category"><i class="icon-pencil"></i> Articles</a>
   </li>
   {% comment %}
   <li>
-    <a href="#" title="Work" data-filter=".work" class="category"><i class="icon-lightbulb"></i> Work</a>
+    <a href="{{ root_url }}/#work" title="Work" class="category"><i class="icon-lightbulb"></i> Work</a>
   </li>
   <li>
-    <a href="#" title="Playground" data-filter=".playground" class="category"><i class="icon-beaker"></i> Playground</a>
+    <a href="{{ root_url }}/#playground" title="Playground" class="category"><i class="icon-beaker"></i> Playground</a>
   </li>
   <li>
     <a href="{{ root_url }}/peter-rhoades" title="About"><i class="icon-user"></i> Info</a>
