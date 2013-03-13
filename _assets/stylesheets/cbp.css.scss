@@ -1,6 +1,7 @@
 @import "vendor/normalize";
 @import "vendor/isotope";
 @import "global";
+@import "articles";
 
 nav#thenav {
   position: fixed;
@@ -103,23 +104,30 @@ article#thepost {
   width: grid-width(4);
   margin: 0 auto;
   background-color: $white;
-  padding: 0 $articlePadding ($articlePadding/2) $articlePadding;
   background-position: top center;
   background-repeat: no-repeat;
 
   &>header { 
-    padding-top: 200px;
+    margin: 0 $articlePadding 0 $articlePadding;
+    padding: ($articlePadding/6) 0;
+  }
+
+  &.image {
+    &>header {
+      margin: 305px ($articlePadding/2) 0 ($articlePadding/2);
+      padding: ($articlePadding/6) ($articlePadding/2);
+      background-color: $white;
+    }
+  }
+
+  &>.entry-content {
+    padding: 0 $articlePadding ($articlePadding/4) $articlePadding;
   }
 
   &>footer { 
-    @include rhythm-borders(0px);
-    @include leader(3);
     @include adjust-font-size-to(14px);
     border: 0;
-    border-top: solid 1px $secondaryColour;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
+    padding: $articlePadding/2 $articlePadding;
     color: $secondaryColour;
     font-style: italic;
   }
@@ -170,3 +178,4 @@ article#thepost {
 //     }
 //   }
 // }
+
