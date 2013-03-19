@@ -101,7 +101,7 @@ a {
 //   content: " \f08e";
 // }
 
-p {
+p, li {
   code {
     @include border-radius(3px);
     @include adjust-font-size-to(14px);

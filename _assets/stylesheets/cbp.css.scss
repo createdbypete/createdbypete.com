@@ -66,6 +66,7 @@ section#thegrid {
     width: grid-width(1);
     height: grid-width(1);
     margin: $gridGutter/2;
+    display: block;
     background-color: $white;
     text-align: center;
     background-position: center;
@@ -82,12 +83,11 @@ section#thegrid {
       padding: $gridGutter*2;
     }
 
-    h1 { @include adjust-font-size-to(18px);
-      a { 
-        @include link-colours($textColour);
-      }
-     }
-    a[rel="full-article"] { 
+    h1 { 
+      @include adjust-font-size-to(18px);
+      color: $textColour;
+    }
+    span[rel="full-article"] { 
       @include adjust-font-size-to(14px); 
       font-family: $headingFontFamily;
         &:hover {
