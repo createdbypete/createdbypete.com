@@ -159,7 +159,7 @@ Now run Bundler to install all the project gems into ```vendor/bundle```, they a
 bundle install
 
 # It's also worth updating your .gitignore file so you don't commit all of those gems!
-echo '/vendor/bundle' > .gitignore
+echo '/vendor/bundle' >> .gitignore
 ```
 
 If your gems ever stop working you can just delete the ```vendor/bundle``` directory and run the command again to re-install them.
@@ -190,7 +190,6 @@ This will download and compile MySQL for you and anything else MySQL requires to
 ```bash
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-mysql_secure_installation
 
 # Add MySQL to launchctl to let OS X manage the process and start when you login
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
@@ -199,6 +198,9 @@ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 # Or if you want to control it yourself
 mysql.server start
 # Usage: mysql.server {start|stop|restart|reload|force-reload|status}
+
+# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password
+mysql_secure_installation
 ```
 
 To start a new Rails app with MySQL instead of the default SQLite3 as the datastore just use the ```-d``` flag like so:
@@ -225,7 +227,8 @@ launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
 Postgres has a slightly longer command as we need to pass in the locations so I've taken to creating an ```alias``` to shrink all this down to simply ```pg```.
 
 ```bash
-alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'
+echo "alias pg='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log'" >> ~/.bash_profile
+source ~/.bash_profile
 pg start
 # Usage: pg {start|stop|restart|reload|status}
 ```
@@ -278,9 +281,9 @@ brew install git
 
 <!-- TODO: Pow install -->
 
-#### What about the kitchen sink?
+### What about the kitchen sink?
 That's all you need for most Ruby on Rails applications. It has been serving me pretty well and meets all the requirements I outlined at the beginning of the article. 
 
 An alternative to ```rbenv``` is [rvm](https://rvm.io/) the idea behind them both is the same but I find working with ```rbenv``` more comfortable but that maybe because I haven't spent much time with ```rvm```.
 
-If you're just starting out don't worry there's alot to take in, start off with this setup and you'll find your sweet spot as get more experienced.
+If you're just starting out don't worry there's alot to take in, start off with this setup and you'll find your sweet spot as you get more experienced.
