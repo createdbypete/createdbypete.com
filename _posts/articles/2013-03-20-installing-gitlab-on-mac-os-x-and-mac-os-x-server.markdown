@@ -40,7 +40,7 @@ We actually have most of what we need on OS X already, but we are missing a few 
 
 ```bash
 brew tap homebrew/dupes
-brew install bash curl git
+brew install bash curl git icu4c
 brew install autoconf automake libtool pkg-config openssl readline libyaml sqlite libxml2 libxslt libksba
 ```
 
@@ -48,7 +48,7 @@ brew install autoconf automake libtool pkg-config openssl readline libyaml sqlit
 We need to create a symlink for Python for compatibility reasons not relating to OS X but for some other Linux distributions that are in limbo between version 2 and 3 of Python.
 
 ```bash
-sudo ln -s /usr/bin/python /usr/bin/python2
+sudo ln -sv /usr/bin/python /usr/bin/python2
 python2 --version # Should be Python 2.7.X
 ```
 
@@ -100,34 +100,15 @@ dscl . -read /Users/git
 sudo createhomedir -c -u git
 ```
 
-## Homebrew custom
-
-```bash
-su - git
-
-mkdir ~/bin
-
-# Add Homebrews binary path to the front of the $PATH 
-echo 'export PATH=$HOME/bin:$PATH' >> ~/.bash_profile
-source ~/.bash_profile
-
-# Follow the instructions: Hit enter to view the license agreement, use space to reach the bottom of the license and then you can type 'agree' to complete the step.
-xcodebuild -license
-
-git clone https://github.com/mxcl/homebrew.git ~/homebrew
-ln -sv ~/homebrew/bin/brew ~/bin/brew
-
-brew doctor # You can ignore the message about Homebrew's location, none of the packages we need to install will be affected by this.
-brew update
-```
-
-
 ## Install RVM and Ruby
 
 Before we start trying to install RVM we need to login as the right user. You can do this from the terminal with the `su` command. It will then ask you for the git users password you set in the previous steps.
 
 ```bash
 su - git # The hyphen is important
+
+# Follow the instructions: Hit enter to view the license agreement, use space to reach the bottom of the license and then you can type 'agree' to complete the step… you've read the license right?!
+xcodebuild -license
 ```
 
 We will be using [RVM](https://rvm.io) to install Ruby, again it's a one-line install for RVM and Ruby doesn't take much effort either. I'm installing Ruby 1.9.3 as at the time of writting this is the supported version for Gitlab.
@@ -136,7 +117,8 @@ We will be using [RVM](https://rvm.io) to install Ruby, again it's a one-line in
 curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
 source ~/.rvm/scripts/rvm
 
-rvm use 1.9.3 --default
+rvm use 1.9.3
+
 
 # Check our shell is using the correct Ruby version
 ruby -v
@@ -148,15 +130,20 @@ With Ruby installed and our shell now running the correct version of Ruby we nee
 
 ```bash
 rvm gemset create gitlab
-rvm use 1.9.3-p392@gitlab --default
+rvm use 1.9.3@gitlab --default
 
 # Skip Rdoc generation
 echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 gem install bundler
 ```
 
+```bash
+env | grep -E "^(GEM_HOME|PATH|RUBY_VERSION|MY_RUBY_HOME|GEM_PATH)=" > ~/.ssh/environment
+# TODO enable ssh options and permit environment
+```
+
 ## Gitlab Shell
-Since [5-0-stable of Gitlab](https://github.com/gitlabhq/gitlabhq/tree/5-0-stable) [Gitolite](https://github.com/sitaramc/gitolite) has been replaced with Gitlab's own implementation. 
+Since [5-0-stable](https://github.com/gitlabhq/gitlabhq/tree/5-0-stable) of Gitlab [Gitolite](https://github.com/sitaramc/gitolite) has been replaced with Gitlab's own implementation. 
 
 ```bash
 su - git # If you're not still logged in as the git user
@@ -196,6 +183,15 @@ With that done install the gitlab-shell with the following command (still as the
 
 ```bash
 brew install mysql
+# TODO
+# TODO create db and user
+```
+
+## Install and setup Redis
+
+```bash
+brew install redis
+# TODO
 ```
 
 ## Setup Gitlab!
@@ -218,7 +214,12 @@ git checkout 5-0-stable
 Using the power of Bundler we can install all the gems required by Gitlab, we will be installing the gems _without_ the `development`, `test` and `postgresql` groups as we won't be needing those.
 
 ```bash
-gem install charlock_holmes --version '0.6.9'
+
+# Please note the -- below is not a mistake
+gem install charlock_holmes -- --version '0.6.9' --with-icu-dir=/usr/local/opt/icu4c
+
+# Configure bundler to always use icu4c from Homebrew and install Gitlab gems
+bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
 bundle install --deployment --without development test postgres
 ```
 
@@ -229,6 +230,7 @@ bundle install --deployment --without development test postgres
 cp config/gitlab.yml.example config/gitlab.yml
 
 vim config/gitlab.yml
+# TODO 
 ```
 
 ```bash
@@ -247,6 +249,7 @@ mkdir ~/gitlab-satellites
 
 # Copy the example Unicorn config
 cp config/unicorn.rb.example config/unicorn.rb
+# TODO
 ```
 
 ```bash
@@ -264,4 +267,12 @@ bundle exec rake gitlab:setup RAILS_ENV=production
 
 ```bash
 bundle exec rake gitlab:env:info RAILS_ENV=production
+```
+
+### Quick test
+
+```bash
+RAILS_ENV=production bundle exec rake sidekiq:launchd > /dev/null 2>&1 &
+RAILS_ENV=production bundle exec rails s
+open http://127.0.0.1:3000
 ```
