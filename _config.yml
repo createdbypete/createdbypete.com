@@ -14,7 +14,6 @@ email: hello@createdbypete.com
 # ----------------------- #
 root: 
 permalink: /:categories/:title
-auto: true
 pygments: true
 exclude: ["vendor","Gemfile","Gemfile.lock","Rakefile"]
 markdown: redcarpet
@@ -33,7 +32,7 @@ assets:
     - _assets/javascripts
     - _assets/stylesheets
   compress:
-    js:   ~
-    css:  ~
-  cachebust: none
-  gzip: false
+    js:   uglifier
+    css:  sass
+  cachebust: hard
+  gzip: [ text/css, application/javascript ]

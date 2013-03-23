@@ -16,7 +16,7 @@ layout: default
   <footer>
     <p class="meta">
       {% include post/date.html %}
-      <i class="icon-pencil"></i> Written by <a rel="me" href="https://plus.google.com/116964527372254202973?rel=author" target="_blank">{{ site.author }}</a> on {{ time }}
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://plus.google.com/116964527372254202973?rel=author" target="_blank" class="vcard author"><span class="fn">{{ site.author }}</span></a> on {{ time }}
       {% if was_updated != '0' %}
         ({{ updated }})
       {% endif %}
