@@ -99,7 +99,7 @@ What I really like with the [new version](http://four.laravel.com) (at the time 
 brew install php54-mcrypt
 ```
 
-Now, download the [latest version](https://github.com/laravel/laravel/archive/develop.zip) of Laravel 4 and unzip, you can unzip it anywhere (preferably within your home directory) as we will be using PHP 5.4 built-in development webserver!
+Now, download the [latest version](https://github.com/laravel/laravel/archive/develop.zip) of Laravel 4, (this is the recommended way) and unzip, you can unzip it anywhere (preferably within your home directory) as we will be using PHP 5.4 built-in development webserver!
 
 ```bash
 cd ~/Downloads/laravel-develop # Change this to wherever you extracted Laravel
