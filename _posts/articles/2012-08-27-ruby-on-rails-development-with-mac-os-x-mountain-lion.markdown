@@ -288,3 +288,12 @@ An alternative to ```rbenv``` is [rvm](https://rvm.io/) the idea behind them bot
 
 If you're just starting out don't worry there's a lot to take in, start off with this setup and you'll find your sweet spot as you get more experienced.
 
+## Further reading for Ruby on Rails
+If you're looking for some further reading to improve your knowledge of Rails and Ruby here are a couple of places to take a look (in no particular order):
+
+* [Rails Guides](http://guides.rubyonrails.org/), you can't beat the documentation!
+* [Rails API](http://api.rubyonrails.org/), always handy to have this bookmarked.
+* [RailsCasts.com](http://railscasts.com/), superb website operated by the talented [@ryanbates](https://twitter.com/rbates) loads of screencasts on a range of topics in the Rails world. Worth the $9 a month subscription for the Pro episodes.
+* [Try Ruby](http://tryruby.org/), operated by [Code School](http://www.codeschool.com/) this is focused on Ruby but if you're new to Ruby it's definitely worth a look.
+* [Rails for Zombies](http://railsforzombies.org/), another from the guys at [Code School](http://www.codeschool.com/) this time focused on Rails and a good way to get your head into working _the Rails way_.
+* [Agile Web Development with Rails](http://pragprog.com/book/rails32/agile-web-development-with-rails-3-2), available in various formats this is another great book to guide you through working with Rails. The link is for the Rails 3.2 version but with [Rails 4 on the horizon you might want this one instead](http://pragprog.com/book/rails4/agile-web-development-with-rails).
