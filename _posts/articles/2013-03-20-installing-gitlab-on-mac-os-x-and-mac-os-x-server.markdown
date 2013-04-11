@@ -5,6 +5,7 @@ image: install-gitlab-osx.jpg
 categories: articles
 tags: [guide,devops,git]
 grid: large
+updated: 2013-04-09 22:36
 ---
 
 [Gitlab](http://gitlab.org) is self hosted Git management software, not only that but it's also _free and open-source_. 
@@ -31,6 +32,10 @@ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 # Add Homebrews binary path to the front of the $PATH 
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
+
+# Update some permissions for later on
+sudo chgrp -R staff /usr/local
+sudo chmod -R g+w /usr/local
 ```
 
 A simple script that will automatically install Homebrew on your machine, once it's done we need to check it's all working and update the formulas.
@@ -50,24 +55,26 @@ brew install autoconf automake apple-gcc42 libtool pkg-config openssl readline l
 ```
 
 #### What's better than one Python? Two apparently!
-We need to create a symlink for Python for compatibility reasons not relating to OS X but for some other Linux distributions that are in limbo between version 2 and 3 of Python.
+We need to create a symlink to Python for compatibility reasons not relating to OS X but for some other Linux distributions that are in limbo between version 2 and 3 of Python.
 
 ```bash
 sudo ln -sv /usr/bin/python /usr/bin/python2
 python2 --version # Should be Python 2.7.X
 ```
 
-We also need Pygments for colourful syntax highlighting.
+We also need to install Pygments for colourful syntax highlighting.
 
 ```bash
 sudo easy_install Pygments
 ```
 
-## Create Git user account
+## Create user accounts
 
 Gitolite and Gitlab need a user to operate as. In OS X you can create this user using the GUI via System Preferences or via the command line like we are about to do. For this example I recommend the command line due to the extra options we need to set.
 
-Create a new group called `git` with the ID of `1050` (check that id is available with `id -g 1050`, you should get `No such user` as a response).
+#### The Git user
+
+Create a new group called `git` with the ID of `1050`.
 
 ```bash
 sudo dscl . -create /Groups/git
@@ -77,7 +84,7 @@ sudo dscl . -create /Groups/git PrimaryGroupID 1050
 Now we create a `git` user account with the recently created `git` group as the primary group.
 
 ```bash
-# Again check the id is available
+# Check the id is available
 id 1050
 
 sudo dscl . -create /Users/git
@@ -97,10 +104,11 @@ dscl . -read /Users/git
 sudo createhomedir -c -u git
 ```
 
-No we have a `git` user for Gitolite, we want to create the application user for Gitlab.
+#### The Gitlab user
+Now we have a `git` user for Gitolite, we want to create the application user for Gitlab this time with id `1051`.
 
 ```bash
-# Again check the id is available
+# Check the id is available
 id 1051
 
 sudo dscl . -create /Users/gitlab
@@ -109,6 +117,9 @@ sudo dscl . -create /Users/gitlab RealName "Gitlab HQ"
 sudo dscl . -create /Users/gitlab UniqueID 1051
 sudo dscl . -create /Users/gitlab PrimaryGroupID 1050
 sudo dscl . -create /Users/gitlab NFSHomeDirectory /Users/gitlab
+
+# Add user to staff group so RVM can access Homebrew files later
+sudo dseditgroup -o edit -a gitlab -t user staff
 
 # Obviously change "mysupersecurepassword123" to something better ;)
 sudo dscl . -passwd /Users/gitlab mysupersecurepassword123
@@ -165,7 +176,6 @@ sudo chown -R git:git /Users/git/repositories/
 sudo -u git -H find /Users/git/repositories -type d -print0 | sudo xargs -0 chmod g+s
 ```
 
-
 ### Add domains to the list of known_hosts
 To avoid problems later we will be manually adding the system the known_hosts file of the gitlab user. We will do this for a couple of hostnames.
 
@@ -196,44 +206,8 @@ sudo rm -rf /tmp/gitolite-admin
 
 If you can't clone the `gitolite-admin` repository: **DO NOT PROCEED WITH INSTALLATION!** Check the [Trouble Shooting Guide](https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide#ssh) and make sure you have followed all of the above steps carefully.
 
-## Install RVM and Ruby
-
-Before we start trying to install RVM we need to login as the right user to make thing easier. Only the `gitlab` user will need RVM and Ruby installed.
-
-```bash
-su - gitlab # The hyphen is important
-
-# Follow the instructions: Hit enter to view the license agreement, use space to reach the bottom of the license and then you can type 'agree' to complete the step… you've read the license right?!
-xcodebuild -license
-```
-
-We will be using [RVM](https://rvm.io) to install Ruby, it's a one-line install for RVM and Ruby together. I'm installing Ruby 1.9.3 as at the time of writing this is the supported version for Gitlab. If you have any problems installing Ruby you should check `rvm requirements` to make sure you have everything it needs installed – this guide should remain correct but just incase.
-
-```bash
-curl -L https://get.rvm.io | bash -s stable --ruby=1.9.3
-source ~/.rvm/scripts/rvm
-
-rvm use 1.9.3
-
-# Check our shell is using the correct Ruby version
-ruby -v
-```
-
-### Create RVM Gemset for Gitlab
-
-With Ruby installed and our shell now running the correct version of Ruby we need to make a gemset to make it easier to manage the gems we will install for Gitlab. We then set this gemset as the default. After this is done we need [Bundler](http://gembundler.com) installed to that gemset.
-
-```bash
-rvm gemset create gitlab
-rvm use 1.9.3@gitlab --default
-
-# Skip Rdoc generation
-echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
-gem install bundler
-```
-
 ## Install and setup MySQL Database for Gitlab
-Gitlab recommends MySQL as the datastore so we'll follow that recommendation. You may already have MySQL installed, if you have and it was installed using Homebrew you will just need to move the `.plist` file from `~/Library/LaunchAgents` to `/Library/LaunchDaemons` as this will start the service when the machine starts instead of when your user logs in.
+Gitlab recommends MySQL as the datastore so we'll follow that recommendation. You may already have MySQL installed, if you have and it was installed using Homebrew you will just need to move the `.plist` file from `~/Library/LaunchAgents` to `/Library/LaunchDaemons` as this will start the service when the machine starts instead of when your user logs in otherwise Gitlab won't be available unless you login which is not what we want.
 
 Run the following commands as your `sudo` capable user.
 
@@ -243,11 +217,14 @@ brew install mysql
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
+# Some problems with permissions have been reported
+sudo chmod -R g+w /usr/loca/var/mysql 
+
 # Add MySQL to launchctl to let OS X manage the process and start when you login, note the LaunchDaemons location to start service when machine starts not when user logs in.
-sudo ln -sfv /usr/local/opt/mysql/*.plist /Library/LaunchDaemons
+sudo cp /usr/local/opt/mysql/*.plist /Library/LaunchDaemons
 sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.mysql.plist
 
-# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password
+# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password.
 mysql_secure_installation
 
 # Login to MySQL
@@ -270,32 +247,67 @@ sudo -u gitlab -H mysql -u gitlab -p -D gitlabhq_production
 ```
 
 ## Install and setup Redis
-Gitlab uses the fantastic [Sidekiq](http://mperham.github.io/sidekiq/) project to handle the scheduling of background jobs such as sending out emails and repo management tasks. Without this running everything will look the part but you'll have trouble running anything at all as these jobs are crucial to the operation of Gitlab.
-
-Sidekiq uses the brilliant [Redis](http://redis.io/) as a datastore so let's set that up now. We will also want Redis to start up with the machine so we will be adding it to the `LaunchDaemons` directory also. 
+Gitlab uses the fantastic [Sidekiq](http://mperham.github.io/sidekiq/) project to handle the scheduling of background jobs such as sending out emails and repo management tasks. Sidekiq uses [Redis](http://redis.io/) as a datastore so let's set that up now. We will also want Redis to start up with the machine so we will be adding it to the `LaunchDaemons` directory also. 
 
 ```bash
 brew install redis
 
-sudo ln -sfv /usr/local/opt/redis/*.plist /Library/LaunchDaemons
+sudo cp /usr/local/opt/redis/*.plist /Library/LaunchDaemons
 sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.redis.plist
 ```
 
 This will run Redis with defaults, you can change these defaults but to do so I recommend duplicating the defaults first so you always have a reference. You can update `/Library/LaunchDaemons/homebrew.mxcl.redis.plist` to the new config location. It's also best the run Redis with `daemonize` set to `no` so that OS X can manage the process correctly.
 
-## Install and setup Gitlab!
+## Install RVM and Ruby
 
-Finally we are now going to clone the Gitlab repository and setup the application.
+Before we start trying to install RVM we need to login as the right user to make thing easier. Only the `gitlab` user will need RVM and Ruby installed.
 
 ```bash
+su - gitlab # The hyphen is important
+```
 
+We will be using [RVM](https://rvm.io) to install Ruby. I'm installing Ruby 1.9.3 as at the time of writing this is the supported version for Gitlab. If you have any problems installing Ruby you should check `rvm requirements` to make sure you have everything it needs installed – this guide should remain correct but just incase.
+
+```bash
+curl -L https://get.rvm.io | bash -s stable
+source ~/.rvm/scripts/rvm
+
+rvm autolibs enable
+rvm install 1.9.3
+
+rvm use 1.9.3
+
+# Check our shell is using the correct Ruby version
+ruby -v
+```
+
+#### Create RVM Gemset for Gitlab
+
+With Ruby installed and our shell now running the correct version of Ruby we need to make a gemset to make it easier to manage the gems we will install for Gitlab. We then set this gemset as the default. After this is done we need [Bundler](http://gembundler.com) installed to that gemset.
+
+```bash
+rvm gemset create gitlab
+rvm use 1.9.3@gitlab --default
+
+# Skip Rdoc generation
+echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
+gem install bundler
+```
+
+## Install and setup Gitlab!
+
+At last now we are going to clone the Gitlab repository and setup the application.
+
+```bash
 # Clone the Gitlabhq repo from Github
+cd /Users/gitlab
 sudo -u gitlab -H git clone https://github.com/gitlabhq/gitlabhq.git /Users/gitlab/gitlab
 cd /Users/gitlab/gitlab
 
 # Checkout to 4-2-stable release
 sudo -u gitlab -H git checkout 4-2-stable
 ```
+We are using branch `4-2-stable` because at the time of writing this is the branch I have working.
 
 ### Configure Gitlab
 
@@ -352,7 +364,7 @@ bundle config build.charlock_holmes --with-icu-dir=/usr/local/opt/icu4c
 bundle install --deployment --without development test postgres
 ```
 
-#### Configure Git
+### Configure Git
 GitLab needs to be able to commit and push changes to Gitolite. In order to do that Git requires a username and email. (It's recommended to  use the same address used for the email.from setting in config/gitlab.yml)
 
 ```bash
@@ -369,7 +381,7 @@ sudo cp ./lib/hooks/post-receive /Users/git/.gitolite/hooks/common/post-receive
 sudo chown git:git /Users/git/.gitolite/hooks/common/post-receive
 ```
 
-#### Initialise database and activate features
+### Initialise database and activate features
 Now it's time to initialise the Gitlab database by running all the migrations and adding the first admin user. Make a note of the credentials it gives you at the end so you can login.
 
 ```bash
@@ -377,6 +389,9 @@ su - gitlab
 cd ~/gitlab
 
 bundle exec rake gitlab:setup RAILS_ENV=production
+
+# Precompile the assets into the public directory
+bundle exec rake assets:precompile RAILS_ENV=production
 ```
 With that done run the following command to output and the environment info used by Gitlab so you check it all looks right for your machine.
 
@@ -395,14 +410,14 @@ cd ~/gitlab
 # Start the rails WEBrick server
 RAILS_ENV=production bundle exec rails s
 ```
-Open `http://127.0.0.1:3000` in your browser. Use <kbd>ctrl</kbd> + <kbd>c</kbd> to close the server once you've had a look.
+Open `http://127.0.0.1:3000` in your browser. Use <kbd>ctrl</kbd> + <kbd>c</kbd> to close the server once you've had a look. It will be quite slow initially as it is only intended as a development webserver.
 
 ## Setting up Gitlab with Apache and Unicorn
 
 Since OS X comes with Apache we will use that as our webserver to Gitlab. You can of course use [Nginx](http://wiki.nginx.org/Main) if you desire but I will not be going over that option in this guide yet. Although I hope to go over that option in the future.
 
 ### Configure Unicorn
-Although not 100% compatible with Apache for various reasons, Unicorn will be responsible for processing the Gitlab Rails application. We need to a make a few alterations to the config to make it OS X friendly.
+Although not 100% compatible with Apache for [various reasons](http://rubyforge.org/pipermail/mongrel-unicorn/2011-July/001057.html), Unicorn will be responsible for processing the Gitlab application. We need to a make a few alterations to the config to make it "OS X friendly".
 
 ```bash
 cd /Users/gitlab/gitlab
@@ -413,9 +428,10 @@ cd /Users/gitlab/gitlab
 sudo -u gitlab -H vim config/unicorn.rb
 ```
 
-Unicorn needs to startup with the machine but we need to do some work with RVM to make that work. We need to make a wrapper around the `bundle` command so it can be used at bootup.
+Unicorn needs to startup with the machine but we need to do some work with RVM. We need to make a wrapper around the `bundle` command so it can be used at bootup.
 
 ```bash
+su - gitlab
 rvm wrapper ruby-1.9.3-p392@gitlab bootup bundle
 ```
 
@@ -431,7 +447,7 @@ sudo launchctl load /Library/LaunchDaemons/gitlab.unicorn.plist
 **Please note:** Unicorn can take a few seconds to start up.
 
 ### Configure Sidekiq
-We also need Sidekiq to start up with the machine, thankfully the steps above have shortened some of the work we need to do now and we only need to create the plist as the `bundle` wrapper is already available.
+We also need Sidekiq to start up with the machine, thankfully the steps above have shortened some of the work we need to do now and we only need to create the plist as the `bundle` wrapper is already available. The plist command used below is an extraction from the [rake task](https://github.com/gitlabhq/gitlabhq/blob/4-2-stable/lib/tasks/sidekiq.rake) that should be used but it is not compatible with OS X.
 
 ```bash
 sudo curl --output /Library/LaunchDaemons/gitlab.sidekiq.plist https://gist.github.com/createdbypete/5345563/raw/gitlab.sidekiq.plist
@@ -441,7 +457,7 @@ sudo launchctl load /Library/LaunchDaemons/gitlab.sidekiq.plist
 ```
 
 ### Configure Apache
-In Mountain Lion Apple decided to remove the web sharing option from the System Preferences panel but this means we just need to start it via terminal.
+In Mountain Lion Apple decided to remove the web sharing option from the System Preferences panel but Apache is still there so it just means we need to start it via terminal.
 
 ```bash
 sudo apachectl start
@@ -474,4 +490,4 @@ admin@local.host
 
 If all this is too much for you I recommend checking out the [GitLab paid service](http://blog.gitlab.com/cloud/). Huge thanks to the [GitLab Team](https://github.com/gitlabhq?tab=members) and all the contributors.
 
-Found a typo? Let me know [@createdbypete](http://twitter.com/createdbypete)
+Found a typo or a part of this guide not working? Let me know [@createdbypete](http://twitter.com/createdbypete)
