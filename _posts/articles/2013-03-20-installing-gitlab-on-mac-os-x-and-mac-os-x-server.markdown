@@ -21,7 +21,7 @@ I have only managed to get Gitlab 4.2 working on OS X so far which uses Gitolite
 
 ## Requirements
 
-The Gitlab team suggests atleast 1GB RAM in your machine to run the Gitlab application, since Mountain Lion requires about 2GB+ RAM you can go ahead and tick that off the list.
+The Gitlab team suggests at least 1GB RAM in your machine to run the Gitlab application, since Mountain Lion requires about 2GB+ RAM you can go ahead and tick that off the list.
 
 ### Install Command Line Tools and Homebrew
 If you don't have [Homebrew](http://mxcl.github.com/homebrew/) installed already then before you start copy & pasting into Terminal you had better check you have [Command Line Tools](https://developer.apple.com/downloads) installed first. Done that? OK, time to install Homebrew.
@@ -29,7 +29,7 @@ If you don't have [Homebrew](http://mxcl.github.com/homebrew/) installed already
 ```bash
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
-# Add Homebrews binary path to the front of the $PATH 
+# Add Homebrew binary path to the front of the $PATH 
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
 
@@ -236,7 +236,7 @@ mysql> CREATE USER 'gitlab'@'localhost' IDENTIFIED BY '$password';
 # Create the GitLab production database
 mysql> CREATE DATABASE IF NOT EXISTS `gitlabhq_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
 
-# Grant the GitLab user necessary permissopns on the table.
+# Grant the GitLab user necessary permissions on the table.
 mysql> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `gitlabhq_production`.* TO 'gitlab'@'localhost';
 
 # Quit the database session
@@ -266,7 +266,7 @@ Before we start trying to install RVM we need to login as the right user to make
 su - gitlab # The hyphen is important
 ```
 
-We will be using [RVM](https://rvm.io) to install Ruby. I'm installing Ruby 1.9.3 as at the time of writing this is the supported version for Gitlab. If you have any problems installing Ruby you should check `rvm requirements` to make sure you have everything it needs installed – this guide should remain correct but just incase.
+We will be using [RVM](https://rvm.io) to install Ruby. I'm installing Ruby 1.9.3 as at the time of writing this is the supported version for Gitlab. If you have any problems installing Ruby you should check `rvm requirements` to make sure you have everything it needs installed — this guide should remain correct but just incase.
 
 ```bash
 curl -L https://get.rvm.io | bash -s stable

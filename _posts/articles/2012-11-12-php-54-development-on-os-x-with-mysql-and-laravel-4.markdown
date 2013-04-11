@@ -8,9 +8,9 @@ date: 2012-11-12 11:23
 updated: 2013-03-16 12:12
 alias: /blog/2012/11/php-54-development-on-osx.html
 ---
-As a developer I always crave the bleeding edge releases, in contrast for any servers I setup I want solid, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of "if it isn't broke don't upgrade it", but when I still come across hosts offering PHP 5.2 when the lastest version of PHP at the time of writting is 5.4 it saddens me to think of what people are missing.
+As a developer I always crave the bleeding edge releases, in contrast for any servers I setup I want solid, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of "if it isn't broke don't upgrade it", but when I still come across hosts offering PHP 5.2 when the latest version of PHP at the time of writing is 5.4 it saddens me to think of what people are missing.
 
-Incase your host can offer you PHP 5.4, or you want to start using the new awesomeness here's how to install it on OS X, I'm running Mountain Lion but since this uses Homebrew I would think any previous versions that can also run Homebrew can follow along.
+In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here's how to install it on OS X, I'm running Mountain Lion but since this uses Homebrew I would think any previous versions that can also run Homebrew can follow along.
 
 ## The Essentials
 
@@ -20,7 +20,7 @@ Incase your host can offer you PHP 5.4, or you want to start using the new aweso
 
 ### Install Homebrew
 
-If you’ve not used [Homebrew](http://mxcl.github.com/homebrew/) before you’re going to love it overthe next few steps as it makes the whole process so much easier! Installation is a simple "one liner".
+If you’ve not used [Homebrew](http://mxcl.github.com/homebrew/) before you're going to love it over the next few steps as it makes the whole process so much easier! Installation is a simple "one liner".
 
 ```bash
 ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
@@ -29,7 +29,7 @@ ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
 brew doctor
 ```
 
-If there are any problems the ```brew doctor``` will give you details about the problem and sometimes even how to fix it. Homebrew formulas are updated all the time so make sure we’re getting the latest formulas before we start.
+If there are any problems the ```brew doctor``` will give you details about the problem and sometimes even how to fix it. Homebrew formulas are updated all the time so make sure we're getting the latest formulas before we start.
 
 ```bash
 brew update
@@ -59,7 +59,7 @@ mysql.server start
 # "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password
 mysql_secure_installation
 ```
-And you're done setting up MySQL for now. If you're looking for a good client application for MySQL [Sequeal Pro](http://www.sequelpro.com/) is the best in my eyes, if you love it please donate as the team have done a fantastic job.
+And you're done setting up MySQL for now. If you're looking for a good client application for MySQL [Sequel Pro](http://www.sequelpro.com/) is the best in my eyes, if you love it please donate as the team have done a fantastic job.
 
 ### Install PHP 5.4 and Composer
 
@@ -68,7 +68,7 @@ With Homebrew already brewing we want to run a quick search for PHP to see what'
 ```bash
 brew search php54
 ```
-This command should return a list of formulas that can be installed, you'll notice that they are all under a forumla respository `josegonzalez/php` so we need to tap that repository so Homebrew knows can use it.
+This command should return a list of formulas that can be installed, you'll notice that they are all under a formula repository `josegonzalez/php` so we need to tap that repository so Homebrew knows can use it.
 
 ```bash
 brew tap josegonzalez/php
@@ -81,7 +81,7 @@ brew tap homebrew/dupes
 brew install php54 php54-xdebug
 ```
 
-A number of other dependency libraries will be installed that PHP relies on when compiling itself, once complete we should install [Composer](http://getcomposer.org/) the _Dependency Manager for PHP_. Laravel 4 uses this to install it's dependencies and is slowly trying to cerment itself as the standard for PHP, much like [Bundler](http://gembundler.com/) is for Ruby Gems.
+A number of other dependency libraries will be installed that PHP relies on when compiling itself, once complete we should install [Composer](http://getcomposer.org/) the _Dependency Manager for PHP_. Laravel 4 uses this to install it's dependencies and is slowly trying to cement itself as the standard for PHP, much like [Bundler](http://gembundler.com/) is for Ruby Gems.
 
 ```bash
 brew install composer
@@ -127,7 +127,7 @@ In your browser you should see the customary "Hello World!" message confirming e
 You'll notice I've used `localhost:4000` above you can use any hostname/IP or port number with a few limitations:
 
 * The port number must be above 1024, any lower and you will need to use `sudo` as these are reserved for system use.
-* The hostname/IP must resolve to your machine. You can use `0.0.0.0` as a wildcard to match any IP your machine can answer to. This is if another machine needs access to the application.
+* The hostname/IP must resolve to your machine. You can use `0.0.0.0` as a wild card to match any IP your machine can answer to. This is if another machine needs access to the application.
 
 There are a number of other options you can use with the command line webserver. I've also used different hostname/IP combinations.
 

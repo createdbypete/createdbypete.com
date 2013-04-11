@@ -10,12 +10,12 @@ updated: 2013-03-11 20:30
 alias: /blog/2012/08/ruby-on-rails-development-with-mac-osx-mountain-lion.html
 ---
 
-Most developers like to spend a bit of time setting up their workspace. I've been experimenting Ruby on Rails for some timenow and this is still my preferred setup. My core criteria is simple:
+Most developers like to spend a bit of time setting up their workspace. I've been experimenting Ruby on Rails for some time now and this is still my preferred setup. My core criteria is simple:
 
 1. Unobtrusive, no modifying core files
 2. Flexibility with Ruby versions and gem versions per project
 3. Minimal configuration
-4. Easy to setup new/exisiting projects
+4. Easy to setup new/existing projects
 
 So if you're a Rails developer with the same ideals this should help you get started quickly.
 
@@ -25,13 +25,13 @@ This article assumes a clean install of Mac OS X Mountain Lion, Mac OS X Lion co
 
 ### Install Xcode and Command Line Tools
 
-[Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) is available for free from the App Store, you don't actually need it but I find the FileMerge application it comes bundled with very useful. It’s a large download so be prepared to wait a little if you’ve not got a high-speed connection. Once it’s downloaded, launch Xcode to make sure it’s setup.
+[Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) is available for free from the App Store, you don't actually need it but I find the FileMerge application it comes bundled with very useful. It's a large download so be prepared to wait a little if you've not got a high-speed connection. Once it's downloaded, launch Xcode to make sure it's setup.
 
 Now download and install the [Command Line Tools for Xcode](https://developer.apple.com/downloads) to complete the package; you need this whether you installed Xcode or not.
 
 ### Install Homebrew
 
-If you’ve not used [Homebrew](http://mxcl.github.com/homebrew/) before you’re going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn’t include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
+If you've not used [Homebrew](http://mxcl.github.com/homebrew/) before you're going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn't include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
 
 ```bash
 ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
@@ -56,7 +56,7 @@ brew update
 
 ### Install Ruby
 
-OS X comes with Ruby installed but it’s an older version (1.8.7 at time of writing), as we don't want to be messing with core files we’re going to use the brilliant [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to manage and install our Ruby development environments.
+OS X comes with Ruby installed but it's an older version (1.8.7 at time of writing), as we don't want to be messing with core files we're going to use the brilliant [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to manage and install our Ruby development environments.
 
 Lets get _brewing_! We can install both using Homebrew, once done we add a line to our ```~/.bash_profile``` and reload our terminal profile.
 
@@ -66,9 +66,9 @@ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-Now you’ll understand why we use ```rbenv``` and ```ruby-build```. It allows us to install different versions of Ruby and specify which version to use on a per project basis. This is very useful to keep a consistent development environment if you need to work in a particular Ruby version.
+Now you'll understand why we use `rbenv` and ```ruby-build```. It allows us to install different versions of Ruby and specify which version to use on a per project basis. This is very useful to keep a consistent development environment if you need to work in a particular Ruby version.
 
-We’re going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](http://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install ```rbenv install --list```.
+We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](http://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install ```rbenv install --list```.
 
 ```bash
 rbenv install 2.0.0-p0
@@ -83,11 +83,11 @@ Let’s set this version as the one to use globally so we can make use of it in 
 rbenv global 2.0.0-p0
 ```
 
-You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It’s worth bookmarking that page for reference later, or there is always ```rbenv --help```.
+You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always ```rbenv --help```.
 
 ### Install Bundler
 
-Bundler manages an application’s dependencies, kind of like a shopping list of other libraries the application needs to work. If you're just starting out with Ruby on Rails you will see just how important and helpful this gem is.
+Bundler manages an application's dependencies, kind of like a shopping list of other libraries the application needs to work. If you're just starting out with Ruby on Rails you will see just how important and helpful this gem is.
 
 You can use the ```rbenv shell``` command to ensure we have the correct version of Ruby loaded in our terminal window, it overrides both project-specific and global version, if you're paranoid you can always check your Ruby version with ```ruby --version```.
 
@@ -115,7 +115,7 @@ If you use Google for finding your Gem documentation like I do you might conside
 echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
 ```
 
-That's all, as you'll see from ```rbenv install --list``` there are loads of Ruby versions available including [JRuby](http://jruby.org/) just remeber you will need to re-install your gems for each version as they are not shared.
+That's all, as you'll see from ```rbenv install --list``` there are loads of Ruby versions available including [JRuby](http://jruby.org/) just remember you will need to re-install your gems for each version as they are not shared.
 
 ### Install SQLite3
 
@@ -136,24 +136,24 @@ gem install rails
 rbenv rehash
 ```
 
-Rails has a number of dependencies to install so don’t be surprised if you see loads of other gems being installed at the same time.
+Rails has a number of dependencies to install so don't be surprised if you see loads of other gems being installed at the same time.
 
 ## Your first Rails project
 
-Ready to put all this to good use and start your first project? Good, we’re going to create a new project called ```helloworld```.
+Ready to put all this to good use and start your first project? Good, we're going to create a new project called ```helloworld```.
 
 ```bash
 rails new helloworld
 cd helloworld
 ```
 
-Now we’re going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to ```.ruby-version``` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
+Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to ```.ruby-version``` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
 ```bash
 rbenv local 2.0.0-p0
 ```
 
-Now run Bundler to install all the project gems into ```vendor/bundle```, they are kept with the project locally and won’t interfere with anything else outside.
+Now run Bundler to install all the project gems into ```vendor/bundle```, they are kept with the project locally and won't interfere with anything else outside.
 
 ```bash
 bundle install
@@ -175,7 +175,7 @@ rails s
 
 Below are some extras you may wish to install. Again [Homebrew](http://mxcl.github.com/homebrew/) to the rescue to make installation a breeze, so open your terminal and get brewing!
 
-**Note:** It’s recommend you run ```brew update``` before installing anything new to make sure all the formulas are up to date.
+**Note:** It's recommend you run ```brew update``` before installing anything new to make sure all the formulas are up to date.
 
 ### Install MySQL
 
@@ -185,7 +185,7 @@ One of the most commonly used SQL services, many projects end up using MySQL as 
 brew install mysql
 ```
 
-This will download and compile MySQL for you and anything else MySQL requires to work. Once finished it will give you instructions to follow regarding setting up MySQL. You can see this information anytime by using the ```info``` action: ```brew info [package name]```.
+This will download and compile MySQL for you and anything else MySQL requires to work. Once finished it will give you instructions to follow regarding setting up MySQL. You can see this information any time by using the ```info``` action: ```brew info [package name]```.
 
 ```bash
 unset TMPDIR
@@ -286,4 +286,5 @@ That's all you need for most Ruby on Rails applications. It has been serving me 
 
 An alternative to ```rbenv``` is [rvm](https://rvm.io/) the idea behind them both is the same but I find working with ```rbenv``` more comfortable but that maybe because I haven't spent much time with ```rvm```.
 
-If you're just starting out don't worry there's alot to take in, start off with this setup and you'll find your sweet spot as you get more experienced.
+If you're just starting out don't worry there's a lot to take in, start off with this setup and you'll find your sweet spot as you get more experienced.
+
