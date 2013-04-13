@@ -188,9 +188,6 @@ brew install mysql
 This will download and compile MySQL for you and anything else MySQL requires to work. Once finished it will give you instructions to follow regarding setting up MySQL. You can see this information any time by using the ```info``` action: ```brew info [package name]```.
 
 ```bash
-unset TMPDIR
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-
 # Add MySQL to launchctl to let OS X manage the process and start when you login
 ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist

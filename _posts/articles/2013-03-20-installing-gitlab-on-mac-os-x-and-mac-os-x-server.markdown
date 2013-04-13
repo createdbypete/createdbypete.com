@@ -214,9 +214,6 @@ Run the following commands as your `sudo` capable user.
 ```bash
 brew install mysql
 
-unset TMPDIR
-mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
-
 # Some problems with permissions have been reported
 sudo chmod -R g+w /usr/loca/var/mysql 
 
