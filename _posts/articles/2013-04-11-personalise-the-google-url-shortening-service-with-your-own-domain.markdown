@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Personalise the Google URL Shortening Service for your Brand
+title: Personalise the Google URL Shortening Service With Your Own Domain
 categories: articles
 tags: [guide,apache,nginx]
 grid: wide
