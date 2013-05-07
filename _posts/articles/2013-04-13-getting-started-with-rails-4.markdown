@@ -4,16 +4,16 @@ title: Getting Started with Rails 4
 categories: articles
 tags: [guide,ruby]
 ---
-With a new major version of Rails on the horizon it makes sense to start taking a look and what's going on. I'm going to show you how to install the latest Rails 4 beta gem so you can start playing with the latest version but still allow you to create new projects from the current Rails 3.2 stable.
+With a new major version of Rails on the horizon it makes sense to start taking a look and what's going on. I'm going to show you how to install the latest Rails 4 gem so you can start playing with the latest version but still allow you to create new projects from the current Rails 3.2 stable.
 
 ## Setup your development environment
 If you are new to Rails then you will might want to check out my other post about [setting up a Ruby on Rails development environment on OS X](http://createdbypete.com/articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/) as the following steps will assume a similar setup.
 
-## Installing Rails 4 beta
-Now the beta has been added to the [RubyGems](http://rubygems.org/) repository it's much easier to get going with it.
+## Installing Rails 4
+Now the Rails 4 has been added to the [RubyGems](http://rubygems.org/) repository it's much easier to get going with it.
 
 ```bash
-gem install rails --version 4.0.0.beta1
+gem install rails --version 4.0.0.rc1 --no-ri --no-rdoc
 rbenv rehash # if you're using rbenv
 ```
 
@@ -34,16 +34,18 @@ Simple really, check the versions of Rails you have installed already with `gem 
 ```bash
 *** LOCAL GEMS ***
 
-rails (4.0.0.beta1, 3.2.13)
+rails (4.0.0.rc1, 3.2.13)
 ```
 
-The output shows I have the Rails `4.0.0.beta1` and `3.2.13` installed and you can simply append that version number to your `rails` command like so.
+The output shows I have the Rails `4.0.0.rc1` and `3.2.13` installed and you can simply append that version number to your `rails` command like so.
 
 ```bash
 rails _3.2.13_ new myproject
 ```
 
-This will create a project in the usual way but this time using the `3.2.13` version of the gem.
+This will create a project in the usual way but this time using the `3.2.13` version of the gem. 
+
+**Don't forget** that you should use `bundle exec` within your project when calling `rails generate` and friends so that the correct gem version according to the projects `Gemfile` is used. For example: `bundle exec rails generate model User`.
 
 ## Find out more about what's new in Rails 4
 The Rails team have made a number of changes, improvements and deprecations that I'm not going to go into here but instead direct you to the following resources to learn more:
