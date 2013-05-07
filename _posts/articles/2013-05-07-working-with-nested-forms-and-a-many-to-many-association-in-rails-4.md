@@ -10,7 +10,7 @@ Recently a project I was working on needed a _many-to-many_ relationship that wo
 
 Rails provides helpers to make working with this sort of relationship a breeze but when you start to include the nested forms and requirement to add data to that connecting table the solution may not be that obvious.
 
-I'll be using Rails 4 (rc1), the code will be the same for Rails 3.2 for hte most part the major difference is [Strong Parameters](https://github.com/rails/strong_parameters) is now used in place of `attr_accessible`. You can find out [how to install Rails 4 yourself here](http://createdbypete.com/articles/getting-started-with-rails-4/).
+I'll be using Rails 4 (rc1), the code will be the same for Rails 3.2 for the most part the major difference is [Strong Parameters](https://github.com/rails/strong_parameters) is now used in place of `attr_accessible`. You can find out [how to install Rails 4 yourself here](http://createdbypete.com/articles/getting-started-with-rails-4/).
 
 ## Getting started
 
@@ -161,4 +161,4 @@ For the Answers `fields_for` we are using the `find_or_initialize_by` method so 
 
 You'll also notice a `hidden_field` where we set the `participant_id` for the record to ensure the answer gets associated to a participant (`fields_for` will automatically create a `hidden_field` for `question_id` as we use that model to build the answers object, view source on the page and you will see). 
 
-The way I have chosen to display this is perhaps not the most efficient but it demonstrates how you might tackle this scenario where you need to display all these options and still handle the data submission. If you have another solution to this please let me know on [Twitter](https://twitter.com/createdbypete) it would be interesting to compare.
+The way I have chosen to display this is perhaps not the most efficient but it demonstrates how you might tackle this scenario where you need to display all these options and still handle the data submission. If you have another solution to this please let me know on [Twitter @createdbypete](https://twitter.com/createdbypete) it would be interesting to compare.
