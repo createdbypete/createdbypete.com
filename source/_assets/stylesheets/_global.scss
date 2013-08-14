@@ -50,7 +50,7 @@ $codeFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;
   @include box-sizing('border-box');
 }
 html, body {
-  height: 100%;
+  @include stretch-y;
   font-weight: 400;
   font-family: $bodyFontFamily;
   background-color: $bodyBackground;
