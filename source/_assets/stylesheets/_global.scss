@@ -47,7 +47,7 @@ $codeFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;
 @include establish-baseline;
 
 * { @include box-sizing(border-box); }
-html, body { 
+html, body {
   height: 100%;
   font-weight: 400;
   font-family: $bodyFontFamily;
@@ -88,10 +88,13 @@ pre {
   background-color: $codeBackground;
   color: $gray;
   font-family: $codeFontFamily;
+  white-space: pre;
+  overflow: scroll;
+
   code { background-color: transparent; }
 }
 
-a { 
+a {
   text-decoration: none;
   @include link-colours($mainColour);
 }
@@ -110,12 +113,12 @@ p, li {
     background-color: #fef9ec;
     border: solid 1px darken(#fef9ec, 5%);
   }
-  a { 
+  a {
     @include transition(background-color 200ms ease);
     padding: 0 .2em;
 
-    &:hover { 
-      background-color: lighten($mainColour, 40%); 
+    &:hover {
+      background-color: lighten($mainColour, 40%);
     }
   }
 }
