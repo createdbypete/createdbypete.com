@@ -10,6 +10,7 @@ group :development do
   gem "coffee-script"
   gem "sass"
   gem "compass"
+  gem "breakpoint"
 
   # Development Tools
   gem "foreman"
