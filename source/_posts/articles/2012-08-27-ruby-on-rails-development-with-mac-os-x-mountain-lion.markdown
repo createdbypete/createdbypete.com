@@ -36,7 +36,7 @@ If you've not used [Homebrew](http://mxcl.github.com/homebrew/) before you're go
 ```bash
 ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
 
-# Add Homebrews binary path to the front of the $PATH 
+# Add Homebrews binary path to the front of the $PATH
 echo "export PATH=/usr/local/bin:$PATH" >> ~/.bash_profile
 source ~/.bash_profile
 ```
@@ -71,7 +71,7 @@ Now you'll understand why we use `rbenv` and ```ruby-build```. It allows us to i
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](http://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install ```rbenv install --list```.
 
 ```bash
-rbenv install 2.0.0-p0
+rbenv install 2.0.0-p247
 rbenv rehash
 ```
 
@@ -80,7 +80,7 @@ rbenv rehash
 Let’s set this version as the one to use globally so we can make use of it in our terminal.
 
 ```bash
-rbenv global 2.0.0-p0
+rbenv global 2.0.0-p247
 ```
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always ```rbenv --help```.
@@ -92,7 +92,7 @@ Bundler manages an application's dependencies, kind of like a shopping list of o
 You can use the ```rbenv shell``` command to ensure we have the correct version of Ruby loaded in our terminal window, it overrides both project-specific and global version, if you're paranoid you can always check your Ruby version with ```ruby --version```.
 
 ```bash
-rbenv shell 2.0.0-p0
+rbenv shell 2.0.0-p247
 gem install bundler
 rbenv rehash
 ```
@@ -150,7 +150,7 @@ cd helloworld
 Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to ```.ruby-version``` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
 ```bash
-rbenv local 2.0.0-p0
+rbenv local 2.0.0-p247
 ```
 
 Now run Bundler to install all the project gems into ```vendor/bundle```, they are kept with the project locally and won't interfere with anything else outside.
@@ -266,7 +266,7 @@ To connect to this custom Redis process instead of the default we need to use ``
 Usage: redis-cli
   -h <hostname>    Server hostname (default: 127.0.0.1)
   -p <port>        Server port (default: 6379)
-  -s <socket>      Server socket (overrides hostname and port) 
+  -s <socket>      Server socket (overrides hostname and port)
 ```
 
 ### Upgrade Git
@@ -279,7 +279,7 @@ brew install git
 <!-- TODO: Pow install -->
 
 ### What about the kitchen sink?
-That's all you need for most Ruby on Rails applications. It has been serving me pretty well and meets all the requirements I outlined at the beginning of the article. 
+That's all you need for most Ruby on Rails applications. It has been serving me pretty well and meets all the requirements I outlined at the beginning of the article.
 
 An alternative to ```rbenv``` is [rvm](https://rvm.io/) the idea behind them both is the same but I find working with ```rbenv``` more comfortable but that maybe because I haven't spent much time with ```rvm```.
 
