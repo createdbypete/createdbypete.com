@@ -3,7 +3,7 @@
 # ----------------------- #
 url: http://createdbypete.com
 title: Created by Pete
-subtitle: 
+subtitle:
 author: Peter Rhoades
 description:
 email: hello@createdbypete.com
@@ -12,10 +12,11 @@ email: hello@createdbypete.com
 # ----------------------- #
 #    Jekyll & Plugins     #
 # ----------------------- #
-root: 
+source:      ./source
+destination: ./public
+root:
 permalink: /:categories/:title
 pygments: true
-exclude: ["vendor","Gemfile","Gemfile.lock","Rakefile"]
 markdown: redcarpet
 date_format: "ordinal"
 titlecase: false
@@ -23,16 +24,11 @@ titlecase: false
 # ----------------------- #
 #      Jekyll Assets      #
 # ----------------------- #
+
 assets:
-  dirname: assets
-  baseurl: /assets/
+  cachebust: none
   sources:
     - _assets/fonts
     - _assets/images
     - _assets/javascripts
     - _assets/stylesheets
-  compress:
-    js:   uglifier
-    css:  sass
-  cachebust: hard
-  gzip: [ text/css, application/javascript ]

@@ -1,7 +1,5 @@
-require './_plugins/date'
 
 module CBPLiquidFilters
-  include CBP::Date
 
   # Extracts raw content DIV from template, used for page description as {{ content }}
   # contains complete sub-template code on main page level

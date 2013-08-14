@@ -30,8 +30,8 @@ nav#thenav {
     padding-top: 25%;
     font-size: 14px;
 
-    [class^="icon-"], 
-    [class*=" icon-"] { 
+    [class^="icon-"],
+    [class*=" icon-"] {
       font-size: 1.3rem;
       display: inline;
       width: 1em;
@@ -41,18 +41,18 @@ nav#thenav {
     &:hover { background-color: lighten($mainColour, 10%); }
   }
 
-  .name { 
+  .name {
     a { padding-top: 0; }
   }
 }
 
-body { 
+body {
   .container { padding-left: $navWidth + $gridGutter; padding-right: 3%; padding-top: $gridGutter; }
-  &>footer { 
-    text-align: center; 
-    padding-top: $gridColumn/4; 
-    padding-bottom: $gridColumn/4; 
-    padding-left: $navWidth + $gridGutter; 
+  &>footer {
+    text-align: center;
+    padding-top: $gridColumn/4;
+    padding-bottom: $gridColumn/4;
+    padding-left: $navWidth + $gridGutter;
     padding-right: 3%; }
 }
 
@@ -75,7 +75,7 @@ section#thegrid {
     &.tall { height: grid-width(2); }
     &.wide { width: grid-width(2); }
 
-    &>header { 
+    &>header {
       position: absolute;
       background-color: $white;
       bottom: 0;
@@ -83,12 +83,12 @@ section#thegrid {
       padding: $gridGutter*2;
     }
 
-    h1 { 
+    h1 {
       @include adjust-font-size-to(18px);
       color: $textColour;
     }
-    span[rel="full-article"] { 
-      @include adjust-font-size-to(14px); 
+    span[rel="full-article"] {
+      @include adjust-font-size-to(14px);
       font-family: $headingFontFamily;
         &:hover {
           border-bottom: dotted 1px $mainColour;
@@ -107,7 +107,7 @@ article#thepost {
   background-position: top center;
   background-repeat: no-repeat;
 
-  &>header { 
+  &>header {
     margin: 0 $articlePadding 0 $articlePadding;
     padding: ($articlePadding/6) 0;
   }
@@ -124,7 +124,7 @@ article#thepost {
     padding: 0 $articlePadding ($articlePadding/4) $articlePadding;
   }
 
-  &>footer { 
+  &>footer {
     @include adjust-font-size-to(14px);
     border: 0;
     padding: $articlePadding/2 $articlePadding;
@@ -132,12 +132,12 @@ article#thepost {
     font-style: italic;
   }
 
-  pre { 
+  pre {
     @include rhythm-borders(0px);
     border-top: solid 1px darken($codeBackground, 3%);
     border-bottom: solid 1px darken($codeBackground, 3%);
     @include adjust-font-size-to(14px);
-    display: block; 
+    display: block;
     margin-left: -$articlePadding;
     margin-right: -$articlePadding;
     padding-left: $articlePadding;

@@ -1,12 +1,17 @@
 source "https://rubygems.org"
 
-gem "jekyll",    "~> 0.12.1"
-gem "redcarpet", "~> 2.2.2"
+group :development do
+  # Jekyll
+  gem "jekyll", "~> 1.1"
+  gem "jekyll-assets"
 
-gem "jekyll-assets"
+  # Asset handlers and processors
+  gem "uglifier"
+  gem "coffee-script"
+  gem "sass"
+  gem "compass"
 
-gem "compass"
-gem "rb-fsevent", require: false
-gem "uglifier"
-gem "coffee-script"
-gem "sass"
+  # Development Tools
+  gem "foreman"
+  gem "guard-jekyll-plus"
+end

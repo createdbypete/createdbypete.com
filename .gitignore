@@ -1,4 +1,6 @@
-.bundle
-.sass-cache
-/_site
+# Ignore bundler
+/.bundle
 /vendor/bundle
+
+# Jekyll generated site
+/public
