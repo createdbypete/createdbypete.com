@@ -1,26 +1,15 @@
-<ul {% if index %}id="filter"{% endif %}>
-  <li class="name">
-    <a href="{{ root_url }}/#"
-     {% if index %}
-     title="Created by Pete" data-filter="*" class="category"
-     {% else %}
-     title="Back to homepage"
-     {% endif %}>
-      <img src="{% asset_path cbp-logo.png %}" alt="Created by Pete">
-    </a>
+<a href="{{ root_url }}" class="logo">CBP</a>
+<ul>
+  <li>
+    <a href="{{ root_url }}" title="Articles"><i class="icon-pencil"></i></a>
   </li>
   <li>
-    <a href="{{ root_url }}/#articles" title="Articles" class="category"><i class="icon-pencil"></i> Articles</a>
-  </li>
-  {% comment %}
-  <li>
-    <a href="{{ root_url }}/#work" title="Work" class="category"><i class="icon-lightbulb"></i> Work</a>
+    <a href="http://github.com/{{ site.networks.github }}" title="Fork me on GitHub"><i class="icon-github"></i></a>
   </li>
   <li>
-    <a href="{{ root_url }}/#playground" title="Playground" class="category"><i class="icon-beaker"></i> Playground</a>
+    <a href="http://twitter.com/{{ site.networks.twitter }}" title="Follow me on Twitter"><i class="icon-twitter"></i></a>
   </li>
   <li>
-    <a href="{{ root_url }}/peter-rhoades" title="About"><i class="icon-user"></i> Info</a>
+    <a href="{{ root_url }}atom.xml" title="Feed"><i class="icon-rss"></i></a>
   </li>
-  {% endcomment %}
 </ul>

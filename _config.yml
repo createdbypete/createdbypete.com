@@ -8,6 +8,10 @@ author: Peter Rhoades
 description:
 email: hello@createdbypete.com
 
+networks:
+  github: createdbypete
+  twitter: createdbypete
+
 
 # ----------------------- #
 #    Jekyll & Plugins     #
