@@ -1,5 +1,4 @@
 @import "mixins";
-@import "compass";
 @import "breakpoint";
 @import "vendor/font-awesome";
 @import "vendor/pygments";
@@ -23,7 +22,7 @@ $grayLight:             #999;
 $grayLighter:           #eee;
 $white:                 #fff;
 
-$bodyBackground:        #f9f9f9;
+$bodyBackground:        #fff;
 $textColour:            $grayDark;
 
 // Layout
@@ -117,10 +116,9 @@ p, li {
   }
   a {
     @include transition(background-color 200ms ease);
-    padding: 0 .2em;
 
     &:hover {
-      background-color: lighten($mainColour, 40%);
+      background-color: lighten($mainColour, 10%);
     }
   }
 }

@@ -9,12 +9,18 @@
 
 .nav {
   @include clearfix;
+  width: 100%;
+  position: fixed;
   background-color: $mainColour;
 
   .logo {
     @include nav-block-item;
     float: left;
     border-right: solid 1px lighten($mainColour, 5%);
+
+    &:hover {
+      background-color: darken($mainColour, 30%);
+    }
   }
 
   ul {
@@ -36,5 +42,12 @@
       font-size: 1.1em;
       line-height: inherit;
     }
+  }
+}
+
+#articles {
+  li.articles a {
+    background-color: $white;
+    color: $mainColour;
   }
 }
