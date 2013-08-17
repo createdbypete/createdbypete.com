@@ -2,7 +2,7 @@
 layout: default
 ---
 {% capture has_image %}{{ page.image | size }}{% endcapture %}
-<article id="thepost" class="hentry {{ page.categories | first }}{% if has_image != '0' %} image{% endif %}" role="article" 
+<article id="thepost" class="hentry {{ page.categories | first }}{% if has_image != '0' %} image{% endif %}" role="article"
 {% if has_image != '0' %}
   style="background-image: url('/media/750x370/{{ page.image }}')"
 {% endif %}
@@ -21,5 +21,15 @@ layout: default
         ({{ updated }})
       {% endif %}
     </p>
+    <div id="comments"></div>
   </footer>
+  <script src="https://apis.google.com/js/plusone.js"></script>
+  <script>
+  gapi.comments.render('comments', {
+      href: window.location,
+      width: '570',
+      first_party_property: 'BLOGGER',
+      view_type: 'FILTERED_POSTMOD'
+  });
+  </script>
 </article>
