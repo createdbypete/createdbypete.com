@@ -1,25 +1,43 @@
 @mixin nav-block-item {
+  $nav-size: 50px;
   display: block;
-  width: 50px;
-  height: 50px;
+  width: $nav-size;
+  height: $nav-size;
+  line-height: $nav-size;
   color: $white;
-  line-height: 50px;
   text-align: center;
+
+  @include breakpoint($tablet-portrait) {
+    $nav-size: 100px;
+    width: $nav-size;
+    height: $nav-size;
+    line-height: $nav-size;
+  }
 }
 
 .nav {
   @include clearfix;
+  top: 0;
+  left: 0;
   width: 100%;
   position: fixed;
   background-color: $mainColour;
+
+  @include breakpoint(800px) {
+    width: 100px;
+  }
 
   .logo {
     @include nav-block-item;
     float: left;
     border-right: solid 1px lighten($mainColour, 5%);
 
+    @include breakpoint($tablet-portrait) {
+      border-right: 0;
+    }
+
     &:hover {
-      background-color: darken($mainColour, 30%);
+      background-color: lighten($mainColour, 5%);
     }
   }
 
@@ -35,12 +53,21 @@
       @include nav-block-item;
       float: left;
       border-left: solid 1px lighten($mainColour, 5%);
+
+      @include breakpoint($tablet-portrait) {
+        border-left: 0;
+        border-top: solid 1px lighten($mainColour, 5%);
+      }
     }
 
     [class^="icon-"],
     [class*=" icon-"] {
       font-size: 1.1em;
       line-height: inherit;
+
+      @include breakpoint(800px) {
+        font-size: 1.6em;
+      }
     }
   }
 }

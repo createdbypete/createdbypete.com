@@ -1,12 +1,7 @@
 ---
 layout: default
 ---
-{% capture has_image %}{{ page.image | size }}{% endcapture %}
-<article id="thepost" class="hentry {{ page.categories | first }}{% if has_image != '0' %} image{% endif %}" role="article" 
-{% if has_image != '0' %}
-  style="background-image: url('/media/750x370/{{ page.image }}')"
-{% endif %}
->
+<article class="hentry {{ page.categories | first }}" role="article">
   <header>
     <h1 class="entry-title">{{ page.title }}</h1>
   </header>

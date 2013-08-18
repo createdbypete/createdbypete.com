@@ -4,20 +4,18 @@
   @include box-sizing('border-box');
 }
 html, body {
-  @include stretch-y;
-  font-weight: 400;
   font-family: $bodyFontFamily;
   background-color: $bodyBackground;
   color: $textColour;
 }
 
 h1, h2, h3, h4, h5, h6 { font-family: $headingFontFamily; font-weight: 700; }
-h1 { @include adjust-font-size-to(48px); }
-h2 { @include adjust-font-size-to(36px); }
-h3 { @include adjust-font-size-to(24px); }
-h4 { @include adjust-font-size-to(18px); }
-h5 { @include adjust-font-size-to(14px); }
-h6 { @include adjust-font-size-to(14px); font-weight: 400; }
+h1 { @include adjust-font-size-to(36px); }
+h2 { @include adjust-font-size-to(24px); }
+h3 { @include adjust-font-size-to(18px); }
+h4 { @include adjust-font-size-to(14px); }
+h5 { @include adjust-font-size-to(12px); }
+h6 { @include adjust-font-size-to(12px); font-weight: 400; }
 
 blockquote {
   padding: 0 0 0 15px;
@@ -46,26 +44,21 @@ pre {
   font-family: $codeFontFamily;
   white-space: pre;
   overflow: scroll;
+  padding: 1em 2em;
 
   code { background-color: transparent; }
 }
 
 a {
+  color: $mainColour;
   text-decoration: none;
-  @include link-colours($mainColour);
 }
-// a[href^="http"]:after {
-//   @include font-awesome;
-//   color: $grayLighter;
-//   content: " \f08e";
-// }
 
 p, li {
   code {
-    @include border-radius(3px);
     @include adjust-font-size-to(14px);
     color: $gray;
-    padding: 0 .3em;
+    padding: 0 0.3em;
     background-color: #fef9ec;
     border: solid 1px darken(#fef9ec, 5%);
   }
@@ -80,6 +73,4 @@ p, li {
 
 .img-centered {
   text-align: center;
-  margin-left: -($articlePadding);
-  margin-right: -($articlePadding);
 }
