@@ -23,8 +23,6 @@ root: /
 permalink: /:categories/:title
 pygments: true
 markdown: redcarpet
-date_format: "ordinal"
-titlecase: false
 
 # ----------------------- #
 #      Jekyll Assets      #
