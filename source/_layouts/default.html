@@ -1,4 +1,4 @@
-{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{% capture root_path %}{{ site.root }}{% endcapture %}
 {% assign index = page.index %}
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
@@ -24,7 +24,7 @@
 </head>
 <body id="articles">
   <nav class="nav">
-    {% include thenav.html %}
+    {% include nav.html %}
   </nav>
   <div class="container">
     {{ content }}
