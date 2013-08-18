@@ -39,3 +39,6 @@ assets:
   js_compressor: uglifier
   css_compressor: sass
   cachebust: hard
+    - _vendor/assets/javascripts
+    - _vendor/assets/stylesheets
+

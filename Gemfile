@@ -10,6 +10,7 @@ group :development do
   gem "coffee-script"
   gem "sass"
   gem "compass"
+  gem "compass-normalize"
   gem "breakpoint"
 
   # Development Tools

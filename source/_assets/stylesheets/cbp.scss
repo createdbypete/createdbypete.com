@@ -1,8 +1,17 @@
+@import "normalize";
+@import "variables";
+
+// Compass mixin imports
 @import "compass";
 @import "compass/layout";
-@import "vendor/normalize";
-@import "vendor/isotope";
+@import "breakpoint";
+
+// Vendor imports
+@import "font-awesome";
+
+// CBP styles
 @import "global";
+@import "layout";
 @import "nav";
 @import "articles";
 

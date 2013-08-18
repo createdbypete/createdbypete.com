@@ -1,0 +1,39 @@
+// Colours
+// -------------------------
+$mainColour:            #427fed;
+$secondaryColour:       #d3d2ce;
+$codeBackground:        #fef9ec;
+
+$articlesColour:        #3498db;
+$playgroundColour:      #f1c40f;
+
+// Grays
+// -------------------------
+$black:                 #000;
+$grayDarker:            #222;
+$grayDark:              #333;
+$gray:                  #555;
+$grayLight:             #999;
+$grayLighter:           #eee;
+$white:                 #fff;
+
+$bodyBackground:        #fff;
+$textColour:            $grayDark;
+
+// Layout
+// -------------------------
+$navWidth:   100px;
+$gridColumn: 180px;
+$gridGutter: 10px;
+
+$articlePadding: ($gridColumn/2);
+
+// Typography
+// -------------------------
+$base-font-size: 16px;
+$base-line-height: 24px;
+// $headingFontFamily: "Bitter", serif;
+$headingFontFamily: serif;
+// $bodyFontFamily: "Open Sans", Helvetica,  sans-serif;
+$bodyFontFamily: Helvetica,  sans-serif;
+$codeFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;
