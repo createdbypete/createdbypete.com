@@ -12,6 +12,7 @@ networks:
   github: createdbypete
   twitter: createdbypete
 
+analytics: true
 
 # ----------------------- #
 #    Jekyll & Plugins     #
