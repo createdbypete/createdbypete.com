@@ -1,63 +1,33 @@
-{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{% capture root_path %}{{ site.root }}{% endcapture %}
 {% assign index = page.index %}
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   <meta name="description" content="Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK.">
   <meta name="viewport" content="width=device-width">
-  {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' }}{% endif %}{% endcapture %}
-  <link rel="canonical" href="{{ canonical }}">
   <link rel="publisher" href="https://plus.google.com/116964527372254202973">
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  {% include canonical.html %}
   <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
   {% stylesheet cbp %}
-  {% javascript vendor/modernizr %}
-  <script>
-    var _gaq=[['_setAccount','UA-33629370-1'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
+  {% include googleanalytics.html %}
 </head>
-<body {% if has_category != '0' %}class="{{ category }}"{% endif %}>
-  <nav id="thenav">
-    {% include thenav.html %}
+<body id="articles">
+  <nav class="nav">
+    {% include nav.html %}
   </nav>
-  <div class="container">
-    {{ content }}
-  </div>
+  {{ content }}
   <footer>
-    <img src="{% asset_path cbp-logo-footer.png %}" alt="Created by Pete">
+    <img src="{% asset_path logo-footer.png %}" alt="Created by Pete">
   </footer>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="{% asset_path vendor/jquery %}"><\/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{% asset_path jquery %}"><\/script>')</script>
   {% javascript cbp %}
-  <script type="text/javascript">
-    var GoSquared = {};
-    GoSquared.acct = "GSN-732251-O";
-    (function(w){
-      function gs(){
-        w._gstc_lt = +new Date;
-        var d = document, g = d.createElement("script");
-        g.type = "text/javascript";
-        g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-        var s = d.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(g, s);
-      }
-      w.addEventListener ?
-        w.addEventListener("load", gs, false) :
-        w.attachEvent("onload", gs);
-    })(window);
-  </script>
+  {% include gosquared.html %}
 </body>
 </html>
