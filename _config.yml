@@ -8,30 +8,34 @@ author: Peter Rhoades
 description:
 email: hello@createdbypete.com
 
+networks:
+  github: createdbypete
+  twitter: createdbypete
+
+analytics: true
 
 # ----------------------- #
 #    Jekyll & Plugins     #
 # ----------------------- #
 source:      ./source
 destination: ./public
-root:
+root: /
 permalink: /:categories/:title
 pygments: true
 markdown: redcarpet
-date_format: "ordinal"
-titlecase: false
 
 # ----------------------- #
 #      Jekyll Assets      #
 # ----------------------- #
 
 assets:
-  cachebust: none
+  js_compressor: uglifier
+  css_compressor: sass
+  cachebust: hard
   sources:
     - _assets/fonts
     - _assets/images
     - _assets/javascripts
     - _assets/stylesheets
-  js_compressor: uglifier
-  css_compressor: sass
-  cachebust: hard
+    - _vendor/assets/javascripts
+    - _vendor/assets/stylesheets

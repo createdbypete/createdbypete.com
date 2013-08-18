@@ -1,0 +1,33 @@
+// Breakpoints
+// -------------------------
+$tablet-portrait: 768px;
+
+// Colours
+// -------------------------
+$mainColour:            #5e8ee4;
+$secondaryColour:       #d3d2ce;
+$codeBackground:        #fef9ec;
+
+$articlesColour:        #3498db;
+$playgroundColour:      #f1c40f;
+
+// Grays
+// -------------------------
+$black:                 #000;
+$grayDarker:            #222;
+$grayDark:              #333;
+$gray:                  #555;
+$grayLight:             #999;
+$grayLighter:           #eee;
+$white:                 #fff;
+
+$bodyBackground:        #fff;
+$textColour:            $grayDark;
+
+// Typography
+// -------------------------
+$base-font-size: 16px;
+$base-line-height: 24px;
+$headingFontFamily: "Bitter", sans-serif;
+$bodyFontFamily: "Open Sans", Helvetica,  sans-serif;
+$codeFontFamily: Monaco, Menlo, Consolas, "Courier New", monospace;

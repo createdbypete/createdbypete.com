@@ -1,0 +1,49 @@
+body {
+  padding-top: 60px;
+
+  @include breakpoint($tablet-portrait) {
+    padding-top: 20px;
+    margin-left: 20%;
+    margin-right: 10%;
+  }
+
+  & > footer {
+    text-align: center;
+    padding: 2em 0;
+  }
+}
+
+.list {
+  article {
+    padding: 1em 2em;
+
+    h1 {
+      @include adjust-font-size-to(18px);
+      @include adjust-leading-to(1);
+
+      @include breakpoint($tablet-portrait) {
+        @include adjust-font-size-to(24px);
+        @include adjust-leading-to(1);
+      }
+    }
+
+    time {
+      @include adjust-font-size-to(12px);
+      color: $grayLight;
+    }
+
+    &.latest {
+      border-bottom: solid 1px $grayLighter;
+      padding: 2em;
+
+      h1 {
+        @include adjust-font-size-to(24px);
+        @include adjust-leading-to(1);
+
+        @include breakpoint($tablet-portrait) {
+          @include adjust-font-size-to(36px);
+        }
+      }
+    }
+  }
+}
