@@ -2,7 +2,7 @@
 layout: default
 index: true
 ---
-<section>
+<section class="list">
 {% for post in site.posts %}
 {% capture css_class %}{{ post.categories | first | prepend: 'category-' }}{% if forloop.first %} {{ 'latest' }}{% endif %}{% endcapture %}
 {% assign date = post.date %}

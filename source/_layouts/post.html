@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-<article class="hentry {{ page.categories | first }}" role="article">
+<article class="hentry {{ page.categories | first | prepend: 'category-' }}" role="article">
   <header>
     <h1 class="entry-title">{{ page.title }}</h1>
   </header>
