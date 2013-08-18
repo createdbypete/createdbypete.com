@@ -32,6 +32,7 @@ blockquote {
     display: block;
     line-height: $base-line-height;
     color: $grayLight;
+
     &:before {
       content: "\2014 \00A0";
     }
@@ -39,14 +40,23 @@ blockquote {
 }
 
 pre {
+  @include adjust-font-size-to(14px);
   background-color: $codeBackground;
   color: $gray;
   font-family: $codeFontFamily;
   white-space: pre;
+  word-wrap: normal;
   overflow: scroll;
   padding: 1em 2em;
+  margin: 0 -2em;
 
-  code { background-color: transparent; }
+  @include breakpoint($tablet-portrait) {
+    margin: 0;
+  }
+
+  code {
+    background-color: transparent;
+  }
 }
 
 a {
@@ -62,6 +72,7 @@ p, li {
     background-color: #fef9ec;
     border: solid 1px darken(#fef9ec, 5%);
   }
+
   a {
     @include transition(background-color 200ms ease);
 

@@ -65,7 +65,7 @@
       font-size: 1.1em;
       line-height: inherit;
 
-      @include breakpoint(800px) {
+      @include breakpoint($tablet-portrait) {
         font-size: 1.6em;
       }
     }
