@@ -3,38 +3,29 @@
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   <meta name="description" content="Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK.">
   <meta name="viewport" content="width=device-width">
-  {% include canonical.html %}
   <link rel="publisher" href="https://plus.google.com/116964527372254202973">
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  {% include canonical.html %}
   {% stylesheet cbp %}
-  {% javascript vendor/modernizr %}
   {% include googleanalytics.html %}
 </head>
 <body id="articles">
   <nav class="nav">
     {% include nav.html %}
   </nav>
-  <div class="container">
-    {{ content }}
-  </div>
+  {{ content }}
   <footer>
     <img src="{% asset_path logo-footer.png %}" alt="Created by Pete">
   </footer>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="{% asset_path vendor/jquery %}"><\/script>')</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="{% asset_path jquery %}"><\/script>')</script>
   {% javascript cbp %}
   {% include gosquared.html %}
 </body>
