@@ -11,3 +11,25 @@ body {
     text-align: center;
   }
 }
+
+.list article {
+  padding: 1em 2em;
+
+  h1 {
+    @include adjust-font-size-to(18px);
+  }
+
+  time {
+    @include adjust-font-size-to(12px);
+    color: $grayLight;
+  }
+
+  &.latest {
+    border-bottom: solid 1px $grayLighter;
+    padding: 2em;
+
+    h1 {
+      @include adjust-font-size-to(18px);
+    }
+  }
+}
