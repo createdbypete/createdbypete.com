@@ -22,6 +22,7 @@ body {
 
       @include breakpoint($tablet-portrait) {
         @include adjust-font-size-to(24px);
+        @include adjust-leading-to(1);
       }
     }
 
