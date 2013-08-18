@@ -23,7 +23,7 @@
   position: fixed;
   background-color: $mainColour;
 
-  @include breakpoint(800px) {
+  @include breakpoint($tablet-portrait) {
     width: 100px;
   }
 
