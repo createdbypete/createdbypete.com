@@ -1,4 +1,5 @@
 {% capture root_path %}{{ site.root }}{% endcapture %}
+{% capture meta_description %}{% if page.excerpt %}{{ page.excerpt | strip_html }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
 {% assign index = page.index %}
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
@@ -8,7 +9,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-  <meta name="description" content="Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK.">
+  <meta name="description" content="{{ meta_description | strip_newlines }}">
   <meta name="viewport" content="width=device-width">
   <link rel="publisher" href="https://plus.google.com/116964527372254202973">
   {% include canonical.html %}
