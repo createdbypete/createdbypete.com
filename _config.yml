@@ -5,7 +5,7 @@ url: http://createdbypete.com
 title: Created by Pete
 subtitle:
 author: Peter Rhoades
-description:
+description: "Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK."
 email: hello@createdbypete.com
 
 networks:
@@ -20,7 +20,7 @@ analytics: true
 source:      ./source
 destination: ./public
 root: /
-permalink: /:categories/:title
+permalink: /:categories/:title/
 pygments: true
 markdown: redcarpet
 
