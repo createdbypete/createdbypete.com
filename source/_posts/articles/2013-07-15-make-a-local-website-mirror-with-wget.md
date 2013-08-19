@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Make a Local Website Mirror with Wget
+alias: /articles/make-a-local-copy-of-any-website-with-wget/index.html
 categories: articles
 tags: [guide]
 ---
