@@ -2,7 +2,6 @@ body {
   padding-top: 60px;
 
   @include breakpoint($tablet-portrait) {
-    padding-top: 20px;
     margin-left: 20%;
     margin-right: 10%;
   }
