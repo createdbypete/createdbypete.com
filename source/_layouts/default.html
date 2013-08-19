@@ -4,7 +4,11 @@
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
 <!DOCTYPE html>
-<html>
+{% if page.excerpt %}
+<html itemscope itemtype="http://schema.org/Article">
+{% else %}
+<html itemscope itemtype="http://schema.org/Blog">
+{% endif %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,6 +17,7 @@
   <meta name="viewport" content="width=device-width">
   <link rel="publisher" href="https://plus.google.com/116964527372254202973">
   {% include canonical.html %}
+  {% include microdata.html %}
   <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
   {% stylesheet cbp %}
   {% include googleanalytics.html %}

@@ -1,0 +1,11 @@
+{% if page.title %}
+  <meta content="{{ page.title }}" itemprop="name">
+{% else %}
+  <meta content="{{ site.title }}" itemprop="og:title">
+{% endif %}
+{% if page.excerpt %}
+  <meta content="{{ page.excerpt | strip_html }}" itemprop="description">
+{% else %}
+  <meta content="{{ site.description }}" itemprop="description">
+{% endif %}
+<meta content="{{ site.url }}{{ 'logo-with-bg.png' | asset_path }}" itemprop="image">
