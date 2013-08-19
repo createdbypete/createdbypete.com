@@ -19,6 +19,5 @@
 {% endif %}
 {% if page.date %}
   <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
-  {% comment %}<meta content="{{ site.url }}/about/" property="article:author">{% endcomment %}
 {% endif %}
 <meta content="{{ site.url }}{{ 'logo-with-bg.png' | asset_path }}" property="og:image">
