@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The internet is down! Google Downtime Caused a 40% Drop in Global Traffic
+title: The internet is down! Google downtime caused a 40% drop in global traffic
 categories: articles
 ---
 Google.com was down for a few minutes between 23:52 and 23:57 BST on Aug 16, 2013. This result of this downtime was a massive drop in global internet traffic. [GoSquared](https://www.gosquared.com/r/ODU5MTM4) a service providing real-time analytics for websites reported a __40% drop__ in the number of pageviews.

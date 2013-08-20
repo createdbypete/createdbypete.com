@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Personalise the Google URL Shortening Service With Your Own Domain
+title: Personalise the Google URL shortening service with your own domain
 categories: articles
 tags: [guide,apache,nginx]
 grid: wide
@@ -19,7 +19,7 @@ This is the best part, you only need a couple of things which in this day and ag
 3. A Google account, if you want to have the URLs you generate with [goo.gl](http://goo.gl) be unique to your account and kept in your dashboard to track number of clicks etc. Otherwise anonymous access will work just fine to generate the URL.
 
 ## I'm ready to go, what's next?
-Everything ready to go we can make the magic happen! 
+Everything ready to go we can make the magic happen!
 
 ### Apache configuration
 Apache people create a `.htaccess` file in the root web directory and add the following lines to it. Of course if you have access to the main vhost configuration then use that to save Apache a little bit of leg work reading in the `.htaccess` file.
@@ -46,9 +46,9 @@ The server block does the same as the Apache rule above and it redirects any req
 ## How do I use this to make my own short urls?
 By now you've probably figured it out but just in case. Visit [goo.gl](http://goo.gl/) and sign in if you want to keep statistics on your links otherwise you will just see the input box **Paste your long URL here:** follow the instructions and paste in your long URL and shorten that URL!
 
-In return you'll get a short URL in the form of `http://goo.gl/nY8J2` all we are interested in is the bit after the domain. We can then append that to our custom domain [crtdby.pt/nY8J2](http://crtdby.pt/nY8J2) like so and you're done! 
+In return you'll get a short URL in the form of `http://goo.gl/nY8J2` all we are interested in is the bit after the domain. We can then append that to our custom domain [crtdby.pt/nY8J2](http://crtdby.pt/nY8J2) like so and you're done!
 
-Now when you use that URL it will first take a trip to your server where it will find the rewrite rules we setup, these will then send the request onto [goo.gl](http://goo.gl) to be translated into the long URL and the correct page. 
+Now when you use that URL it will first take a trip to your server where it will find the rewrite rules we setup, these will then send the request onto [goo.gl](http://goo.gl) to be translated into the long URL and the correct page.
 
 #### Seriously is that it!?
 Yup, that's it. This method ensures you can still use the analytical data collected by the `goo.gl` service in their pretty graphs and you get to use your own domain.
