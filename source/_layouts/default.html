@@ -1,17 +1,25 @@
 {% capture root_path %}{{ site.root }}{% endcapture %}
+{% capture meta_description %}{% if page.excerpt %}{{ page.excerpt | strip_html }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
 {% assign index = page.index %}
 {% capture category %}{{ page.categories | first }}{% endcapture %}
 {% capture has_category %}{{ category | size }}{% endcapture %}
 <!DOCTYPE html>
-<html>
+{% if page.excerpt %}
+<html itemscope itemtype="http://schema.org/Article">
+{% else %}
+<html itemscope itemtype="http://schema.org/Blog">
+{% endif %}
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-  <meta name="description" content="Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK.">
+  <meta name="description" content="{{ meta_description | strip_newlines }}">
   <meta name="viewport" content="width=device-width">
   <link rel="publisher" href="https://plus.google.com/116964527372254202973">
   {% include canonical.html %}
+  {% include microdata.html %}
+  {% include opengraph.html %}
+  {% include twittermeta.html %}
   <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
   {% stylesheet cbp %}
   {% include googleanalytics.html %}
