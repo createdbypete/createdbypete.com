@@ -6,9 +6,12 @@ image: old_train_by_devils666.jpg
 categories: articles
 tags: [guide,ruby]
 date: 2012-08-27 16:00
-updated: 2013-03-11 20:30
+updated: 2013-11-10 22:30
 alias: /blog/2012/08/ruby-on-rails-development-with-mac-osx-mountain-lion.html
 ---
+<div class="alert">
+  <strong>Using OS X Mavericks?</strong> I will be updating this article very soon.
+</div>
 
 Most developers like to spend a bit of time setting up their workspace. I've been experimenting Ruby on Rails for some time now and this is still my preferred setup. My core criteria is simple:
 
