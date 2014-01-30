@@ -1,6 +1,7 @@
 # Ignore bundler
 /.bundle
 /vendor/bundle
+/Gemfile.lock
 
 # Jekyll generated site
 /public
