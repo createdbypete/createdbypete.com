@@ -1,29 +1,38 @@
 ---
 layout: post
 title: PHP 5.4 development on OS X with MySQL and Laravel 4
-image: php-laravel4.jpg
 categories: articles
-grid: large
 date: 2012-11-12 11:23
-updated: 2013-03-16 12:12
+updated: 2014-02-01 20:48
 alias: /blog/2012/11/php-54-development-on-osx.html
 ---
-As a developer I always crave the bleeding edge releases, in contrast for any servers I setup I want solid, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of "if it isn't broke don't upgrade it", but when I still come across hosts offering PHP 5.2 when the latest version of PHP at the time of writing is 5.4 it saddens me to think of what people are missing.
 
-In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here's how to install it on OS X, I'm running Mountain Lion but since this uses Homebrew I would think any previous versions that can also run Homebrew can follow along.
+As a developer I'm always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of "if it isn't broken don't upgrade it", but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.
+
+Most hosts should be able to offer you at least 5.3 by now (if not find someone else right now!). In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here's how to install it on OS X. I'm running Mavericks but since most of this guide uses Homebrew I have included a few notes for differences installing on Mountain Lion and I would think any previous versions that can also run Homebrew can follow along.
 
 ## The Essentials
 
-### Install Xcode and Command Line Tools
+### Install Command Line Tools
 
-[Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) and [Command Line Tools for Xcode](https://developer.apple.com/downloads) are pretty much the first thing I ever install on a new Mac setup. Xcode is available for free from the App Store, it provides some useful tools such as FileMerge but it is not essential, Command Line Tools is however essential and can be downloaded from within Xcode or as a separate package.
+Installion of Command Line Tools for Mavericks has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
+
+    xcode-select --install
+
+You should see a pop-up window appear asking you to install, after clicking install just sit back and wait for it to finish.
+
+**Mountain Lion:** If you're on Mountain Lion (or Lion) you will need to [download Command Line Tools](https://developer.apple.com/downloads) from Apple. The Apple Developer site requires you to sign in to access the downloads page but once you're in search for the Command Line Tools for your version, download and install.
+
+### What about Xcode?
+
+You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) from the App Store but you don't actually need it. I find the FileMerge application comes in very useful but it's a large download just for that so be prepared to wait a little if you've not got a high-speed connection. Once it's downloaded, launch Xcode to make sure it's setup.
 
 ### Install Homebrew
 
-If you’ve not used [Homebrew](http://mxcl.github.com/homebrew/) before you're going to love it over the next few steps as it makes the whole process so much easier! Installation is a simple "one liner".
+If you’ve not used [Homebrew](http://brew.sh/) before you're going to love it over the next few steps as it makes the whole process so much easier! Installation is a simple "one liner".
 
 ```bash
-ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go)
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 # Check every is configured properly
 brew doctor
@@ -42,7 +51,7 @@ MySQL and PHP go hand in hand just about everywhere these days you just can't ke
 ```bash
 brew install mysql
 ```
-Now you just sit back and let Homebrew do its magic and not only install MySQL but also any dependencies. Once it's finished it will display some post installation instructions; I'm going to go through the steps here but please double check you're not following out of date steps. 
+Now you just sit back and let Homebrew do its magic and not only install MySQL but also any dependencies. Once it's finished it will display some post installation instructions; I'm going to go through the steps here but please double check you're not following out of date steps.
 
 ```bash
 # Add MySQL to launchctl to let OS X manage the process and start when you login
@@ -86,28 +95,26 @@ composer --version # Check we have access to it
 ```
 
 ## Laravel 4
-With more PHP frameworks than it's worth making joke about, [Laravel](http://laravel.com) by [Taylor Otwell](https://github.com/taylorotwell) and [team](https://github.com/laravel?tab=members) has reminded me that PHP can still be fun.
+With more PHP frameworks than it's worth making joke about, [Laravel](http://laravel.com) by [Taylor Otwell](https://github.com/taylorotwell) and [team](https://github.com/laravel?tab=members) looks to me like a step in the right direction.
 
 > It's like a dirty weekend away from Rails
 
-What I really like with the [new version](http://four.laravel.com) (at the time of writing is in beta), is the adoption of the latest PHP syntax features, Composer to manage the packages, completely unit tested and has a really clean way to work with multiple environments. I'll stop stalling and get it setup so we can play! First install the PHP Mcrypt module that Laravel requires.
+What I really like with the Laravel, is the adoption of the latest PHP syntax features, Composer to manage the packages, completely unit tested and has a really clean way to work with multiple environments. I'll stop stalling and get it setup so we can play! First install the PHP Mcrypt module that Laravel requires.
 
 ```bash
 brew install php54-mcrypt
 ```
 
-Now, download the [latest version](https://github.com/laravel/laravel/archive/develop.zip) of Laravel 4, (this is the recommended way) and unzip, you can unzip it anywhere (preferably within your home directory) as we will be using PHP 5.4 built-in development webserver!
+Using Composer we can follow Laravel's one liner [quickstart](http://laravel.com/docs/quick#installation). Obviously change `your-project-name` for something more meaningful.
 
 ```bash
-cd ~/Downloads/laravel-develop # Change this to wherever you extracted Laravel
-
-# Run composer to install the dependencies
-composer install
+cd /where/projects/are/kept
+composer create-project laravel/laravel your-project-name --prefer-dist
 ```
 
 ### Using the PHP 5.4 built-in webserver
 
-With Laravel now ready to go, let's fire up the [PHP built-in webserver](http://php.net/manual/features.commandline.webserver.php). Having enjoyed the ease of using the `rails s` command in Rails this addition was particularly exciting. It allows you to spawn a development webserver from the command line. No need to configure Apache and you get a live (and colourful) log output which during development is incredibly useful!
+With Laravel now ready to go, let's fire up the [PHP built-in webserver](http://php.net/manual/features.commandline.webserver.php). Having enjoyed the ease of using the `rails server` command in Rails this addition was particularly exciting. It allows you to spawn a development webserver from the command line. No need to configure Apache and you get a live (and colourful) log output which during development is incredibly useful!
 
 Laravel 4 comes with a routing script so we can still work with pretty URLs (usually you would need to have index.php in the URL which is not a big deal in development).
 
@@ -137,6 +144,6 @@ php -S 0.0.0.0:4000 -t /path/to/web/root
 php -S myproject.dev:5000 -t ./path/can/be/relative/too
 
 # Using a router script (this is method we used with Laravel)
-php -S localhost:8000 my-router-script.php 
+php -S localhost:8000 my-router-script.php
 ```
 You can find out more details from the [PHP documentation](http://php.net/manual/features.commandline.webserver.php). You can also find out [what's changed in PHP 5.4](http://php.net/manual/migration54.changes.php) and how to migrate/test your older projects if you are upgrading.
