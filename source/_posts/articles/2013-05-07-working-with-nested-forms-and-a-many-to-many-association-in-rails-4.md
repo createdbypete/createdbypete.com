@@ -2,9 +2,8 @@
 layout: post
 title: Working with nested forms and a many-to-many association in Rails 4
 categories: articles
-image: vintage-database.jpg
-grid: wide
 tags: [guide,ruby]
+updated: 2014-02-01 14:45
 ---
 Recently a project I was working on needed a _many-to-many_ relationship that would also store some extra data in the pivot table.
 
