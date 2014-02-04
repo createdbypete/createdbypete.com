@@ -6,17 +6,17 @@ image: vintage-database.jpg
 grid: wide
 tags: [guide,ruby]
 ---
-Recently a project I was working on needed a _many-to-many_ relationship that would also store some extra data in the pivot table. 
+Recently a project I was working on needed a _many-to-many_ relationship that would also store some extra data in the pivot table.
 
 Rails provides helpers to make working with this sort of relationship a breeze but when you start to include the nested forms and requirement to add data to that connecting table the solution may not be that obvious.
 
-I'll be using Rails 4 (rc1), the code will be the same for Rails 3.2 for the most part the major difference is [Strong Parameters](https://github.com/rails/strong_parameters) is now used in place of `attr_accessible`. You can find out [how to install Rails 4 yourself here](http://createdbypete.com/articles/getting-started-with-rails-4/).
+I'll be using Rails 4, the code will be the same for Rails 3.2 for the most part the major difference is [Strong Parameters](https://github.com/rails/strong_parameters) is now used in place of `attr_accessible`. You can find out [how to install Rails 4 yourself here](/articles/ruby-on-rails-development-setup-for-mac-osx/).
 
 ## Getting started
 
 For this example I'm going to use a Survey application, unfortunately this was a survey done in the street on paper and now the results need to be manually added to the system.
 
-> Each Survey will have some Questions, these Questions will be answered by a Participant. 
+> Each Survey will have some Questions, these Questions will be answered by a Participant.
 
 So in this example we need an Answers table to be our many-to-many table that will link our Participant to our Question and keep the Answer the participant provided in an additional column.
 
@@ -87,13 +87,13 @@ class SurveysController < ApplicationController
   end
 
   private
-    
+
     # ... ignoring content that hasn't changed from scaffold
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:name, 
-        :questions_attributes => [:id, :content, 
+      params.require(:survey).permit(:name,
+        :questions_attributes => [:id, :content,
           :answers_attributes => [:id, :answer, :participant_id]
         ])
     end
@@ -159,6 +159,6 @@ What we have done there is create a table for the Survey model in the usual, the
 
 For the Answers `fields_for` we are using the `find_or_initialize_by` method so that our answer `text_area` will populate with data if it's available and if there isn't a record for that Participant and Question combination it initializes a model so the form builder has an object to map on to.
 
-You'll also notice a `hidden_field` where we set the `participant_id` for the record to ensure the answer gets associated to a participant (`fields_for` will automatically create a `hidden_field` for `question_id` as we use that model to build the answers object, view source on the page and you will see). 
+You'll also notice a `hidden_field` where we set the `participant_id` for the record to ensure the answer gets associated to a participant (`fields_for` will automatically create a `hidden_field` for `question_id` as we use that model to build the answers object, view source on the page and you will see).
 
 The way I have chosen to display this is perhaps not the most efficient but it demonstrates how you might tackle this scenario where you need to display all these options and still handle the data submission. If you have another solution to this please let me know on [Twitter @createdbypete](https://twitter.com/createdbypete) it would be interesting to compare.
