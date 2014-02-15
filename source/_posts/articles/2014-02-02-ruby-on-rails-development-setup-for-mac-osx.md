@@ -4,6 +4,7 @@ title: Ruby on Rails development setup for Mac OSX
 categories: articles
 tags: [guide,ruby]
 date: 2014-02-02 19:13
+updated: 2014-02-15 20:37
 alias: /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
 ---
 
@@ -69,6 +70,8 @@ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
 source ~/.bash_profile
 {% endhighlight %}
+
+Now close terminal and open it again, this ensure everything has been reloaded in your shell.
 
 The package we just installed allow us to install different versions of Ruby and specify which version to use on a per project basis and globally. This is very useful to keep a consistent development environment if you need to work in a particular Ruby version.
 
