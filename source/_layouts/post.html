@@ -4,6 +4,7 @@ layout: default
 <article class="hentry {{ page.categories | first | prepend: 'category-' }}" role="article">
   <header>
     <h1 class="entry-title">{{ page.title }}</h1>
+    {% qr page.url %}
   </header>
   <section class="entry-content">
     {{ content }}

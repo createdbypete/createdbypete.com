@@ -1,0 +1,22 @@
+@media print {
+  #articles {
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 0;
+
+    .qrcode {
+      display: block;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+
+    .entry-title {
+      margin-right: 120px;
+    }
+  }
+
+  .nav {
+    display: none;
+  }
+}
