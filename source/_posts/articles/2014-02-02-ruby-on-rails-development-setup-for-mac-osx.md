@@ -5,7 +5,9 @@ categories: articles
 tags: [guide,ruby]
 date: 2014-02-02 19:13
 updated: 2014-02-15 20:37
-alias: /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
+alias:
+  - /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
+  - /articles/ruby-on-rails-development-with-mac/index.html
 ---
 
 Most developers like to spend a bit of time setting up their development workspace. I'm no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks.
