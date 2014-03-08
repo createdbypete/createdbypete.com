@@ -33,9 +33,9 @@ assets:
   css_compressor: sass
   cachebust: hard
   sources:
-    - _assets/fonts
     - _assets/images
     - _assets/javascripts
     - _assets/stylesheets
+    - _vendor/assets/fonts
     - _vendor/assets/javascripts
     - _vendor/assets/stylesheets
