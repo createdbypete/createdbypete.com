@@ -1,4 +1,5 @@
-require 'cgi'
+require 'rqrcode_png'
+require 'googl'
 
 module CBP
   module Liquid
@@ -19,14 +20,15 @@ module CBP
       end
 
       def render(context)
-        site_url = lookup(context, 'site.url')
-        page_url = lookup(context, @url)
-        img_uri = "https://chart.googleapis.com/chart?cht=qr&chs=100x100&chl=#{CGI.escape(site_url)}#{CGI.escape(page_url)}&choe=UTF-8&chld=M|0"
+        page_url = Googl.shorten("#{lookup(context, 'site.url')}#{lookup(context, @url)}")
+        qr = RQRCode::QRCode.new(page_url.short_url,)
+        png = qr.to_img
         <<-MARKUP.strip
-<div class="qrcode"><img src="#{img_uri}"></div>
-MARKUP
+        <div class="qrcode">
+          <img src="#{png.resize(90, 90).to_data_url}" alt="#{page_url.long_url}">
+        </div>
+        MARKUP
       end
-
     end
   end
 end
