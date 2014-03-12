@@ -10,11 +10,7 @@ module CBP
 
       def lookup(context, name)
         lookup = context
-
-        name.split(".").each do |value|
-          lookup = lookup[value]
-        end
-
+        name.split(".").each { |value| lookup = lookup[value] }
         lookup
       end
 
@@ -24,7 +20,7 @@ module CBP
         png = qr.to_img
         <<-MARKUP.strip
         <div class="qrcode">
-          <img src="#{png.resize(90, 90).to_data_url}" alt="#{page_url}">
+          <img src="#{png.to_data_url}" alt="#{page_url}">
         </div>
         MARKUP
       end
