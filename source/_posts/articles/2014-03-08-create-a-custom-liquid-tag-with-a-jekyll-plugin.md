@@ -53,7 +53,7 @@ qr = RQRCode::QRCode.new('http://createdbypete.com')
 png = qr.to_img
 
 # Now we have a chunky_png to work with we can base64 encode the image
-png.resize(90, 90).to_data_url
+png.to_data_url
 {% endhighlight %}
 
 As you can see in the last line [chunky_png](https://rubygems.org/gems/chunky_png) has a very useful method to allow for the image data to be converted into a data url for use in an ordinary `<img>` tag.
@@ -83,7 +83,7 @@ class QrCodeTag < Liquid::Tag
     png = qr.to_img
     <<-MARKUP.strip
     <div class="qrcode">
-      <img src="#{png.resize(90, 90).to_data_url}" alt="#{page_url}">
+      <img src="#{png.to_data_url}" alt="#{page_url}">
     </div>
     MARKUP
   end
