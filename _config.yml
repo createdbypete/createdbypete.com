@@ -27,7 +27,6 @@ markdown: redcarpet
 # ----------------------- #
 #      Jekyll Assets      #
 # ----------------------- #
-
 assets:
   js_compressor: uglifier
   css_compressor: sass
