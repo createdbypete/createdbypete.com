@@ -4,7 +4,7 @@ title: Ruby on Rails development setup for Mac OSX
 categories: articles
 tags: [guide,ruby]
 date: 2014-02-02 19:13
-updated: 2014-02-15 20:37
+updated: 2014-03-31 18:37
 alias:
   - /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - /articles/ruby-on-rails-development-with-mac/index.html
@@ -37,7 +37,7 @@ You should see a pop-up window appear asking you to install, after clicking inst
 
 ### What about Xcode?
 
-You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) from the App Store but you don't actually need it. I find the FileMerge application comes in very useful but it's a large download just for that so be prepared to wait a little if you've not got a high-speed connection. Once it's downloaded, launch Xcode to make sure it's setup.
+You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) from the App Store but it's not essential. I find the FileMerge application comes in very useful but it's a large download just for that so be prepared to wait a little if you've not got a high-speed connection. Once it's downloaded, launch Xcode to make sure it's setup.
 
 ### Install Homebrew
 
@@ -67,9 +67,8 @@ OS X comes with Ruby installed (Mavericks even gets version 2.0.0, previously it
 Lets get _brewing_! We can install both of the required packages using Homebrew, once done we add a line to our `~/.bash_profile` and reload our terminal profile.
 
 {% highlight bash %}
-brew install rbenv ruby-build rbenv-gem-rehash rbenv-default-gems
+brew install rbenv ruby-build rbenv-gem-rehash
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-echo 'bundler' >> "$(brew --prefix rbenv)/default-gems"
 source ~/.bash_profile
 {% endhighlight %}
 
@@ -79,11 +78,12 @@ The package we just installed allow us to install different versions of Ruby and
 
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](https://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install `rbenv install --list`.
 
-    rbenv install 2.1.0
+    rbenv install 2.1.1
+    rbenv rehash
 
 Let’s set this version as the one to use globally so we can make use of it in our terminal.
 
-    rbenv global 2.1.0
+    rbenv global 2.1.1
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always `rbenv --help`.
 
@@ -91,12 +91,13 @@ You can checkout more commands in the [rbenv readme on Github](https://github.co
 
 Bundler manages an application's dependencies, kind of like a shopping list of other libraries the application needs to work. If you're just starting out with Ruby on Rails you will soon see just how important and helpful this gem is.
 
-Usually you would install this with `gem install bundler` but in the previous set we are making use of the [rbenv-default-gems](https://github.com/sstephenson/rbenv-default-gems) plugin to install bundler automatically for us whenever we install a new version of Ruby.
+    gem install bundler
 
-You can add more default gems by altering this file:
+We can also make use of the [rbenv-default-gems](https://github.com/sstephenson/rbenv-default-gems) plugin to install bundler automatically for us whenever we install a new version of Ruby. I had some trouble with this working on the first version of Ruby you install but any others seemed to go ok.
 
 {% highlight bash %}
-open "$(brew --prefix rbenv)/default-gems"
+brew install rbenv-default-gems
+echo "bundler\n" >> "~/.rbenv/default-gems"
 {% endhighlight %}
 
 #### Skip rdoc generation
@@ -104,7 +105,7 @@ open "$(brew --prefix rbenv)/default-gems"
 If you use Google for finding your Gem documentation like I do you might consider saving a bit of time when installing gems by skipping the documentation.
 
 {% highlight bash %}
-echo 'gem: --no-rdoc --no-ri' >> ~/.gemrc
+echo 'gem: --no-document' >> ~/.gemrc
 {% endhighlight %}
 
 That's all, as you'll see from `rbenv install --list` there are loads of Ruby versions available including [JRuby](http://jruby.org/). You will need to re-install any gems for each version as they are not shared.
@@ -115,7 +116,7 @@ So far you've installed Ruby, if you're not going to be working with Rails you c
 
 ### Install SQLite3
 
-SQLite is lightweight SQL service and handy to have installed since Rails defaults to using it with new projects. You may find OS X already provides an (older) version of SQLite3, but in the interests of being thorough we'll install it anyway as Homebrew will set it to 'keg-only' and no interfere with the system version if that is the case.
+SQLite is lightweight SQL service and handy to have installed since Rails defaults to using it with new projects. You may find OS X already provides an (older) version of SQLite3, but in the interests of being thorough we'll install it anyway as Homebrew will set it to 'keg-only' and not interfere with the system version if that is the case.
 
 Installation is simple with Homebrew: (_are you loving Homebrew yet!?_)
 
@@ -130,7 +131,7 @@ With Ruby installed and the minimum dependencies ready to go [Rails](http://ruby
 If you would like Rails to be a default gem in the future when you install a new version of Ruby you can add it to the `default-gems` file.
 
 {% highlight bash %}
-echo 'rails' >> "$(brew --prefix rbenv)/default-gems"
+echo 'rails' >> "~/.rbenv/default-gems"
 {% endhighlight %}
 
 Rails has quite a number of other gem dependencies so don't be surprised if you see loads of other gems being installed at the same time.
@@ -144,7 +145,7 @@ Ready to put all this to good use and start your first project? Good, we're goin
 
 Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to `.ruby-version` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
-    rbenv local 2.1.0
+    rbenv local 2.1.1
 
 **Note:** If your gems start causing problems you can just run `gem pristine --all` to restore them to pristine condition.
 
