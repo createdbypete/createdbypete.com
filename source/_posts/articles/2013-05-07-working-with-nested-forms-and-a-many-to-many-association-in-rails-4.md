@@ -3,7 +3,7 @@ layout: post
 title: Working with nested forms and a many-to-many association in Rails 4
 categories: articles
 tags: [guide,ruby]
-updated: 2014-02-01 14:45
+updated: 2014-04-04 08:05
 ---
 Recently a project I was working on needed a _many-to-many_ relationship that would also store some extra data in the pivot table.
 
@@ -93,7 +93,7 @@ class SurveysController < ApplicationController
     def survey_params
       params.require(:survey).permit(:name,
         :questions_attributes => [:id, :content,
-          :answers_attributes => [:id, :answer, :participant_id]
+          :answers_attributes => [:id, :content, :participant_id]
         ])
     end
 end
