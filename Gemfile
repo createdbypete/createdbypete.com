@@ -16,5 +16,4 @@ group :development do
 
   # Development Tools
   gem "foreman"
-  gem "guard-jekyll-plus"
 end
