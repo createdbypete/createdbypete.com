@@ -15,7 +15,7 @@
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ meta_description | strip_newlines }}">
   <meta name="viewport" content="width=device-width">
-  <link rel="publisher" href="https://plus.google.com/116964527372254202973">
+  <link rel="publisher" href="https://plus.google.com/{{ site.networks.googleplus }}">
   {% include canonical.html %}
   {% include microdata.html %}
   {% include opengraph.html %}

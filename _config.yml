@@ -11,6 +11,7 @@ email: hello@createdbypete.com
 networks:
   github: createdbypete
   twitter: createdbypete
+  googleplus: +PeterRhoades
 
 analytics: true
 
