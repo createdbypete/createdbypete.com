@@ -22,7 +22,7 @@ source:      ./source
 destination: ./public
 root: /
 permalink: /:categories/:title/
-pygments: true
+highlighter: pygments
 markdown: redcarpet
 
 # ----------------------- #

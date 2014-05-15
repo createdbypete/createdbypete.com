@@ -1,14 +1,16 @@
 ---
 layout: post
 title: Installing Gitlab on Mac OS X and Mac OS X Server
-image: install-gitlab-osx.jpg
 categories: articles
-tags: [guide,devops,git]
-grid: large
 updated: 2013-04-09 22:36
 ---
 
-[Gitlab](http://gitlab.org) is self hosted Git management software, not only that but it's also _free and open-source_. 
+<div class="alert">
+  <p>This article is now outdated and I recommend you check one of the many <a href="https://github.com/gitlabhq/gitlabhq#installation">installation methods</a>.</p>
+  <p>I would also recommend <a href="https://gitlab.com/gitlab-org/cookbook-gitlab/blob/master/doc/development.md">running GitLab on a virtual machine</a> in OS X that way you don't need to mess around with OS X internals, you could still host the database and files on your OS X filesystem if that makes you feel more comfortable. As with everything though, backup and backup again!</p>
+</div>
+
+[Gitlab](http://gitlab.org) is self hosted Git management software, not only that but it's also _free and open-source_.
 
 While Gitlab has a brilliant [installation guide](https://github.com/gitlabhq/gitlabhq/blob/stable/doc/install/installation.md) available, it is focused on Ubuntu/Debian and not all those instructions carry over to OS X so after a bit of tinkering I've put together this guide for anyone else looking to run Gitlab on OS X.
 
@@ -29,7 +31,7 @@ If you don't have [Homebrew](http://mxcl.github.com/homebrew/) installed already
 ```bash
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
-# Add Homebrew binary path to the front of the $PATH 
+# Add Homebrew binary path to the front of the $PATH
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
 
@@ -97,7 +99,7 @@ sudo dscl . -create /Users/git NFSHomeDirectory /Users/git
 # Obviously change "mysupersecurepassword123" to something better ;)
 sudo dscl . -passwd /Users/git mysupersecurepassword123
 
-# Check our new Git user exists 
+# Check our new Git user exists
 dscl . -read /Users/git
 
 # Create home directory
@@ -124,7 +126,7 @@ sudo dseditgroup -o edit -a gitlab -t user staff
 # Obviously change "mysupersecurepassword123" to something better ;)
 sudo dscl . -passwd /Users/gitlab mysupersecurepassword123
 
-# Check our new Git user exists 
+# Check our new Git user exists
 dscl . -read /Users/gitlab
 
 # Create home directory
@@ -215,7 +217,7 @@ Run the following commands as your `sudo` capable user.
 brew install mysql
 
 # Some problems with permissions have been reported
-sudo chmod -R g+w /usr/loca/var/mysql 
+sudo chmod -R g+w /usr/loca/var/mysql
 
 # Add MySQL to launchctl to let OS X manage the process and start when you login, note the LaunchDaemons location to start service when machine starts not when user logs in.
 sudo cp /usr/local/opt/mysql/*.plist /Library/LaunchDaemons
@@ -244,7 +246,7 @@ sudo -u gitlab -H mysql -u gitlab -p -D gitlabhq_production
 ```
 
 ## Install and setup Redis
-Gitlab uses the fantastic [Sidekiq](http://mperham.github.io/sidekiq/) project to handle the scheduling of background jobs such as sending out emails and repo management tasks. Sidekiq uses [Redis](http://redis.io/) as a datastore so let's set that up now. We will also want Redis to start up with the machine so we will be adding it to the `LaunchDaemons` directory also. 
+Gitlab uses the fantastic [Sidekiq](http://mperham.github.io/sidekiq/) project to handle the scheduling of background jobs such as sending out emails and repo management tasks. Sidekiq uses [Redis](http://redis.io/) as a datastore so let's set that up now. We will also want Redis to start up with the machine so we will be adding it to the `LaunchDaemons` directory also.
 
 ```bash
 brew install redis
@@ -333,7 +335,7 @@ sudo -u gitlab -H cp config/unicorn.rb.example config/unicorn.rb
 
 ### Configure Gitlab database settings
 
-Since we're using MySQL we want to use the `database.yml` template for MySQL. Make sure to update username/password in config/database.yml. 
+Since we're using MySQL we want to use the `database.yml` template for MySQL. Make sure to update username/password in config/database.yml.
 I hope you're keeping up!
 
 ```bash
@@ -468,11 +470,11 @@ sudo curl --output /etc/apache2/other/gitlab.conf https://gist.github.com/create
 # Change ServerName to your machine hostname
 sudo vim /etc/apache2/other/gitlab.conf
 
-# Restart Apache 
+# Restart Apache
 sudo apachectl restart
 ```
 
-**OS X Server People** You can use the Server.app to setup a new VirtualHost and Allow Overrides. You can then edit the generated configuration file as required to [match the gist](https://gist.github.com/createdbypete/5345563#file-gitlab-conf). 
+**OS X Server People** You can use the Server.app to setup a new VirtualHost and Allow Overrides. You can then edit the generated configuration file as required to [match the gist](https://gist.github.com/createdbypete/5345563#file-gitlab-conf).
 
 Now you can open `http://my-hostname.local` in your browser and you should be greeted by the Gitlab login screen. Again use the details from earlier:
 

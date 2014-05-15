@@ -2,9 +2,8 @@
 layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
-tags: [guide,ruby]
 date: 2014-02-02 19:13
-updated: 2014-03-31 18:37
+updated: 2014-05-15 21:37
 alias:
   - /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - /articles/ruby-on-rails-development-with-mac/index.html
@@ -78,12 +77,12 @@ The package we just installed allow us to install different versions of Ruby and
 
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](https://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install `rbenv install --list`.
 
-    rbenv install 2.1.1
+    rbenv install 2.1.2
     rbenv rehash
 
 Let’s set this version as the one to use globally so we can make use of it in our terminal.
 
-    rbenv global 2.1.1
+    rbenv global 2.1.2
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always `rbenv --help`.
 
@@ -91,13 +90,13 @@ You can checkout more commands in the [rbenv readme on Github](https://github.co
 
 Bundler manages an application's dependencies, kind of like a shopping list of other libraries the application needs to work. If you're just starting out with Ruby on Rails you will soon see just how important and helpful this gem is.
 
-    gem install bundler
+    gem install bundler --pre
 
 We can also make use of the [rbenv-default-gems](https://github.com/sstephenson/rbenv-default-gems) plugin to install bundler automatically for us whenever we install a new version of Ruby. I had some trouble with this working on the first version of Ruby you install but any others seemed to go ok.
 
 {% highlight bash %}
 brew install rbenv-default-gems
-echo "bundler\n" >> "~/.rbenv/default-gems"
+echo "bundler --pre\n" >> "~/.rbenv/default-gems"
 {% endhighlight %}
 
 #### Skip rdoc generation
@@ -105,7 +104,7 @@ echo "bundler\n" >> "~/.rbenv/default-gems"
 If you use Google for finding your Gem documentation like I do you might consider saving a bit of time when installing gems by skipping the documentation.
 
 {% highlight bash %}
-echo 'gem: --no-document' >> ~/.gemrc
+echo "gem: --no-document\n" >> ~/.gemrc
 {% endhighlight %}
 
 That's all, as you'll see from `rbenv install --list` there are loads of Ruby versions available including [JRuby](http://jruby.org/). You will need to re-install any gems for each version as they are not shared.
@@ -131,7 +130,7 @@ With Ruby installed and the minimum dependencies ready to go [Rails](http://ruby
 If you would like Rails to be a default gem in the future when you install a new version of Ruby you can add it to the `default-gems` file.
 
 {% highlight bash %}
-echo 'rails' >> "~/.rbenv/default-gems"
+echo "rails\n" >> "~/.rbenv/default-gems"
 {% endhighlight %}
 
 Rails has quite a number of other gem dependencies so don't be surprised if you see loads of other gems being installed at the same time.
@@ -145,7 +144,7 @@ Ready to put all this to good use and start your first project? Good, we're goin
 
 Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to `.ruby-version` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
-    rbenv local 2.1.1
+    rbenv local 2.1.2
 
 **Note:** If your gems start causing problems you can just run `gem pristine --all` to restore them to pristine condition.
 
@@ -164,21 +163,9 @@ Below are some extras you may wish to install. Again [Homebrew](http://brew.sh/)
 One of the most commonly used SQL services, many projects end up using MySQL as a datasource. Homebrew does have formulas for alternatives such as [MariaDB](http://mariadb.org/) if you prefer.
 
     brew install mysql
+    brew services start mysql
 
-This will download and compile MySQL for you and anything else MySQL requires to work. Once finished it will give you instructions to follow regarding setting up MySQL. You can see this information any time by using the `info` action: `brew info [package name]`.
-
-{% highlight bash %}
-# Add MySQL to launchctl to let OS X manage the process and start when you login
-ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-
-# Or if you want to control it yourself
-mysql.server start
-# Usage: mysql.server {start|stop|restart|reload|force-reload|status}
-
-# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password
-mysql_secure_installation
-{% endhighlight %}
+This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service and also start it everytime you login. You can see more commands with `brew services`.
 
 To start a new Rails app with MySQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -191,23 +178,8 @@ You can find more information about the other options available with `rails --he
 OS X already comes with [PostgreSQL](http://www.postgresql.org/) installed however as with Ruby it is an older version (again).
 We want the latest so using Homebrew install PostgreSQL.
 
-{% highlight bash %}
-brew install postgresql
-initdb /usr/local/var/postgres -E utf8
-
-# Add PostgreSQL to launchctl to let OS X manage the process and start when you login
-ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
-{% endhighlight %}
-
-Postgres has a slightly longer command as we need to pass in the locations so I've taken to creating an `alias` to shrink all this down to simply `pg`.
-
-{% highlight bash %}
-echo 'alias pg="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log"' >> ~/.bash_profile
-source ~/.bash_profile
-pg start
-# Usage: pg {start|stop|restart|reload|status}
-{% endhighlight %}
+    brew install postgresql
+    brew services start postgresql
 
 To start a new Rails app with PostgreSQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -221,13 +193,8 @@ All the cool kids are using [Redis](http://redis.io/) these days and for good re
 
 Redis is required by projects such as [Resque](https://github.com/defunkt/resque) for super fast storage.
 
-{% highlight bash %}
-brew install redis
-
-# Add Redis to launchctl to let OS X manage the process and start when you login, this will use the default config from /usr/local/etc/redis.conf
-ln -sfv /usr/local/opt/redis/*.plist ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
-{% endhighlight %}
+    brew install redis
+    brew services start redis
 
 The above is usually fine but when you have a few projects on the go all using Redis you'll want to have a project specific config for it so you can set a different port for example. Thankfully this is no problem, first take a copy of the default config.
 

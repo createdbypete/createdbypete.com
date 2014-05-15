@@ -2,7 +2,6 @@
 layout: post
 title: Simple way to find broken links with Wget
 categories: articles
-tags: [guide]
 ---
 After writing the previous post singing the praises of Wget by show it can be used to [mirror and entire website locally](/articles/make-a-local-website-mirror-with-wget/). I have stumbled across another useful feature, it can be used to [spider a website](http://en.wikipedia.org/wiki/Web_crawler) following every link it finds (including those of assets such as stylesheets etc) and log the results.
 
@@ -12,15 +11,11 @@ In short, it's a pretty effective broken link finder, brilliant news for anyone 
 
 First, you'll need to make sure you have [Wget](http://www.gnu.org/software/wget/), on OS X you can just use [Homebrew](http://brew.sh/).
 
-```
-brew install wget
-```
+    brew install wget
 
 The command to give Wget is as follows, note this will output the resulting file to your home directory `~/`. It may take a little while depending on the size of your website.
 
-```
-wget --spider -o ~/wget.log -e robots=off -w 1 -r -p http://www.example.com
-```
+    wget --spider -o ~/wget.log -e robots=off -w 1 -r -p http://www.example.com
 
 Let's break this command down so you can see what Wget is being told to do:
 
@@ -36,17 +31,13 @@ Let's break this command down so you can see what Wget is being told to do:
 
 If you take a look inside the log file created by the Wget output you'll wonder how you'd get any useful information out of it. Simple, our old friend [Grep](http://en.wikipedia.org/wiki/Grep). Obviously if you changed the location of the log file update the command accordingly.
 
-```
-grep -B 2 '404' ~/wget.log
-```
+    grep -B 2 '404' ~/wget.log
 
 This will find all references to the [HTTP Code](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) `404` indicating a page not found failure. It will also return the 2 lines above that line so that you can see the url concerned. If you're lucky you will get no output but if you do have some broken links you will get something similar to this:
 
-```
---2013-09-11 07:12:25--  http://createdbypete.com/something-not-found.html
-Reusing existing connection to createdbypete.com:80.
-HTTP request sent, awaiting response... 404 Not Found
-```
+    --2013-09-11 07:12:25--  http://createdbypete.com/something-not-found.html
+    Reusing existing connection to createdbypete.com:80.
+    HTTP request sent, awaiting response... 404 Not Found
 
 Unfortunately this doesn't show you where it found the link but it at least tells you the link that is trying to be called so you might be able to start your own investigation. I will update this article if I find a way to get more details about the links location but Wget is not really designed as a website debugging tool.
 

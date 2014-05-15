@@ -13,7 +13,4 @@ group :development do
   gem "compass-normalize"
   gem "breakpoint"
   gem "rqrcode_png"
-
-  # Development Tools
-  gem "foreman"
 end

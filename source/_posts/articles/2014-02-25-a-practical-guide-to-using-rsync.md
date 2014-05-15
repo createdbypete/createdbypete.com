@@ -2,7 +2,6 @@
 layout: post
 title: A Practical Guide to Using rsync
 categories: articles
-tags: [guide]
 ---
 If you've never used [rsync](http://rsync.samba.org/) before then today is going to be a great day for you. Firstly, rsync is not new it's been around for quite a while and chances are you've already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection.
 
@@ -81,4 +80,4 @@ By using `$(date +'%Y-%m-%d')` I'm telling it to use todays date in the folder n
 
 ## Please sir, I want some more!
 
-More! That's all for now but as I think of/remember other use cases for the brilliant `rsync` tool I will update this list. Or feel free to contribute your own by [tweeting me @createdbypete](https://twitter.com/createdbypete) or on [Google+](https://plus.google.com/+PeterRhoades).
+More! That's all for now but as I think of/remember other use cases for the brilliant `rsync` tool I will update this list. Or feel free to contribute your own by [tweeting me @createdbypete](https://twitter.com/createdbypete) or on [Google+](https://plus.google.com/+PeterRhoades) or [create and issue on GitHub](https://github.com/createdbypete/createdbypete.github.io/issues).

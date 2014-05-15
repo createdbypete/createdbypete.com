@@ -2,7 +2,6 @@
 layout: post
 title: Create a custom Liquid tag with a Jekyll plugin
 categories: articles
-tags: [guide]
 ---
 If you didn't know already, this site is made in [Jekyll](http://jekyllrb.com/) and Jekyll makes use of the [Liquid](http://liquidmarkup.org/) templating language to process templates. All the standard [tags](http://docs.shopify.com/themes/liquid-basics/logic) and [filters](http://docs.shopify.com/themes/liquid-basics/output) for Liquid are supported, but sometimes you need a bit more!
 

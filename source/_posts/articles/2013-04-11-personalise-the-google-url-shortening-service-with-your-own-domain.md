@@ -2,13 +2,11 @@
 layout: post
 title: Personalise the Google URL shortening service with your own domain
 categories: articles
-tags: [guide,apache,nginx]
-grid: wide
 ---
 
 In this short article I'll show you one way to personalise the Google URL Shortening service known as [goo.gl](http://goo.gl) so you can use your own short URL domain. You can probably use this with any other URL shortening service as well but I have a Google account so this is just easy.
 
-#### But why would to do this?
+### But why would to do this?
 First, with so many services on offer these days (we really are spoilt) I see little point inventing your own system for the sake of some branding. Secondly, why not?! We live in adventurous times and it's only going to take a few minutes to set this up.
 
 ## What do I need?

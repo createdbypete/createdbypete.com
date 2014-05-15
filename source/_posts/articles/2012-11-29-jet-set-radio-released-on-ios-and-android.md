@@ -1,6 +1,5 @@
 ---
 layout: post
-image: jet-set-radio.jpg
 title: Jet Set Radio released on iOS and Android
 categories: articles
 alias: /blog/2012/11/jet-set-radio-released-on-ios-and-android.html
