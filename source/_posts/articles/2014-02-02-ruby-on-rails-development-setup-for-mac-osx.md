@@ -3,7 +3,7 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2014-05-15 21:37
+updated: 2014-08-13 08:15
 alias:
   - /articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - /articles/ruby-on-rails-development-with-mac/index.html
@@ -90,13 +90,13 @@ You can checkout more commands in the [rbenv readme on Github](https://github.co
 
 Bundler manages an application's dependencies, kind of like a shopping list of other libraries the application needs to work. If you're just starting out with Ruby on Rails you will soon see just how important and helpful this gem is.
 
-    gem install bundler --pre
+    gem install bundler
 
 We can also make use of the [rbenv-default-gems](https://github.com/sstephenson/rbenv-default-gems) plugin to install bundler automatically for us whenever we install a new version of Ruby. I had some trouble with this working on the first version of Ruby you install but any others seemed to go ok.
 
 {% highlight bash %}
 brew install rbenv-default-gems
-echo "bundler --pre\n" >> "~/.rbenv/default-gems"
+echo "bundler\n" >> ~/.rbenv/default-gems
 {% endhighlight %}
 
 #### Skip rdoc generation
