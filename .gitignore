@@ -4,3 +4,4 @@
 
 # Jekyll generated site
 /public
+/.sass-cache
