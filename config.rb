@@ -21,6 +21,12 @@ activate :asset_hash
 
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
+set :debug_assets, false
+
+configure :build do
+  activate :minify_css
+  activate :minify_javascript
+end
 
 configure :development do
   set :debug_assets, true
