@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'middleman', '~> 3.3'
 gem 'middleman-blog'
+gem 'middleman-alias'
 gem 'nokogiri'
 gem 'compass-normalize'
 gem 'breakpoint'

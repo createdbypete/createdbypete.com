@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Make a local website mirror with Wget
-alias: /articles/make-a-local-copy-of-any-website-with-wget/index.html
+alias: articles/make-a-local-copy-of-any-website-with-wget/index.html
 categories: articles
 ---
 You've probably used the [Wget](http://www.gnu.org/software/wget/) command-line tool before but you may not be aware of a pretty neat feature it has tucked away.

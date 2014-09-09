@@ -9,6 +9,7 @@ activate :blog do |blog|
   blog.summary_separator = /\n/
 end
 activate :directory_indexes
+activate :alias
 
 configure :development do
   set :debug_assets, true

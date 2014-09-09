@@ -4,7 +4,7 @@ title: PHP 5.4 development on OS X with MySQL and Laravel 4
 categories: articles
 date: 2012-11-12 11:23
 updated: 2014-02-01 20:48
-alias: /blog/2012/11/php-54-development-on-osx.html
+alias: blog/2012/11/php-54-development-on-osx.html
 ---
 
 As a developer I'm always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of "if it isn't broken don't upgrade it", but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.
