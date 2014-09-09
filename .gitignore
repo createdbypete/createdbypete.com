@@ -1,7 +1,9 @@
-# Ignore bundler
+# Ignore bundler config
 /.bundle
-/Gemfile.lock
 
-# Jekyll generated site
-/public
+# Ignore the build directory
+/build
+
+# Ignore cache
 /.sass-cache
+/.cache

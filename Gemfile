@@ -1,16 +1,13 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-group :development do
-  # Jekyll
-  gem "jekyll", "~> 2.0.3"
-  gem "jekyll-assets"
-
-  # Asset handlers and processors
-  gem "uglifier"
-  gem "coffee-script"
-  gem "sass"
-  gem "compass"
-  gem "compass-normalize"
-  gem "breakpoint"
-  gem "rqrcode_png"
-end
+gem 'middleman', '~> 3.3'
+gem 'middleman-blog'
+gem 'middleman-alias'
+gem 'redcarpet'
+gem 'nokogiri'
+gem 'compass-normalize'
+gem 'breakpoint'
+gem 'builder', '~> 3.0'
+gem 'rqrcode_png'
+gem 'middleman-search_engine_sitemap'
+gem 'middleman-syntax'

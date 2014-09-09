@@ -1,0 +1,23 @@
+<meta content="Created by Pete" property="og:site_name">
+<% if current_page.try(:title) -%>
+<meta content="<%= current_page.title %>" property="og:title">
+<% else -%>
+<meta content="Created by Pete" property="og:title">
+<% end -%>
+<% if current_page.try(:title) -%>
+<meta content="article" property="og:type">
+<% else -%>
+<meta content="website" property="og:type">
+<% end -%>
+<% if current_page.try(:summary) -%>
+<meta content="<%= current_page.data.meta_description || strip_tags(current_page.summary) %>" property="og:description">
+<% else -%>
+<meta content="<%= meta_description %>" property="og:description">
+<% end -%>
+<% if current_page.try(:url) -%>
+<meta content="<%= URI.join(site_url, current_page.url) %>" property="og:url">
+<% end -%>
+<% if current_article && current_article.date -%>
+<meta content="<%= current_article.date.xmlschema %>" property="article:published_time">
+<% end -%>
+<meta content="<%= URI.join(site_url, image_path('logo-with-bg.png')) %>" property="og:image">

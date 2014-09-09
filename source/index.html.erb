@@ -1,0 +1,18 @@
+---
+layout: default
+index: true
+---
+<section class="list">
+<% blog.articles.each_with_index do |article, i| -%>
+  <article class="category-articles <%= 'latest' if i.zero? %>">
+    <header>
+      <h1 class="entry-title"><%= link_to article.title, article %></h1>
+    </header>
+    <% if i.zero? %>
+    <%= article.summary %>
+    <% else %>
+    <time datetime="<%= article.date.xmlschema %>" pubdate><%= article.date.strftime('%b %d, %Y') %></time>
+    <% end %>
+  </article>
+<% end %>
+</section>

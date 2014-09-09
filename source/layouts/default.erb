@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<% if current_article -%>
+<html itemscope itemtype="http://schema.org/Article">
+<% else -%>
+<html itemscope itemtype="http://schema.org/Blog">
+<% end -%>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title><%= "#{current_page.data.title} - " if current_page.data.title %><%= title %></title>
+  <% if current_article %>
+  <meta name="description" content="<%= strip_tags(current_article.summary) %>">
+  <% else %>
+  <meta name="description" content="<%= current_page.data.meta_description || meta_description %>">
+  <% end %>
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/<%= data.networks.googleplus %>">
+  <%= partial 'canonical' %>
+  <%= partial 'microdata' %>
+  <%= partial 'opengraph' %>
+  <%= partial 'twittermeta' %>
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag 'cbp' %>
+  <%= partial 'googleanalytics' %>
+</head>
+<body id="articles">
+  <nav class="nav">
+    <%= partial 'nav' %>
+  </nav>
+  <%= yield %>
+  <footer>
+    <%= image_tag 'logo-footer.png', alt: 'Created by Pete' %>
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <%= javascript_include_tag 'cbp' %>
+  <%= partial 'gosquared' %>
+</body>
+</html>

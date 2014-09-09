@@ -1,0 +1,17 @@
+<meta content="summary" name="twitter:card" >
+<% if current_page.try(:title) -%>
+<meta content="<%= current_page.title %>" name="twitter:title">
+<% else -%>
+<meta content="Created by Pete" name="twitter:title">
+<% end -%>
+<% if current_page.try(:summary) -%>
+<meta content="<%= current_page.data.meta_description || strip_tags(current_page.summary) %>" name="twitter:description">
+<% else -%>
+<meta content="<%= meta_description %>" name="twitter:description">
+<% end -%>
+<% if current_page.try(:url) -%>
+<meta content="<%= URI.join(site_url, current_page.url) %>" name="twitter:url">
+<% end -%>
+<meta content="<%= URI.join(site_url, image_path('logo-with-bg.png')) %>" name="twitter:image">
+<meta content="@<%= data.networks.twitter %>" name="twitter:site">
+<meta content="@<%= data.networks.twitter %>" name="twitter:creator">
