@@ -17,6 +17,7 @@ set :url_root, 'http://www.createdbypete.com'
 activate :search_engine_sitemap
 
 activate :syntax
+activate :asset_hash
 
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
@@ -29,7 +30,7 @@ end
 
 helpers do
   def qr_code(page_url)
-    qr = RQRCode::QRCode.new(page_url.to_s, size: 10)
+    qr = RQRCode::QRCode.new(page_url.to_s, size: 14)
     png = qr.to_img
     <<-MARKUP.strip
     <div class="qrcode">
