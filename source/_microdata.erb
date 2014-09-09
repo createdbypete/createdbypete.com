@@ -1,0 +1,12 @@
+<% if current_page.try(:title) -%>
+  <meta content="<%= current_page.title %>" itemprop="name">
+<% else -%>
+  <meta content="Created by Pete" itemprop="name">
+<% end -%>
+<% if current_page.try(:summary) %>
+  <meta content="<%= current_page.data.meta_description || strip_tags(current_page.summary) %>" itemprop="description">
+<% else %>
+  <meta content="<%= meta_description %>" itemprop="description">
+<% end %>
+
+<meta content="<%= URI.join(site_url, image_path('logo-with-bg.png')) %>" itemprop="image">
