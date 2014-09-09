@@ -2,7 +2,7 @@
 <article class="hentry {{ page.categories | first | prepend: 'category-' }}" role="article">
   <header>
     <h1 class="entry-title"><%= current_article.title %></h1>
-    {% qr page.url %}
+    <%= qr_code URI.join(site_url, current_article.try(:path)) %>
   </header>
   <section class="entry-content">
     <%= yield %>
