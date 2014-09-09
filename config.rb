@@ -13,6 +13,9 @@ activate :alias
 
 page "/404.html", directory_index: false
 
+set :url_root, 'http://www.createdbypete.com'
+activate :search_engine_sitemap
+
 configure :development do
   set :debug_assets, true
   set :analytics, false
