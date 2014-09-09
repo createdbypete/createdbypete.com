@@ -3,7 +3,7 @@ layout: post
 title: PHP 5.4 development on OS X with MySQL and Laravel 4
 categories: articles
 date: 2012-11-12 11:23
-updated: 2014-02-01 20:48
+updated: 2014-09-09 14:38
 alias: blog/2012/11/php-54-development-on-osx.html
 ---
 
@@ -74,10 +74,10 @@ With Homebrew already brewing we want to run a quick search for PHP to see what'
 ```bash
 brew search php54
 ```
-This command should return a list of formulas that can be installed, you'll notice that they are all under a formula repository `josegonzalez/php` so we need to tap that repository so Homebrew knows can use it.
+This command should return a list of formulas that can be installed, you'll notice that they are all under a formula repository `homebrew/php` so we need to tap that repository so Homebrew knows can use it.
 
 ```bash
-brew tap josegonzalez/php
+brew tap homebrew/php
 ```
 
 You'll see some familiar git cloning feedback as Homebrew clones the repository but once it has been done run the `brew search php54` command again and you'll see all the formulas without that repository prefix now. Before we install PHP though we need to tap another repository for some dependencies. I'm also going to install the [Xdebug](http://xdebug.org/) module for PHP at the same time as it's a useful development aid.

@@ -42,13 +42,13 @@ You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) 
 
 If you've not used [Homebrew](http://brew.sh/) before you're going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn't include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
 
-{% highlight bash %}
+```bash
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 # Add Homebrews binary path to the front of the $PATH
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
 source ~/.bash_profile
-{% endhighlight %}
+```
 
 Now check our environment is correctly configured for Homebrew.
 
@@ -65,11 +65,11 @@ OS X comes with Ruby installed (Mavericks even gets version 2.0.0, previously it
 
 Lets get _brewing_! We can install both of the required packages using Homebrew, once done we add a line to our `~/.bash_profile` and reload our terminal profile.
 
-{% highlight bash %}
+```bash
 brew install rbenv ruby-build rbenv-gem-rehash
 echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 source ~/.bash_profile
-{% endhighlight %}
+```
 
 Now close terminal and open it again, this ensure everything has been reloaded in your shell.
 
@@ -94,18 +94,18 @@ Bundler manages an application's dependencies, kind of like a shopping list of o
 
 We can also make use of the [rbenv-default-gems](https://github.com/sstephenson/rbenv-default-gems) plugin to install bundler automatically for us whenever we install a new version of Ruby. I had some trouble with this working on the first version of Ruby you install but any others seemed to go ok.
 
-{% highlight bash %}
+```bash
 brew install rbenv-default-gems
 echo "bundler\n" >> ~/.rbenv/default-gems
-{% endhighlight %}
+```
 
 #### Skip rdoc generation
 
 If you use Google for finding your Gem documentation like I do you might consider saving a bit of time when installing gems by skipping the documentation.
 
-{% highlight bash %}
+```bash
 echo "gem: --no-document\n" >> ~/.gemrc
-{% endhighlight %}
+```
 
 That's all, as you'll see from `rbenv install --list` there are loads of Ruby versions available including [JRuby](http://jruby.org/). You will need to re-install any gems for each version as they are not shared.
 
@@ -129,9 +129,9 @@ With Ruby installed and the minimum dependencies ready to go [Rails](http://ruby
 
 If you would like Rails to be a default gem in the future when you install a new version of Ruby you can add it to the `default-gems` file.
 
-{% highlight bash %}
+```bash
 echo "rails\n" >> "~/.rbenv/default-gems"
-{% endhighlight %}
+```
 
 Rails has quite a number of other gem dependencies so don't be surprised if you see loads of other gems being installed at the same time.
 
@@ -207,14 +207,14 @@ With that done I usually commit the default into Git so it's always there as a r
 
 To connect to this custom Redis process instead of the default we need to use `redis-cli` with some extra flags:
 
-{% highlight bash %}
+```bash
 redis-cli --help
   Usage: redis-cli [OPTIONS] [cmd [arg [arg ...]]]
     -h <hostname>    Server hostname (default: 127.0.0.1)
     -p <port>        Server port (default: 6379)
     -s <socket>      Server socket (overrides hostname and port)
     ...
-{% endhighlight %}
+```
 
 ### Upgrade Git
 

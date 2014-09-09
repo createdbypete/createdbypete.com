@@ -33,7 +33,7 @@ Generate some models and scaffolds to save a little bit of typing later.
 
 First, we'll sort out the models, the file names are above each class as a comment.
 
-{% highlight ruby %}
+```ruby
 # app/models/participant.rb
 class Participant < ActiveRecord::Base
   has_many :answers
@@ -60,7 +60,7 @@ class Answer < ActiveRecord::Base
   belongs_to :participant
   belongs_to :question
 end
-{% endhighlight %}
+```
 
 You'll notice I'm not worrying about validation in this guide because it's a simple enough example and this post is concentrating on the nested forms and many-to-many associations.
 
@@ -68,7 +68,7 @@ You should be familiar with what you see here, I've used `through:` as this is r
 
 Now let's tackle the controllers, in fact we only need to tackle the Survey controller.
 
-{% highlight ruby %}
+```ruby
 # app/controllers/surveys_controller.rb
 class SurveysController < ApplicationController
   before_action :set_survey, only: [:show, :edit, :update, :destroy, :answers]
@@ -92,13 +92,13 @@ class SurveysController < ApplicationController
       ])
   end
 end
-{% endhighlight %}
+```
 
 Because of [Strong Parameters](https://github.com/rails/strong_parameters) replacing `attr_accessible` in Rails 4 we tell the application which attributes to allow through to our model to avoid mass-assignment security issues. The way it works is similar but you need to specify _everything_ this includes the attributes within our nested models. (Don't forget the `id` attribute!)
 
 Next we setup a [member route](http://guides.rubyonrails.org/routing.html#adding-more-restful-actions) we can use to enter our answers and associate them with a survey.
 
-{% highlight ruby %}
+```ruby
 # config/routes.rb
 SurveyApp::Application.routes.draw do
   resources :surveys do
@@ -106,11 +106,11 @@ SurveyApp::Application.routes.draw do
   end
   resources :participants
 end
-{% endhighlight %}
+```
 
 The _behind the scenes_ work is done so lets sort out our views. Specifically the form so we can add the answers
 
-{% highlight erb %}
+```erb
 # app/views/survey/answers.html.erb
 <h1><%= @survey.name %> Answers</h1>
 
@@ -145,7 +145,7 @@ The _behind the scenes_ work is done so lets sort out our views. Specifically th
     <%= f.submit %>
   </div>
 <% end -%>
-{% endhighlight %}
+```
 
 What we have done there is create a table for the Survey model in the usual, then nested within that `fields_for` Questions and within that `fields_for` Answers. This allows Rails to make use of the `accepts_nested_attributes_for` method we used in the models.
 

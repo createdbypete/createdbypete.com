@@ -1,5 +1,5 @@
 <% wrap_layout :default do %>
-<article class="hentry {{ page.categories | first | prepend: 'category-' }}" role="article">
+<article class="hentry <%= "category-#{current_article.data.categories}" if current_article.data.categories %>" role="article">
   <header>
     <h1 class="entry-title"><%= current_article.title %></h1>
     <%= qr_code URI.join(site_url, current_article.try(:path)) %>
