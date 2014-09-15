@@ -1,9 +1,11 @@
 ---
 layout: post
-title: Create a custom Liquid tag with a Jekyll plugin
+title: Create a custom Liquid tag as a Jekyll plugin
 categories: articles
+updated: 2014-09-15 21:09
+alias: articles/create-a-custom-liquid-tag-with-a-jekyll-plugin/index.html
 ---
-If you didn't know already, this site is made in [Jekyll](http://jekyllrb.com/) and Jekyll makes use of the [Liquid](http://liquidmarkup.org/) templating language to process templates. All the standard [tags](http://docs.shopify.com/themes/liquid-basics/logic) and [filters](http://docs.shopify.com/themes/liquid-basics/output) for Liquid are supported, but sometimes you need a bit more!
+If you didn't know already, this site was built in [Jekyll](http://jekyllrb.com/) (more recently in [Middleman](http://middlemanapp.com/)) and Jekyll makes use of the [Liquid](http://liquidmarkup.org/) templating language to process templates. All the standard [tags](http://docs.shopify.com/themes/liquid-basics/logic) and [filters](http://docs.shopify.com/themes/liquid-basics/output) for Liquid are supported, but sometimes you need a bit more!
 
 I wanted to show a [QR code](http://en.wikipedia.org/wiki/QR_code) in the top corner of my article pages when it is printed off so you can scan the code and return to the page form a mobile device. A little bit of a gimmick but I wanted something real to base this article on.
 
