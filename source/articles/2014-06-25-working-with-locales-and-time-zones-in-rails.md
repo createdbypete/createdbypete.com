@@ -2,6 +2,7 @@
 layout: post
 title: Working with Locales and Time Zones in Rails
 categories: articles
+updated: 2014-09-20 10:30
 ---
 [Rails handles internationalization (i18n) really well](http://guides.rubyonrails.org/i18n.html), and you can set the default locale and time zone for your application very simply:
 
@@ -56,6 +57,8 @@ end
 
 And there we have it, the application can respond with the correct content based on the URL. To make use of this in your application use the [`t`](http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-t) and [`l`](http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-l) helpers, these can be used in your controllers and views.
 
+## Using i18n in your application
+
 I recommend using them for everything, it will save **a lot** of pain if you ever need to handle multiple locales in the future; or you might just want to change the format of your dates.
 
 First in Rails 4.1 you'll want to `raise_on_missing_translations` so Rails will shout at you if any translations are missing.
@@ -100,6 +103,14 @@ l(Time.current, format: :short) #=> 25 Apr 11:40
 ```
 
 **Note:** Rails only provides the US English locale by default, but you can get hold of you locale from the [rails-i18n](https://github.com/svenfuchs/rails-i18n) gem.
+
+## Find missing or unused i18n translations
+
+As your application grows you'll find the translation files can quickly become large difficult to keep track of everything in them. Thankfully [i18n-tasks](https://github.com/glebm/i18n-tasks) can ease the pain and help you track down missing or unused translations (credit to [Jessie Young](https://twitter.com/jessieay) for letting me know about this one):
+
+    i18n-tasks health
+
+Check out the readme for [i18n-tasks](https://github.com/glebm/i18n-tasks) for more details on using the tool, along with the [configuration](https://github.com/glebm/i18n-tasks#configuration) options available.
 
 ## Setting the time zone
 
