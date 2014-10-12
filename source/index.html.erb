@@ -10,8 +10,6 @@ index: true
     </header>
     <% if i.zero? %>
     <%= article.summary %>
-    <% else %>
-    <time datetime="<%= article.date.xmlschema %>" pubdate><%= article.date.strftime('%b %d, %Y') %></time>
     <% end %>
   </article>
 <% end %>
