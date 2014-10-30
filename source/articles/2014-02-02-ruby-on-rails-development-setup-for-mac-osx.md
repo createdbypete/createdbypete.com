@@ -3,13 +3,13 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2014-08-13 08:15
+updated: 2014-10-30 14:49
 alias:
   - articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - articles/ruby-on-rails-development-with-mac/index.html
 ---
 
-Most developers like to spend a bit of time setting up their development workspace. I'm no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks.
+Most developers like to spend a bit of time setting up their development workspace. I'm no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks/Yosemite.
 
 There has always been a consistent critera my development environment needed to meet:
 
@@ -20,13 +20,13 @@ There has always been a consistent critera my development environment needed to 
 
 So if you're a Ruby developer with the same ideals this should help you get started quickly.
 
-This article assumes a clean install of Mac OS X Mavericks but I've added notes for Mountain Lion and those stuck on Lion should also be able to follow along.
+This article assumes a clean install of Mac OS X Mavericks/Yosemite but I've added notes for Mountain Lion and those stuck on Lion should also be able to follow along.
 
 ## The Essentials
 
 ### Install Command Line Tools
 
-Installion of Command Line Tools for Mavericks has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
+Installion of Command Line Tools for Mavericks/Yosemite has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
 
     xcode-select --install
 
@@ -43,7 +43,7 @@ You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) 
 If you've not used [Homebrew](http://brew.sh/) before you're going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn't include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
 
 ```bash
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)""
 
 # Add Homebrews binary path to the front of the $PATH
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
@@ -61,7 +61,7 @@ Now we want to update Homebrew to make sure we're getting the latest formulas:
 
 ### Install Ruby
 
-OS X comes with Ruby installed (Mavericks even gets version 2.0.0, previously it was only 1.8.7), as we don't want to be messing with core files we're going to use the brilliant [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to manage and install our Ruby versions for our development environment.
+OS X comes with Ruby installed (Mavericks/Yosemite even gets version 2.0.0, previously it was only 1.8.7), as we don't want to be messing with core files we're going to use the brilliant [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) to manage and install our Ruby versions for our development environment.
 
 Lets get _brewing_! We can install both of the required packages using Homebrew, once done we add a line to our `~/.bash_profile` and reload our terminal profile.
 
