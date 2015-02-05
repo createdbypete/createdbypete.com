@@ -3,7 +3,7 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2014-10-30 14:49
+updated: 2015-02-05 20:49
 alias:
   - articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - articles/ruby-on-rails-development-with-mac/index.html
@@ -43,7 +43,7 @@ You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) 
 If you've not used [Homebrew](http://brew.sh/) before you're going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn't include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
 
 ```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)""
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Add Homebrews binary path to the front of the $PATH
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
@@ -77,12 +77,12 @@ The package we just installed allow us to install different versions of Ruby and
 
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](https://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install `rbenv install --list`.
 
-    rbenv install 2.1.2
+    rbenv install 2.2.0
     rbenv rehash
 
 Let’s set this version as the one to use globally so we can make use of it in our terminal.
 
-    rbenv global 2.1.2
+    rbenv global 2.2.0
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always `rbenv --help`.
 
@@ -144,13 +144,13 @@ Ready to put all this to good use and start your first project? Good, we're goin
 
 Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to `.ruby-version` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
-    rbenv local 2.1.2
+    rbenv local 2.2.0
 
 **Note:** If your gems start causing problems you can just run `gem pristine --all` to restore them to pristine condition.
 
 Now let's test our application is working:
 
-    rails server
+    bin/rails server
 
 ## The Options Pack
 
@@ -163,9 +163,9 @@ Below are some extras you may wish to install. Again [Homebrew](http://brew.sh/)
 One of the most commonly used SQL services, many projects end up using MySQL as a datasource. Homebrew does have formulas for alternatives such as [MariaDB](http://mariadb.org/) if you prefer.
 
     brew install mysql
-    brew services start mysql
+    mysql.server start
 
-This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service and also start it everytime you login. You can see more commands with `brew services`.
+This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service. If you want it to start everytime you login check out `brew info mysql` for details.
 
 To start a new Rails app with MySQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -179,7 +179,7 @@ OS X already comes with [PostgreSQL](http://www.postgresql.org/) installed howev
 We want the latest so using Homebrew install PostgreSQL.
 
     brew install postgresql
-    brew services start postgresql
+    postgres -D /usr/local/var/postgres
 
 To start a new Rails app with PostgreSQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -194,7 +194,7 @@ All the cool kids are using [Redis](http://redis.io/) these days and for good re
 Redis is required by projects such as [Resque](https://github.com/defunkt/resque) for super fast storage.
 
     brew install redis
-    brew services start redis
+    redis-server /usr/local/etc/redis.conf
 
 The above is usually fine but when you have a few projects on the go all using Redis you'll want to have a project specific config for it so you can set a different port for example. Thankfully this is no problem, first take a copy of the default config.
 
@@ -235,6 +235,7 @@ If you're looking for some further reading to improve your knowledge of Rails an
 
 * [Rails Guides](http://guides.rubyonrails.org/), you can't beat the documentation!
 * [Rails API](http://api.rubyonrails.org/), always handy to have this bookmarked.
+* [Treehouse](http://referrals.trhou.se/createdbypete), brilliant Ruby course using videos, quizzes and challenges to help you learn. Also offers courses on many other languages.
 * [RailsCasts.com](http://railscasts.com/), superb website operated by the talented [@ryanbates](https://twitter.com/rbates) loads of screencasts on a range of topics in the Rails world. Worth the $9 a month subscription for the Pro episodes.
 * [Try Ruby](http://tryruby.org/), operated by [Code School](http://www.codeschool.com/) this is focused on Ruby but if you're new to Ruby it's definitely worth a look.
 * [Rails for Zombies](http://railsforzombies.org/), another from the guys at [Code School](http://www.codeschool.com/) this time focused on Rails and a good way to get your head into working _the Rails way_.
