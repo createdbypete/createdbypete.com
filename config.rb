@@ -36,6 +36,11 @@ configure :development do
   set :site_url, 'http://localhost:4567'
 end
 
+activate :deploy do |deploy|
+  deploy.method = :git
+  deploy.branch = 'master'
+end
+
 helpers do
   def qr_code(page_url)
     qr = RQRCode::QRCode.new(page_url.to_s, size: 14)

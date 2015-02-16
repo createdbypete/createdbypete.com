@@ -3,7 +3,7 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2015-02-05 20:49
+updated: 2015-02-16 20:09
 alias:
   - articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - articles/ruby-on-rails-development-with-mac/index.html
@@ -130,7 +130,7 @@ With Ruby installed and the minimum dependencies ready to go [Rails](http://ruby
 If you would like Rails to be a default gem in the future when you install a new version of Ruby you can add it to the `default-gems` file.
 
 ```bash
-echo "rails\n" >> "~/.rbenv/default-gems"
+echo "rails\n" >> ~/.rbenv/default-gems
 ```
 
 Rails has quite a number of other gem dependencies so don't be surprised if you see loads of other gems being installed at the same time.
