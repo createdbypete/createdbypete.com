@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Deploy using Middleman-deploy
+bundle exec middleman deploy
