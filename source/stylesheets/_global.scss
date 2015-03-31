@@ -77,7 +77,7 @@ p, li {
     @include transition(background-color 200ms ease);
 
     &:hover {
-      background-color: lighten($mainColour, 30%);
+      background-color: lighten($mainColour, 5%);
     }
   }
 }
