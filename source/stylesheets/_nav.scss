@@ -48,6 +48,31 @@
     li {
       padding: 0;
 
+      &.treehouse {
+        background-color: #5ece7f;
+        .badge {
+          display: none;
+        }
+
+        a {
+          &:hover {
+            background-color: lighten(#5ece7f,  15%);
+          }
+        }
+
+        @include breakpoint($tablet-portrait) {
+          padding-top: 1em;
+          background-color: white;
+
+          .badge {
+            display: inline;
+          }
+
+          .small-badge {
+            display: none;
+          }
+        }
+      }
       @include breakpoint($tablet-portrait) {
         &.network {
           a {
