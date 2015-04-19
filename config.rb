@@ -1,5 +1,5 @@
 set :title, 'Created by Pete'
-set :meta_description, "Hi, my name is Peter Rhoades and I'm a multidisciplinary design, developer and creator from the UK."
+set :meta_description, "Hi, my name is Peter Rhoades I write about code."
 set :site_url, 'http://www.createdbypete.com'
 set :analytics, true
 activate :blog do |blog|
