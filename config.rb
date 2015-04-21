@@ -1,7 +1,12 @@
 set :title, 'Created by Pete'
 set :meta_description, "Hi, my name is Peter Rhoades I write about code."
 set :site_url, 'http://www.createdbypete.com'
-set :analytics, true
+
+activate :google_analytics do |ga|
+  ga.tracking_id = 'UA-33629370-1'
+  ga.development = false
+end
+
 activate :blog do |blog|
   blog.prefix = 'articles'
   blog.layout = 'post'

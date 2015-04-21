@@ -21,7 +21,6 @@
   <%= partial 'twittermeta' %>
   <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag 'cbp' %>
-  <%= partial 'googleanalytics' %>
 </head>
 <body id="articles">
   <nav class="nav">
@@ -34,6 +33,6 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <%= javascript_include_tag 'cbp' %>
-  <%= partial 'gosquared' %>
+  <%= google_analytics_universal_tag %>
 </body>
 </html>
