@@ -3,7 +3,7 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2015-02-16 20:09
+updated: 2015-04-21 17:56
 alias:
   - articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - articles/ruby-on-rails-development-with-mac/index.html
@@ -11,7 +11,7 @@ alias:
 
 Most developers like to spend a bit of time setting up their development workspace. I'm no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks/Yosemite.
 
-There has always been a consistent critera my development environment needed to meet:
+There has always been a consistent criteria my development environment needed to meet:
 
 1. Unobtrusive, no modifying core files
 2. Flexibility with Ruby versions
@@ -26,7 +26,7 @@ This article assumes a clean install of Mac OS X Mavericks/Yosemite but I've add
 
 ### Install Command Line Tools
 
-Installion of Command Line Tools for Mavericks/Yosemite has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
+Installation of Command Line Tools for Mavericks/Yosemite has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
 
     xcode-select --install
 
@@ -77,12 +77,12 @@ The package we just installed allow us to install different versions of Ruby and
 
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](https://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install `rbenv install --list`.
 
-    rbenv install 2.2.0
+    rbenv install 2.2.2
     rbenv rehash
 
-Let’s set this version as the one to use globally so we can make use of it in our terminal.
+Let's set this version as the one to use globally so we can make use of it in our terminal.
 
-    rbenv global 2.2.0
+    rbenv global 2.2.2
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always `rbenv --help`.
 
@@ -165,7 +165,7 @@ One of the most commonly used SQL services, many projects end up using MySQL as 
     brew install mysql
     mysql.server start
 
-This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service. If you want it to start everytime you login check out `brew info mysql` for details.
+This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service. If you want it to start every time you login check out `brew info mysql` for details.
 
 To start a new Rails app with MySQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -238,5 +238,4 @@ If you're looking for some further reading to improve your knowledge of Rails an
 * [Treehouse](http://referrals.trhou.se/createdbypete), brilliant Ruby course using videos, quizzes and challenges to help you learn. Also offers courses on many other languages.
 * [RailsCasts.com](http://railscasts.com/), superb website operated by the talented [@ryanbates](https://twitter.com/rbates) loads of screencasts on a range of topics in the Rails world. Worth the $9 a month subscription for the Pro episodes.
 * [Try Ruby](http://tryruby.org/), operated by [Code School](http://www.codeschool.com/) this is focused on Ruby but if you're new to Ruby it's definitely worth a look.
-* [Rails for Zombies](http://railsforzombies.org/), another from the guys at [Code School](http://www.codeschool.com/) this time focused on Rails and a good way to get your head into working _the Rails way_.
 * [Agile Web Development with Rails](http://pragprog.com/book/rails4/agile-web-development-with-rails), available in various formats this is another great book to guide you through working with Rails.
