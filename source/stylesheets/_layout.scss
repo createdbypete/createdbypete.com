@@ -31,6 +31,12 @@ body {
         @include adjust-font-size-to(24px);
         @include adjust-leading-to(1);
       }
+
+      & + small {
+        text-transform: uppercase;
+        color: $grayLight;
+        font-weight: 600;
+      }
     }
 
     time {
