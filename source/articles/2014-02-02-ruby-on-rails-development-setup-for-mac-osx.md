@@ -3,7 +3,7 @@ layout: post
 title: Ruby on Rails development setup for Mac OSX
 categories: articles
 date: 2014-02-02 19:13
-updated: 2015-04-21 17:56
+updated: 2016-03-21 21:56
 alias:
   - articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/index.html
   - articles/ruby-on-rails-development-with-mac/index.html
@@ -24,26 +24,12 @@ This article assumes a clean install of Mac OS X Mavericks/Yosemite but I've add
 
 ## The Essentials
 
-### Install Command Line Tools
-
-Installation of Command Line Tools for Mavericks/Yosemite has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.
-
-    xcode-select --install
-
-You should see a pop-up window appear asking you to install, after clicking install just sit back and wait for it to finish.
-
-**Mountain Lion:** If you're on Mountain Lion (or Lion) you will need to [download Command Line Tools](https://developer.apple.com/downloads) from Apple. The Apple Developer site requires you to sign in to access the downloads page but once you're in search for the Command Line Tools for your version, download and install.
-
-### What about Xcode?
-
-You can install [Xcode](http://itunes.apple.com/gb/app/xcode/id497799835?mt=12) from the App Store but it's not essential. I find the FileMerge application comes in very useful but it's a large download just for that so be prepared to wait a little if you've not got a high-speed connection. Once it's downloaded, launch Xcode to make sure it's setup.
-
 ### Install Homebrew
 
 If you've not used [Homebrew](http://brew.sh/) before you're going to love it. The self proclaimed _missing package manager for OS X_ allows us to easily install the stuff we need that Apple doesn't include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:
 
 ```bash
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Add Homebrews binary path to the front of the $PATH
 echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bash_profile
@@ -77,12 +63,12 @@ The package we just installed allow us to install different versions of Ruby and
 
 We're going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the [Ruby website](https://www.ruby-lang.org/en/downloads/). Or to see a list of all available versions to install `rbenv install --list`.
 
-    rbenv install 2.2.2
+    rbenv install 2.3.0
     rbenv rehash
 
 Let's set this version as the one to use globally so we can make use of it in our terminal.
 
-    rbenv global 2.2.2
+    rbenv global 2.3.0
 
 You can checkout more commands in the [rbenv readme on Github](https://github.com/sstephenson/rbenv#command-reference). It's worth bookmarking that page for reference later, or there is always `rbenv --help`.
 
@@ -144,7 +130,7 @@ Ready to put all this to good use and start your first project? Good, we're goin
 
 Now we're going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to `.ruby-version` in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don't have it installed.
 
-    rbenv local 2.2.0
+    rbenv local 2.3.0
 
 **Note:** If your gems start causing problems you can just run `gem pristine --all` to restore them to pristine condition.
 
@@ -158,12 +144,16 @@ Below are some extras you may wish to install. Again [Homebrew](http://brew.sh/)
 
 **Note:** It's recommended you run `brew update` before installing anything new to make sure all the formulas are up to date.
 
+I also find it helps to make use of [Homebrew services](https://github.com/Homebrew/homebrew-services), it can be installed very simply:
+
+    brew tap homebrew/services
+
 ### Install MySQL
 
 One of the most commonly used SQL services, many projects end up using MySQL as a datasource. Homebrew does have formulas for alternatives such as [MariaDB](http://mariadb.org/) if you prefer.
 
     brew install mysql
-    mysql.server start
+    brew services start mysql
 
 This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will `start` the MySQL service. If you want it to start every time you login check out `brew info mysql` for details.
 
@@ -179,7 +169,7 @@ OS X already comes with [PostgreSQL](http://www.postgresql.org/) installed howev
 We want the latest so using Homebrew install PostgreSQL.
 
     brew install postgresql
-    postgres -D /usr/local/var/postgres
+    brew services start postgresql
 
 To start a new Rails app with PostgreSQL instead of the default SQLite3 as the datastore just use the `-d` flag like so:
 
@@ -194,7 +184,7 @@ All the cool kids are using [Redis](http://redis.io/) these days and for good re
 Redis is required by projects such as [Resque](https://github.com/defunkt/resque) for super fast storage.
 
     brew install redis
-    redis-server /usr/local/etc/redis.conf
+    brew services start redis
 
 The above is usually fine but when you have a few projects on the go all using Redis you'll want to have a project specific config for it so you can set a different port for example. Thankfully this is no problem, first take a copy of the default config.
 
