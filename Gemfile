@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'middleman', '~> 3.3'
+gem 'middleman', '~> 3.3.0'
 gem 'middleman-blog'
 gem 'middleman-alias'
 gem 'middleman-google-analytics'

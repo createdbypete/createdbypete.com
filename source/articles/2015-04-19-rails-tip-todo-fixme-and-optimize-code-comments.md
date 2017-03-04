@@ -38,8 +38,6 @@ config.annotations.register_extensions("scss", "sass", "less") do |annotation|
 end
 ```
 
-You should checkout the [short section in the Rails Guides](rails-cli-notes) to
+You should checkout the [short section in the Rails Guides](http://guides.rubyonrails.org/command_line.html#notes) to
 find out more about this handy Rake task, including how to list your own
 annotations.
-
-[rails-cli-notes]: http://guides.rubyonrails.org/command_line.html#notes

@@ -9,7 +9,7 @@
   </section>
   <footer>
     <p class="meta">
-      <i class="icon-pencil"></i> Written by <a rel="me" href="https://plus.google.com/<%= data.networks.googleplus %>?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="<%= current_article.date.xmlschema %>" pubdate<%= ' data-updated="true"' if current_article.data.updated %>><%= current_article.date.strftime("%b %d, %Y") %></time>
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/<%= data.networks.github %>?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="<%= current_article.date.xmlschema %>" pubdate<%= ' data-updated="true"' if current_article.data.updated %>><%= current_article.date.strftime("%b %d, %Y") %></time>
 
       <% if current_article.data.updated %>
       (<time datetime="<%= Date.parse(current_article.data.updated).xmlschema %>" class="updated">Updated on <%= Date.parse(current_article.data.updated).strftime("%b %d, %Y") %></time>)
