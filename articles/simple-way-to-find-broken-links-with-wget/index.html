@@ -1,0 +1,135 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Simple way to find broken links with Wget - Created by Pete</title>
+  <meta name="description" content="After writing the previous post singing the praises of Wget by show it can be used to mirror and entire website locally. I have stumbled across another useful feature, it can be used to spider a website following every link it finds (including those of assets such as stylesheets etc) and log the results.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/">
+
+  <meta content="Simple way to find broken links with Wget" itemprop="name">
+<meta content="After writing the previous post singing the praises of Wget by show it can be used to mirror and entire website locally. I have stumbled across another useful feature, it can be used to spider a website following every link it finds (including those of assets such as stylesheets etc) and log the results." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Simple way to find broken links with Wget" property="og:title">
+<meta content="article" property="og:type">
+<meta content="After writing the previous post singing the praises of Wget by show it can be used to mirror and entire website locally. I have stumbled across another useful feature, it can be used to spider a website following every link it finds (including those of assets such as stylesheets etc) and log the results." property="og:description">
+<meta content="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/" property="og:url">
+<meta content="2013-09-11T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Simple way to find broken links with Wget" name="twitter:title">
+<meta content="After writing the previous post singing the praises of Wget by show it can be used to mirror and entire website locally. I have stumbled across another useful feature, it can be used to spider a website following every link it finds (including those of assets such as stylesheets etc) and log the results." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Simple way to find broken links with Wget</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADXElEQVR4nGP6Dwf/mBgQgCL2fxbdj/Nvrp+o3QgU/3HM4IClxMGFdkD2BL9fAS6rekyegNTfrNkf37+3CqT3/8cTczoTI5RB7EJbpXuxfKfZZYBs9mStwwI2b9kPMTAx/tmcYLt8ycLSeqD4LM9VMkpGL1wNgOwrVadvqwpUtk4F2vv/1sX5ncJ7F50EinddMrc/q8Sg6gLUW2fsKDXr4s1zZ4FqutYdrJptt0XBGSh+2cP9uVncK0lpoHp1V/aknpr8R0Dx/8L+tkq54QL53kA1Uxrl6jfcrPvFDhRfsqg0U2DuSa2jQPVrrvY5lz6bckgQqGbzs5iuC0V122eA9BrvlG1yWTzZGqhG/N+MePGJCw6IANm/uAXcTin/CmABsqNnttxJE3VctR6ot0/rxCX2vgvn3gHFbWZOORa3hytoC9CclPRTjqdbnH08gWomnRdQc5gkoSUKVGP6szbxUHhT1g6gGpEj3ySEPsyc9ROo5uk2N+emyPUvQWqYJbfkC2U1f44AqjmidnprT8yi87VANX5zmxjC5k9hbQWqOeTTVbLJ78cJB6CaLSwt/fM3KGgWAtU4v9ZmFfC3SNgIVLPc9Obu2k1/b/IA1TwRctwyR3DqkplANZG/P9kfPXVb5ClQ3GTbIwubsqrpN4DiYrt1UqVMV7yLBeqdIxRavFFvwxpDkN9/J4Wpapi0AsOHQe/jsofX/Ra13AOyZUIyds+5s+AcMH4ZWmR3uF9VKZ5iBTRT6NwsZcZPCd8UgOJb/a1aVm3neCcLZNc1V0/2P9F9CxRfQnsD7yhUHW8Dhhvjki95PCVHvYw2AfXyln7P21kcdSkSqEbp8uovVpt+880CqpHXu33+zJ+rzkA1DNU1e/nq7W6IHweFJ8+UzqBLCnXrgHpfn1nJrBmksfICUD1zpuW1L9Jn5gDd/19andODz7M1TAwo7p69kPnufI3nX4Dis27+Ckpt/lukDRSv8TtySmXPQanTQHE5nZCfGnfPuIkDxYUXfHiwxq/p2G1Qvki8sj3JZtK/I0B7f+4NsE4+0uDiAMoX/l26FUYZIsKgvPDK/hWH2tyaTFAeqXFp/qBX+OI+KF8ItExiWjzn0zkgm0M7wS37T+aUu6B8we61xveM5V5uyvIsEhsAbU5hsppfx5sAAAAASUVORK5CYII=" alt="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>After writing the previous post singing the praises of Wget by show it can be used to <a href="/articles/make-a-local-website-mirror-with-wget/">mirror and entire website locally</a>. I have stumbled across another useful feature, it can be used to <a href="http://en.wikipedia.org/wiki/Web_crawler">spider a website</a> following every link it finds (including those of assets such as stylesheets etc) and log the results.</p>
+
+<p>In short, it&rsquo;s a pretty effective broken link finder, brilliant news for anyone with a long standing blog for example as most CMS systems such as <a href="http://wordpress.org/">Wordpress</a> will not update any article references you have put in your blog posts for you.</p>
+
+<h2>Shut up and show me this thing!</h2>
+
+<p>First, you&rsquo;ll need to make sure you have <a href="http://www.gnu.org/software/wget/">Wget</a>, on OS X you can just use <a href="http://brew.sh/">Homebrew</a>.</p>
+<pre class="highlight plaintext"><code>brew install wget
+</code></pre>
+<p>The command to give Wget is as follows, note this will output the resulting file to your home directory <code>~/</code>. It may take a little while depending on the size of your website.</p>
+<pre class="highlight plaintext"><code>wget --spider -o ~/wget.log -e robots=off -w 1 -r -p http://www.example.com
+</code></pre>
+<p>Let&rsquo;s break this command down so you can see what Wget is being told to do:</p>
+
+<ul>
+<li><code>--spider</code>, this tells Wget not to download anything since we only want a report so it will only do a HEAD request not a GET.</li>
+<li><code>-o ~/wget.log</code>, log messages to the declared file, in this case a file called <code>wget.log</code> that will be saved to your home directory, you can change this to a more convenient location and filename.</li>
+<li><code>-e robots=off</code>, this one tells wget to ignore the <code>robots.txt</code> file. <a href="http://www.robotstxt.org/">Learn more about robots.txt</a>.</li>
+<li><code>-w 1</code>, adds a 1 second wait between requests, this slows down Wget to more consistent rate to minimise stress on the hosting server so you don&rsquo;t get back any false positives.</li>
+<li><code>-r</code>, this means recursive so Wget will keep trying to follow links deeper into your sites until it can find no more!</li>
+<li><code>-p</code>, get all page requisites such as images, etc. needed to display HTML page so we can find broken image links too.</li>
+<li><code>http://www.example.com</code>, finally the website url to start from.</li>
+</ul>
+
+<h3>Reading the log</h3>
+
+<p>If you take a look inside the log file created by the Wget output you&rsquo;ll wonder how you&rsquo;d get any useful information out of it. Simple, our old friend <a href="http://en.wikipedia.org/wiki/Grep">Grep</a>. Obviously if you changed the location of the log file update the command accordingly.</p>
+<pre class="highlight plaintext"><code>grep -B 2 '404' ~/wget.log
+</code></pre>
+<p>This will find all references to the <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP Code</a> <code>404</code> indicating a page not found failure. It will also return the 2 lines above that line so that you can see the url concerned. If you&rsquo;re lucky you will get no output but if you do have some broken links you will get something similar to this:</p>
+<pre class="highlight plaintext"><code>--2013-09-11 07:12:25--  http://createdbypete.com/something-not-found.html
+Reusing existing connection to createdbypete.com:80.
+HTTP request sent, awaiting response... 404 Not Found
+</code></pre>
+<p>Unfortunately this doesn&rsquo;t show you where it found the link but it at least tells you the link that is trying to be called so you might be able to start your own investigation. I will update this article if I find a way to get more details about the links location but Wget is not really designed as a website debugging tool.</p>
+
+<h3>Try it out!</h3>
+
+<p>Give it a go on your website and see what comes back, you might be suprised even on a small site typos can creep in. You could even search the log for other HTTP response codes.</p>
+
+<h3>More options</h3>
+
+<p>Check out the <a href="http://www.gnu.org/software/wget/manual/wget.html">manual for wget</a> as there are many more options available. Or as usual with any command you can use <code>man wget</code> in your terminal.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2013-09-11T00:00:00Z" pubdate>Sep 11, 2013</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

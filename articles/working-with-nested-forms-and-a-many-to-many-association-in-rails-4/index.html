@@ -1,0 +1,231 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Working with nested forms and a many-to-many association in Rails 4 - Created by Pete</title>
+  <meta name="description" content="Recently a project I was working on needed a many-to-many relationship that would also store some extra data in the pivot table.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/">
+
+  <meta content="Working with nested forms and a many-to-many association in Rails 4" itemprop="name">
+<meta content="Recently a project I was working on needed a many-to-many relationship that would also store some extra data in the pivot table." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Working with nested forms and a many-to-many association in Rails 4" property="og:title">
+<meta content="article" property="og:type">
+<meta content="Recently a project I was working on needed a many-to-many relationship that would also store some extra data in the pivot table." property="og:description">
+<meta content="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/" property="og:url">
+<meta content="2013-05-07T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Working with nested forms and a many-to-many association in Rails 4" name="twitter:title">
+<meta content="Recently a project I was working on needed a many-to-many relationship that would also store some extra data in the pivot table." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Working with nested forms and a many-to-many association in Rails 4</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADVklEQVR4nGP6Dwf/mBgQgCL2f2YlxkM3+ydqNwLFfyj/tjp/f42nHZA9Ifz0FfYD67c8AbIZ6/4JPLukHwTWu6xJg72xdTWInf/A4cGxdWvsZYBsDm6Vw5418e6HGJgY/zjqOex9YvO6HijeMzFI2jFovpokkP1o6UR2gwXpumuA9k5ba7Pn/40Iy0lAcdeOfqWogNmWaUC2TmbTl8n/HqtcA7IX3pomfTHzZtcKoJl+0+aLmBbsTgkH6hX6Pc3jjv1P/XVANe+ENhx1EHwsIgRUc2rpjDzTxzu9VgPFzdZeuF1+0tokCqheZSX7Cjn5j7pA8xl1ws5lx8t9Bpt/RG9dB1fe1F1A8//rfNrelKNTLpYNFL88t29Lossm1yqgeu3Sw7cOa333fwRUs84k7/67c9olr0F+vHRuc+WeqqZ9QHGW5Ffuh1m+tDkBxTetvid5YdO2B2JAc5b7HZPIuOF7+xZQDePFy+/C52sUHwOq2ftm9by4Q2fNs4BqbHg2vWJ5ve+DG5C9eW9N/L7GgBYPILtm9dnJnD/Ug1OAev+ueBJ+LOHyVX2g+OHqW5JX/bb3LQGy1UrOrWhi8uzrAqmXvZS36pGO02Ig20hkYZxUSkmvIJDtNnd3ltvJU/dA8TJXsWD+g8DTbLtAfhcKvfxqaVrpYaD5B33mzhOy0Z0GincTM3dVGaNnouVA9e9afjxu0vM+9QKoZs65CbvY7mRXbAWqUfmzxNPhiEoAyJ1GmhXKKkHPLsiCzM9U/qihdrYCFLaThX5MWbbeZ7cpUG/pmV9FDvGO0jOA4t1d1+Nfmz53iQWq39OzI7Nus/X1K0A1MloPVxj515ZvB6rhOyN8l1dUKxRk/qKTN5aHbXk4xReo/r7tpjuS5YfWXwKKf2Gbd3S6vm91KlCvS8GCPsfpvtGVQPGZt47dOFzzvtMSFLZb9S+/f+sd6A1knzuUOKVOJEZfHWhOrUzFtcoZ+u9/APVKX7E5Ne3W+yk9QHER+6JXP99t9XsMFGeVltq0/I6NxnFQvii85vPxSPQncyC7/1yLonLQ/QnqoLyw9e7D9x7eYXIg9klVj7z7MVoaQHYh167yn9z2URKgfPH877RrV29zgtLSHxaz3b43LGdJU5ZnkdgAtEhrsqGUg6EAAAAASUVORK5CYII=" alt="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>Recently a project I was working on needed a <em>many-to-many</em> relationship that would also store some extra data in the pivot table.</p>
+
+<p>Rails provides helpers to make working with this sort of relationship a breeze but when you start to include the nested forms and requirement to add data to that connecting table the solution may not be that obvious.</p>
+
+<p>I&rsquo;ll be using Rails 4, the code will be the same for Rails 3.2 for the most part the major difference is <a href="https://github.com/rails/strong_parameters">Strong Parameters</a> is now used in place of <code>attr_accessible</code>. You can find out <a href="/articles/ruby-on-rails-development-setup-for-mac-osx/">how to install Rails 4 yourself here</a>.</p>
+
+<h2>Getting started</h2>
+
+<p>For this example I&rsquo;m going to use a Survey application, unfortunately this was a survey done in the street on paper and now the results need to be manually added to the system.</p>
+
+<blockquote>
+<p>Each Survey will have some Questions, these Questions will be answered by a Participant.</p>
+</blockquote>
+
+<p>So in this example we need an Answers table to be our many-to-many table that will link our Participant to our Question and keep the Answer the participant provided in an additional column.</p>
+
+<p>So let&rsquo;s start a new Rails application.</p>
+<pre class="highlight plaintext"><code>rails new SurveyApp
+</code></pre>
+<p>Generate some models and scaffolds to save a little bit of typing later.</p>
+<pre class="highlight plaintext"><code>rails generate scaffold Participant name
+rails generate scaffold Survey name
+rails generate model Question content:text survey:references
+rails generate model Answer question:references participant:references content:text
+
+rake db:migrate
+</code></pre>
+<p>First, we&rsquo;ll sort out the models, the file names are above each class as a comment.</p>
+<pre class="highlight ruby"><code><span class="c1"># app/models/participant.rb</span>
+<span class="k">class</span> <span class="nc">Participant</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:answers</span>
+  <span class="n">has_many</span> <span class="ss">:questions</span><span class="p">,</span> <span class="ss">through: :answers</span>
+<span class="k">end</span>
+
+<span class="c1"># app/models/survey.rb</span>
+<span class="k">class</span> <span class="nc">Survey</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:questions</span>
+
+  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:questions</span>
+<span class="k">end</span>
+
+<span class="c1"># app/models/question.rb</span>
+<span class="k">class</span> <span class="nc">Question</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:survey</span>
+  <span class="n">has_many</span> <span class="ss">:answers</span>
+  <span class="n">has_many</span> <span class="ss">:participants</span><span class="p">,</span> <span class="ss">through: :answers</span>
+
+  <span class="n">accepts_nested_attributes_for</span> <span class="ss">:answers</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Answer</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:participant</span>
+  <span class="n">belongs_to</span> <span class="ss">:question</span>
+<span class="k">end</span>
+</code></pre>
+<p>You&rsquo;ll notice I&rsquo;m not worrying about validation in this guide because it&rsquo;s a simple enough example and this post is concentrating on the nested forms and many-to-many associations.</p>
+
+<p>You should be familiar with what you see here, I&rsquo;ve used <code>through:</code> as this is recommended in the documentation as we have extra fields we want to access on the pivot table.</p>
+
+<p>Now let&rsquo;s tackle the controllers, in fact we only need to tackle the Survey controller.</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/surveys_controller.rb</span>
+<span class="k">class</span> <span class="nc">SurveysController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="n">before_action</span> <span class="ss">:set_survey</span><span class="p">,</span> <span class="ss">only: </span><span class="p">[</span><span class="ss">:show</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:answers</span><span class="p">]</span>
+
+  <span class="c1"># ... ignoring content that hasn't changed from scaffold</span>
+
+  <span class="k">def</span> <span class="nf">answers</span>
+    <span class="vi">@participants</span> <span class="o">=</span> <span class="no">Participant</span><span class="p">.</span><span class="nf">all</span>
+    <span class="vi">@questions</span> <span class="o">=</span> <span class="vi">@survey</span><span class="p">.</span><span class="nf">questions</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="c1"># ... ignoring content that hasn't changed from scaffold</span>
+
+  <span class="c1"># Never trust parameters from the scary internet, only allow the white list through.</span>
+  <span class="k">def</span> <span class="nf">survey_params</span>
+    <span class="n">params</span><span class="p">.</span><span class="nf">require</span><span class="p">(</span><span class="ss">:survey</span><span class="p">).</span><span class="nf">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">,</span>
+      <span class="ss">:questions_attributes</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:id</span><span class="p">,</span> <span class="ss">:content</span><span class="p">,</span>
+        <span class="ss">:answers_attributes</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:id</span><span class="p">,</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">:participant_id</span><span class="p">]</span>
+      <span class="p">])</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Because of <a href="https://github.com/rails/strong_parameters">Strong Parameters</a> replacing <code>attr_accessible</code> in Rails 4 we tell the application which attributes to allow through to our model to avoid mass-assignment security issues. The way it works is similar but you need to specify <em>everything</em> this includes the attributes within our nested models. (Don&rsquo;t forget the <code>id</code> attribute!)</p>
+
+<p>Next we setup a <a href="http://guides.rubyonrails.org/routing.html#adding-more-restful-actions">member route</a> we can use to enter our answers and associate them with a survey.</p>
+<pre class="highlight ruby"><code><span class="c1"># config/routes.rb</span>
+<span class="no">SurveyApp</span><span class="o">::</span><span class="no">Application</span><span class="p">.</span><span class="nf">routes</span><span class="p">.</span><span class="nf">draw</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:surveys</span> <span class="k">do</span>
+    <span class="n">get</span> <span class="s1">'answers'</span><span class="p">,</span> <span class="ss">on: :member</span>
+  <span class="k">end</span>
+  <span class="n">resources</span> <span class="ss">:participants</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <em>behind the scenes</em> work is done so lets sort out our views. Specifically the form so we can add the answers</p>
+<pre class="highlight erb"><code># app/views/survey/answers.html.erb
+<span class="nt">&lt;h1&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@survey</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span> Answers<span class="nt">&lt;/h1&gt;</span>
+
+<span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@survey</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%</span> <span class="vi">@participants</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">participant</span><span class="o">|</span> <span class="cp">-%&gt;</span>
+  <span class="nt">&lt;h3&gt;</span><span class="cp">&lt;%=</span> <span class="n">participant</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span><span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;table&gt;</span>
+    <span class="nt">&lt;thead&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Questions<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>Answer<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    <span class="nt">&lt;/thead&gt;</span>
+    <span class="nt">&lt;tbody&gt;</span>
+      <span class="cp">&lt;%</span> <span class="vi">@questions</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">question</span><span class="o">|</span> <span class="cp">-%&gt;</span>
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span><span class="cp">&lt;%=</span> <span class="n">question</span><span class="p">.</span><span class="nf">content</span> <span class="cp">%&gt;</span><span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>
+        <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">fields_for</span> <span class="ss">:questions</span><span class="p">,</span> <span class="n">question</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="o">|</span> <span class="cp">-%&gt;</span>
+          <span class="cp">&lt;%=</span> <span class="n">q</span><span class="p">.</span><span class="nf">fields_for</span> <span class="ss">:answers</span><span class="p">,</span> <span class="n">question</span><span class="p">.</span><span class="nf">answers</span><span class="p">.</span><span class="nf">find_or_initialize_by</span><span class="p">(</span><span class="ss">participant: </span><span class="n">participant</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span> <span class="cp">-%&gt;</span>
+            <span class="cp">&lt;%=</span> <span class="n">a</span><span class="p">.</span><span class="nf">text_area</span> <span class="ss">:content</span> <span class="cp">%&gt;</span>
+            <span class="cp">&lt;%=</span> <span class="n">a</span><span class="p">.</span><span class="nf">hidden_field</span> <span class="ss">:participant_id</span><span class="p">,</span> <span class="n">participant</span><span class="p">.</span><span class="nf">id</span> <span class="cp">%&gt;</span>
+          <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span>
+        <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span>
+        <span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span>
+    <span class="nt">&lt;/tbody&gt;</span>
+  <span class="nt">&lt;/table&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"actions"</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">f</span><span class="p">.</span><span class="nf">submit</span> <span class="cp">%&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">-%&gt;</span>
+</code></pre>
+<p>What we have done there is create a table for the Survey model in the usual, then nested within that <code>fields_for</code> Questions and within that <code>fields_for</code> Answers. This allows Rails to make use of the <code>accepts_nested_attributes_for</code> method we used in the models.</p>
+
+<p>For the Answers <code>fields_for</code> we are using the <code>find_or_initialize_by</code> method so that our answer <code>text_area</code> will populate with data if it&rsquo;s available and if there isn&rsquo;t a record for that Participant and Question combination it initializes a model so the form builder has an object to map on to.</p>
+
+<p>You&rsquo;ll also notice a <code>hidden_field</code> where we set the <code>participant_id</code> for the record to ensure the answer gets associated to a participant (<code>fields_for</code> will automatically create a <code>hidden_field</code> for <code>question_id</code> as we use that model to build the answers object, view source on the page and you will see).</p>
+
+<p>The way I have chosen to display this is perhaps not the most efficient but it demonstrates how you might tackle this scenario where you need to display all these options and still handle the data submission. If you have another solution to this please let me know on <a href="https://twitter.com/createdbypete">Twitter @createdbypete</a> or <a href="https://github.com/createdbypete/createdbypete.github.io/issues">create an issue on GitHub</a> it would be interesting to compare.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2013-05-07T00:00:00Z" pubdate data-updated="true">May 07, 2013</time>
+
+      (<time datetime="2014-04-04T00:00:00Z" class="updated">Updated on Apr 04, 2014</time>)
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

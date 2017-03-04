@@ -1,0 +1,153 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Dynamic OmniAuth Provider Setup - Created by Pete</title>
+  <meta name="description" content="I&rsquo;m a real fan of OmniAuth gem but I think some of it&rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/">
+
+  <meta content="Dynamic OmniAuth Provider Setup" itemprop="name">
+<meta content="I&rsquo;m a real fan of OmniAuth gem but I think some of it&rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Dynamic OmniAuth Provider Setup" property="og:title">
+<meta content="article" property="og:type">
+<meta content="I&rsquo;m a real fan of OmniAuth gem but I think some of it&rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth." property="og:description">
+<meta content="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/" property="og:url">
+<meta content="2014-09-26T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Dynamic OmniAuth Provider Setup" name="twitter:title">
+<meta content="I&rsquo;m a real fan of OmniAuth gem but I think some of it&rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Dynamic OmniAuth Provider Setup</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADWklEQVR4nGP6Dwf/mBgQgCL2fxbdg5w310/UbgSK/zj2wMFS4uBCOyB7gt8rrpBVPCZPQOpvarn59/+tAun9/9ErtzJxhjKIXWjb9CCXj5tdBshmT9Y6KmCzlv0QAxPjn80d1ulLHpbUA8VneXZILzLK8DAAsq9U7b+jKvCzaSrQ3vpbl5lPCtcuPgkU75pkf9ZViUHDBcj+98k2K+1i5OmjQDbXx4NWj+2+KHgDzbzc4f88zU6LUxqod7nz76SAmnwmZ6D4ZD9PJd3lAvFANf9NmpXqN+ys02YHij9ZmJkZEHqSC2SOztU6J1OpKRsEgWomP8vIuTCpbscMoBph44NxTQrLJ1sDxcP/L7GbXjtngwhQvMqdQbXJ/1cCC1A8+n7Ln7KnnqvWA8X5Mk5c+r3uyLlHQDNtAqYcS9rDV3QEqCbl9SnHq0v8dVyBaibdF1Azu8SiJQtUY/qxNvGEelfWCqAa4ZBvEmIKM2cxAtU8v+TmXPtzy0tRoBrmyC35QtllnyOAaraknd7aHbP4fCVQTbJtE4PXvAmsE4FqrvJ0lWwLZT7hA1TT1NLSP3+jwkpgfDGG/9RmFQqyVOgFqll14+butpW/ZgLj4v9Tf8ctU3lnPOkEqokV/GR/VO9myFOguPG0Rxa2xdXiL0B+n78mVXLeine5QL3znK7WH0zdoAMMH4afrx/5qa40dgWGD4Pez2V3t/stZrkPZMsErNi95s4Evv1AdovqD3fWJ80ioHATOjZL+aJRQpkiUHyrv1XLLAOLdX+B7NrJ1ZPr3apnAdUwiG4MuHP/33K2HqC9s04U8Uy28bID+v2/7NSPeadPd526AVTDdFj/i/aK2VxRQDXmWlGHX9t89TcGimfPseart3vBzgpk+/KETlS6ZNAEjIv/3Ge0/lsGSaydAFTflfnymon0nR5DoHiZ+p3Ac56ladOA4jLZNTV351s8/gIU33vTRly16WzRa6B4jV96Z8reh1KngeIyOom/Ne6esRMHhcmChntr/Jpu3Qbli0SWzUk2k34dAYXJXga34iMNFg6gfOF/QjHDKENCGJQXXgl+4FCdW5MJyiM1W+oYDAtfgMKqUKBhZtHCOZ/2Adkc2iZO2X8yp5wF5Qv2qvVnz1ju1aYszyKxAU4kWbKnpwETAAAAAElFTkSuQmCC" alt="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>I&rsquo;m a real fan of <a href="https://github.com/intridea/omniauth">OmniAuth</a> gem but I think some of it&rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth.</p>
+
+<p>We&rsquo;ll be using Rails 4 and Omniauth 1.2 (versions at the time of writing). We&rsquo;ll use the <a href="https://github.com/arunagw/omniauth-twitter">Twitter strategy</a> for the examples but the same principles can be applied to any strategy.</p>
+
+<p>The <a href="https://github.com/intridea/omniauth/wiki/Setup-Phase">OmniAuth wiki provides an overview of the different ways you can use the setup phase</a>, in the wiki examples a <code>lambda</code> is used but we&rsquo;ll be moving it into a class called <code>OmniauthSetup</code>. Let&rsquo;s configure OmniAuth to use the class.</p>
+<pre class="highlight ruby"><code><span class="c1"># config/initializers/omniauth.rb</span>
+<span class="nb">require</span> <span class="s1">'omniauth_setup'</span>
+
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">config</span><span class="p">.</span><span class="nf">middleware</span><span class="p">.</span><span class="nf">use</span> <span class="no">OmniAuth</span><span class="o">::</span><span class="no">Builder</span> <span class="k">do</span>
+  <span class="n">provider</span> <span class="ss">:twitter</span><span class="p">,</span> <span class="ss">setup: </span><span class="no">OmniauthSetup</span>
+<span class="k">end</span>
+</code></pre>
+<h2>Writing the class</h2>
+
+<p>The <code>setup</code> key tells OmniAuth to call our new class for the setup phase. You can still include the <code>key</code> and <code>secret</code> here, they would be used as defaults but you can leave them out if you don&rsquo;t want to have a default defined here.</p>
+
+<p>Time to expand our <code>OmniauthSetup</code> class to do something useful. For this example, let&rsquo;s assume we have a model called <code>Account</code> with an attribute called <code>subdomain</code> where we store the subdomain for this account. We use a subdomain because the OmniAuth routes aren&rsquo;t easy to change, so we use the subdomain in the request to find the account record in our database.</p>
+<pre class="highlight ruby"><code><span class="c1"># lib/omniauth_setup.rb</span>
+<span class="k">class</span> <span class="nc">OmniauthSetup</span>
+  <span class="c1"># OmniAuth expects the class passed to setup to respond to the #call method.</span>
+  <span class="c1"># env - Rack environment</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">call</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="kp">new</span><span class="p">(</span><span class="n">env</span><span class="p">).</span><span class="nf">setup</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Assign variables and create a request object for use later.</span>
+  <span class="c1"># env - Rack environment</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+    <span class="vi">@env</span> <span class="o">=</span> <span class="n">env</span>
+    <span class="vi">@request</span> <span class="o">=</span> <span class="no">ActionDispatch</span><span class="o">::</span><span class="no">Request</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="c1"># The main purpose of this method is to set the consumer key and secret.</span>
+  <span class="k">def</span> <span class="nf">setup</span>
+    <span class="vi">@env</span><span class="p">[</span><span class="s1">'omniauth.strategy'</span><span class="p">].</span><span class="nf">options</span><span class="p">.</span><span class="nf">merge!</span><span class="p">(</span><span class="n">custom_credentials</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Use the subdomain in the request to find the account with credentials</span>
+  <span class="k">def</span> <span class="nf">custom_credentials</span>
+    <span class="n">account</span> <span class="o">=</span> <span class="no">Account</span><span class="p">.</span><span class="nf">find_by!</span><span class="p">(</span><span class="ss">subdomain: </span><span class="vi">@request</span><span class="p">.</span><span class="nf">subdomain</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="ss">client_id: </span><span class="n">account</span><span class="p">.</span><span class="nf">twitter_consumer_key</span><span class="p">,</span>
+      <span class="ss">client_secret: </span><span class="n">account</span><span class="p">.</span><span class="nf">twitter_consumer_secret</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Let&rsquo;s break this class down and see what&rsquo;s going on:</p>
+
+<ol>
+<li>OmniAuth expects our class to respond to <code>.call</code> and passes <code>env</code> as a parameter.</li>
+<li>When we instantiate our class we create a request instance from the <code>env</code>. This will allow us to get the <code>#subdomain</code> later on.</li>
+<li>The <code>#setup</code> method reaches inside the environment hash for <code>omniauth.strategy</code> to grab the current options. This would be the values you&rsquo;ve already set in the omniauth initializer. It then merges in the hash returned from the hash returned by <code>#custom_credentials</code>.</li>
+<li>We obtain the accounts custom credentials by simply finding the account in our database with a matching recording and then building a hash with those values.</li>
+</ol>
+
+<p>So now if you start the OmniAuth sign in process from the accounts subdomain, OmniAuth sets up the oauth handshake to Twitter using the credentials stored against the account record in the database.</p>
+
+<p>While this is a basic example of what you can do with the OmniAuth setup phase, hopefully it will inspire you to creativly exploit the OmniAuth setup phase in your own projects.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2014-09-26T00:00:00Z" pubdate>Sep 26, 2014</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

@@ -1,0 +1,1539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Created by Pete</title>
+  <id>http://www.createdbypete.com/articles</id>
+  <link href="http://www.createdbypete.com/articles"/>
+  <link href="http://www.createdbypete.com/atom.xml" rel="self"/>
+  <updated>2015-07-08T10:00:00+10:00</updated>
+  <author>
+    <name>Peter Rhoades</name>
+  </author>
+  <entry>
+    <title>How to organise i18n without losing your… translation_not_found</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/how-to-organise-i18n-without-losing-your/"/>
+    <id>http://www.createdbypete.com/articles/how-to-organise-i18n-without-losing-your/</id>
+    <published>2015-07-08T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;I’ve written before about &lt;a href="articles/working-with-locales-and-time-zones-in-rails/"&gt;Working with Locales and Time Zones in Rails&lt;/a&gt;, but I often feel the i18n library (short for internationalisation) is underused (appreciated?). Perhaps it is even avoided because of the perception it is more effort to develop with and harder to maintain. This article will, I hope, open your mind to the idea that you will be better off using i18n in your application (even for a single language) and that it can be maintainable with some simple organisational pointers.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Rails Tip: TODO, FIXME and OPTIMIZE code comments</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/"/>
+    <id>http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/</id>
+    <published>2015-04-19T10:00:00+10:00</published>
+    <updated>2017-03-04T18:12:00+11:00</updated>
+    <content type="html">&lt;p&gt;Ruby on Rails has so much that it&amp;rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:&lt;/p&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="c1"&gt;# TODO Refactor this class, it's way too big!&lt;/span&gt;
+  &lt;span class="c1"&gt;# FIXME broke some_method during refactor&lt;/span&gt;
+  &lt;span class="c1"&gt;# OPTIMIZE moar speed!!!&lt;/span&gt;
+  &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;.&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="nf"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You get the idea. I called them special comments in the previous paragraph but
+really they are just your usual comments but the &lt;code&gt;TODO&lt;/code&gt;, &lt;code&gt;FIXME&lt;/code&gt; and
+&lt;code&gt;OPTIMIZE&lt;/code&gt; keywords make them special when you run the following rake task:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rake notes
+app/models/user.rb:
+  * [2] [TODO] Refactor this class, it's way too big!
+  * [3] [FIXME] broke some_method during refactor
+  * [4] [OPTIMIZE] moar speed!!!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For the power users out there you can add support for new file extensions using
+&lt;code&gt;config.annotations.register_extensions&lt;/code&gt; option, which receives a list of the
+extensions with its corresponding regex to match it up.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Match .scss, .sass or .less comments. Example // TODO make some notes&lt;/span&gt;
+&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;annotations&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_extensions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"scss"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"sass"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"less"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;annotation&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="sr"&gt;/\/\/\s*(&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;annotation&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sr"&gt;):?\s*(.*)$/&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should checkout the &lt;a href="http://guides.rubyonrails.org/command_line.html#notes"&gt;short section in the Rails Guides&lt;/a&gt; to
+find out more about this handy Rake task, including how to list your own
+annotations.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Creating Form Objects with ActiveModel and Virtus</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/"/>
+    <id>http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/</id>
+    <published>2015-04-15T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of &lt;a href="https://robots.thoughtbot.com/back-to-basics-solid"&gt;SOLID&lt;/a&gt;, the &lt;a href="https://en.wikipedia.org/wiki/Single_responsibility_principle"&gt;single responsibility principle (SRP)&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Dynamic OmniAuth Provider Setup</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/"/>
+    <id>http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/</id>
+    <published>2014-09-26T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;I&amp;rsquo;m a real fan of &lt;a href="https://github.com/intridea/omniauth"&gt;OmniAuth&lt;/a&gt; gem but I think some of it&amp;rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&amp;rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll be using Rails 4 and Omniauth 1.2 (versions at the time of writing). We&amp;rsquo;ll use the &lt;a href="https://github.com/arunagw/omniauth-twitter"&gt;Twitter strategy&lt;/a&gt; for the examples but the same principles can be applied to any strategy.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href="https://github.com/intridea/omniauth/wiki/Setup-Phase"&gt;OmniAuth wiki provides an overview of the different ways you can use the setup phase&lt;/a&gt;, in the wiki examples a &lt;code&gt;lambda&lt;/code&gt; is used but we&amp;rsquo;ll be moving it into a class called &lt;code&gt;OmniauthSetup&lt;/code&gt;. Let&amp;rsquo;s configure OmniAuth to use the class.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/initializers/omniauth.rb&lt;/span&gt;
+&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'omniauth_setup'&lt;/span&gt;
+
+&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;middleware&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;use&lt;/span&gt; &lt;span class="no"&gt;OmniAuth&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Builder&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;provider&lt;/span&gt; &lt;span class="ss"&gt;:twitter&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;setup: &lt;/span&gt;&lt;span class="no"&gt;OmniauthSetup&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Writing the class&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;setup&lt;/code&gt; key tells OmniAuth to call our new class for the setup phase. You can still include the &lt;code&gt;key&lt;/code&gt; and &lt;code&gt;secret&lt;/code&gt; here, they would be used as defaults but you can leave them out if you don&amp;rsquo;t want to have a default defined here.&lt;/p&gt;
+
+&lt;p&gt;Time to expand our &lt;code&gt;OmniauthSetup&lt;/code&gt; class to do something useful. For this example, let&amp;rsquo;s assume we have a model called &lt;code&gt;Account&lt;/code&gt; with an attribute called &lt;code&gt;subdomain&lt;/code&gt; where we store the subdomain for this account. We use a subdomain because the OmniAuth routes aren&amp;rsquo;t easy to change, so we use the subdomain in the request to find the account record in our database.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# lib/omniauth_setup.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;OmniauthSetup&lt;/span&gt;
+  &lt;span class="c1"&gt;# OmniAuth expects the class passed to setup to respond to the #call method.&lt;/span&gt;
+  &lt;span class="c1"&gt;# env - Rack environment&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;call&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="kp"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;setup&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Assign variables and create a request object for use later.&lt;/span&gt;
+  &lt;span class="c1"&gt;# env - Rack environment&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="vi"&gt;@env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;
+    &lt;span class="vi"&gt;@request&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ActionDispatch&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# The main purpose of this method is to set the consumer key and secret.&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;setup&lt;/span&gt;
+    &lt;span class="vi"&gt;@env&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'omniauth.strategy'&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;options&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;merge!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;custom_credentials&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Use the subdomain in the request to find the account with credentials&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;custom_credentials&lt;/span&gt;
+    &lt;span class="n"&gt;account&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Account&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_by!&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;subdomain: &lt;/span&gt;&lt;span class="vi"&gt;@request&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;subdomain&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;client_id: &lt;/span&gt;&lt;span class="n"&gt;account&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_consumer_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="ss"&gt;client_secret: &lt;/span&gt;&lt;span class="n"&gt;account&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;twitter_consumer_secret&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&amp;rsquo;s break this class down and see what&amp;rsquo;s going on:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;OmniAuth expects our class to respond to &lt;code&gt;.call&lt;/code&gt; and passes &lt;code&gt;env&lt;/code&gt; as a parameter.&lt;/li&gt;
+&lt;li&gt;When we instantiate our class we create a request instance from the &lt;code&gt;env&lt;/code&gt;. This will allow us to get the &lt;code&gt;#subdomain&lt;/code&gt; later on.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;#setup&lt;/code&gt; method reaches inside the environment hash for &lt;code&gt;omniauth.strategy&lt;/code&gt; to grab the current options. This would be the values you&amp;rsquo;ve already set in the omniauth initializer. It then merges in the hash returned from the hash returned by &lt;code&gt;#custom_credentials&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;We obtain the accounts custom credentials by simply finding the account in our database with a matching recording and then building a hash with those values.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So now if you start the OmniAuth sign in process from the accounts subdomain, OmniAuth sets up the oauth handshake to Twitter using the credentials stored against the account record in the database.&lt;/p&gt;
+
+&lt;p&gt;While this is a basic example of what you can do with the OmniAuth setup phase, hopefully it will inspire you to creativly exploit the OmniAuth setup phase in your own projects.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Working with Locales and Time Zones in Rails</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/"/>
+    <id>http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/</id>
+    <published>2014-06-25T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;&lt;a href="http://guides.rubyonrails.org/i18n.html"&gt;Rails handles internationalization (i18n) really well&lt;/a&gt;, and you can set the default locale and time zone for your application very simply:&lt;/p&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/application.rb&lt;/span&gt;
+
+&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;I18nTest&lt;/span&gt;
+  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Application&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Application&lt;/span&gt;
+    &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;i18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_locale&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'en'&lt;/span&gt;
+    &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_zone&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'London'&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Setting the locale from the URL&lt;/h2&gt;
+
+&lt;p&gt;First you need to wrap your applications routes in a scope defining the &lt;code&gt;:locale&lt;/code&gt; parameter. Your application URLs will then look like &lt;code&gt;/en/controller/action&lt;/code&gt; with the first segment telling Rails which locale it should use. The following regular expression just places a constraint on the locale parameter so that it must match one of the locales the application knows about.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/routes.rb&lt;/span&gt;
+
+&lt;span class="n"&gt;scope&lt;/span&gt; &lt;span class="s1"&gt;':locale'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;locale: &lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;available_locales&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"|"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sr"&gt;/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="c1"&gt;# application routes...&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Catch all requests without a locale and redirect to the default...&lt;/span&gt;
+&lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;'*path'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_locale&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/%{path}"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="ss"&gt;constraints: &lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;req&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;starts_with?&lt;/span&gt; &lt;span class="s2"&gt;"/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_locale&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/"&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;match&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;to: &lt;/span&gt;&lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"/&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_locale&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Contrary to the Rails guides examples, I prefer to use the &lt;a href="http://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html#method-i-around_action"&gt;&lt;code&gt;around_action&lt;/code&gt;&lt;/a&gt; hook with &lt;a href="https://github.com/svenfuchs/i18n/blob/master/lib/i18n.rb#L252"&gt;&lt;code&gt;I18n.with_locale&lt;/code&gt;&lt;/a&gt; class method to set the locale. Even though we may not be running in a multi-threaded environment, I feel it is more responsible way to handle the locale on a per-request basis like this.&lt;/p&gt;
+
+&lt;p&gt;We also override the &lt;code&gt;#default_url_options&lt;/code&gt; method so the locale is automatically set when we use any of the &lt;code&gt;*_url&lt;/code&gt; or &lt;code&gt;*_path&lt;/code&gt; helper methods in our controller or views.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/application_controller.rb&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ApplicationController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActionController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;around_action&lt;/span&gt; &lt;span class="ss"&gt;:with_locale&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;with_locale&lt;/span&gt;
+    &lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;with_locale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:locale&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;default_url_options&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;locale: &lt;/span&gt;&lt;span class="no"&gt;I18n&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;locale&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And there we have it, the application can respond with the correct content based on the URL. To make use of this in your application use the &lt;a href="http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-t"&gt;&lt;code&gt;t&lt;/code&gt;&lt;/a&gt; and &lt;a href="http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-l"&gt;&lt;code&gt;l&lt;/code&gt;&lt;/a&gt; helpers, these can be used in your controllers and views.&lt;/p&gt;
+
+&lt;h2&gt;Using i18n in your application&lt;/h2&gt;
+
+&lt;p&gt;I recommend using them for everything, it will save &lt;strong&gt;a lot&lt;/strong&gt; of pain if you ever need to handle multiple locales in the future; or you might just want to change the format of your dates.&lt;/p&gt;
+
+&lt;p&gt;First in Rails 4.1 you&amp;rsquo;ll want to &lt;code&gt;raise_on_missing_translations&lt;/code&gt; so Rails will shout at you if any translations are missing.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/environments/{test,development}.rb&lt;/span&gt;
+
+&lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configure&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;
+  &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;action_view&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;raise_on_missing_translations&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kp"&gt;true&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;t&lt;/code&gt; or &lt;code&gt;translate&lt;/code&gt; helper accepts a simple dot.notation string to specify the translation you are trying to access (there are short hand options available but &lt;a href="http://guides.rubyonrails.org/i18n.html"&gt;check the Rails documentation for more information&lt;/a&gt;). You can also pass in a hash to replace named keys in the translation string:&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/locales/en.yml&lt;/span&gt;
+
+&lt;span class="na"&gt;en&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;dot&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;notation&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Hello,&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;my&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;name&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;is&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;%{name}"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Example&lt;/span&gt;
+&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'dot.notation'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;name: &lt;/span&gt;&lt;span class="s1"&gt;'Pete'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#=&amp;gt; Hello, my name is Pete&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;l&lt;/code&gt; or &lt;code&gt;localize&lt;/code&gt; helper doesn&amp;rsquo;t get as much attention as it deserves, it&amp;rsquo;s very useful for localising dates, numbers, money and so on.&lt;/p&gt;
+&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/locales/en.yml&lt;/span&gt;
+
+&lt;span class="na"&gt;en&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;time&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="na"&gt;formats&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="na"&gt;short&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;%d&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;%b&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;%H:%M'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# Example&lt;/span&gt;
+&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;format: :short&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#=&amp;gt; 25 Apr 11:40&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Rails only provides the US English locale by default, but you can get hold of you locale from the &lt;a href="https://github.com/svenfuchs/rails-i18n"&gt;rails-i18n&lt;/a&gt; gem.&lt;/p&gt;
+
+&lt;h2&gt;Find missing or unused i18n translations&lt;/h2&gt;
+
+&lt;p&gt;As your application grows you&amp;rsquo;ll find the translation files can quickly become large difficult to keep track of everything in them. Thankfully &lt;a href="https://github.com/glebm/i18n-tasks"&gt;i18n-tasks&lt;/a&gt; can ease the pain and help you track down missing or unused translations (credit to &lt;a href="https://twitter.com/jessieay"&gt;Jessie Young&lt;/a&gt; for letting me know about this one):&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;i18n-tasks health
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Check out the readme for &lt;a href="https://github.com/glebm/i18n-tasks"&gt;i18n-tasks&lt;/a&gt; for more details on using the tool, along with the &lt;a href="https://github.com/glebm/i18n-tasks#configuration"&gt;configuration&lt;/a&gt; options available.&lt;/p&gt;
+
+&lt;h2&gt;Setting the time zone&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s recommended to use the &lt;code&gt;around_action&lt;/code&gt; hook and &lt;a href="http://api.rubyonrails.org/classes/Time.html#method-i-use_zone"&gt;&lt;code&gt;Time.use_zone&lt;/code&gt;&lt;/a&gt; as &lt;code&gt;Time.zone&lt;/code&gt; is known to leak into other threads. In the example below the time zone is stored as an attribute on the user; a list of valid time zone values can be found by running &lt;code&gt;rake time:zones:all&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The &lt;code&gt;Time.use_zone&lt;/code&gt; method is a core extension provided by ActiveSupport.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/application_controller.rb&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ApplicationController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActionController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;around_action&lt;/span&gt; &lt;span class="ss"&gt;:with_time_zone&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;if: :current_user&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;with_time_zone&lt;/span&gt;
+    &lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;use_zone&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;time_zone&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;yield&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Working with time zones can be tricky, Rails helps you in some places and then leaves you hanging in others (for good reason, but it can still catch you out). Let&amp;rsquo;s examine some of the gotchas:&lt;/p&gt;
+
+&lt;h3&gt;Working with ActiveRecord attributes and time zones&lt;/h3&gt;
+
+&lt;p&gt;Good news! ActiveRecord helps you out by converting all values to UTC for storing in the database. When it fetches the record the value is converted to the expect time zone for that request (either from &lt;code&gt;config.time_zone&lt;/code&gt; or if you&amp;rsquo;re using &lt;code&gt;Time.use_zone&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3&gt;Working with the &lt;code&gt;Time&lt;/code&gt; class&lt;/h3&gt;
+
+&lt;p&gt;If you are using the &lt;a href="http://www.ruby-doc.org/core-2.1.2/Time.html"&gt;&lt;code&gt;Time&lt;/code&gt;&lt;/a&gt; class it&amp;rsquo;s important to specify the time zone you want to use. The easiest way to do this is to include the &lt;code&gt;zone&lt;/code&gt; with &lt;code&gt;Time.zone&lt;/code&gt;; this will use the expected time zone. If you just use &lt;code&gt;Time&lt;/code&gt; then it will use the servers system time zone. For example &lt;a href="http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html"&gt;Rails provides some helpers&lt;/a&gt;:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current&lt;/span&gt; &lt;span class="c1"&gt;# Rails helper for Time.zone.now&lt;/span&gt;
+&lt;span class="no"&gt;Time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;zone&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'2014-04-25 11:30:00'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Method calls like &lt;code&gt;2.hours.ago&lt;/code&gt; use the time zone you&amp;rsquo;ve configured so these are safe to use as well. Even if you&amp;rsquo;re not building an application that cares about time zones at the moment, it could save you some pain in the future to use the time zone safe methods.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Create a custom Liquid tag as a Jekyll plugin</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/"/>
+    <id>http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/</id>
+    <published>2014-03-08T11:00:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;If you didn&amp;rsquo;t know already, this site was built in &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt; (more recently in &lt;a href="http://middlemanapp.com/"&gt;Middleman&lt;/a&gt;) and Jekyll makes use of the &lt;a href="http://liquidmarkup.org/"&gt;Liquid&lt;/a&gt; templating language to process templates. All the standard &lt;a href="http://docs.shopify.com/themes/liquid-basics/logic"&gt;tags&lt;/a&gt; and &lt;a href="http://docs.shopify.com/themes/liquid-basics/output"&gt;filters&lt;/a&gt; for Liquid are supported, but sometimes you need a bit more!&lt;/p&gt;
+&lt;p&gt;I wanted to show a &lt;a href="http://en.wikipedia.org/wiki/QR_code"&gt;QR code&lt;/a&gt; in the top corner of my article pages when it is printed off so you can scan the code and return to the page form a mobile device. A little bit of a gimmick but I wanted something real to base this article on.&lt;/p&gt;
+
+&lt;h2&gt;The plan&lt;/h2&gt;
+
+&lt;p&gt;This plugin will need to do a couple of things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Turn a page url into a QR code&lt;/li&gt;
+&lt;li&gt;Not rely on any third party services&lt;/li&gt;
+&lt;li&gt;Use base64 to encode the image directly into the page&lt;/li&gt;
+&lt;li&gt;Provide me with a convenient tag to use in my pages&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Creating a Liquid tag&lt;/h2&gt;
+
+&lt;p&gt;Creating a new tag for Liquid is very simple, you just need to inherit from &lt;a href="https://github.com/Shopify/liquid/blob/master/lib/liquid/tag.rb"&gt;Liquid::Tag&lt;/a&gt; and register your new tag.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;QrCodeTag&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Liquid&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Tag&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tag_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tokens&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;super&lt;/span&gt;
+    &lt;span class="vi"&gt;@url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# Create the QR code here&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;Liquid&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Template&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'qr'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;QrCodeTag&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You would then be able to use your new tag in templates like so:&lt;/p&gt;
+&lt;pre class="highlight html"&gt;&lt;code&gt;{% qr http://createdbypete.com %}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Creating a QR code&lt;/h2&gt;
+
+&lt;p&gt;Again this is very simple thanks to the &lt;a href="https://rubygems.org/gems/rqrcode_png"&gt;rqrcode_png&lt;/a&gt; gem. With this gem it is trivial to produce a QR code, as you can see below:&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;'rqrcode_png'&lt;/span&gt;
+
+&lt;span class="n"&gt;qr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RQRCode&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;QRCode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'http://createdbypete.com'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;png&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_img&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Now we have a chunky_png to work with we can base64 encode the image&lt;/span&gt;
+&lt;span class="n"&gt;png&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_data_url&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see in the last line &lt;a href="https://rubygems.org/gems/chunky_png"&gt;chunky_png&lt;/a&gt; has a very useful method to allow for the image data to be converted into a data url for use in an ordinary &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;
+
+&lt;h2&gt;Putting it all together&lt;/h2&gt;
+
+&lt;p&gt;The following code is what I ended up with. You&amp;rsquo;ll notice a new &lt;code&gt;lookup&lt;/code&gt; method, this allow me to pass in the &lt;code&gt;page.url&lt;/code&gt; variable into this tag since I don&amp;rsquo;t want to be maintaining individual URLs here when I can let Jekyll and Liquid do it for me.&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;a href="http://stackoverflow.com/a/8771374"&gt;this StackOverflow post&lt;/a&gt; for helping me solve this one.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;QrCodeTag&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Liquid&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Tag&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tag_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tokens&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;super&lt;/span&gt;
+    &lt;span class="vi"&gt;@url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;lookup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;
+    &lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"."&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;lookup&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;lookup&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;page_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'site.url'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}#{&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="vi"&gt;@url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+    &lt;span class="n"&gt;qr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;RQRCode&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;QRCode&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;page_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;size: &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Size increased because URLs can be long&lt;/span&gt;
+    &lt;span class="n"&gt;png&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;qr&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_img&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;MARKUP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;strip&lt;/span&gt;&lt;span class="sh"&gt;
+    &amp;lt;div class="qrcode"&amp;gt;
+      &amp;lt;img src="&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;png&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;to_data_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;" alt="&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;page_url&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="sh"&gt;"&amp;gt;
+    &amp;lt;/div&amp;gt;
+&lt;/span&gt;&lt;span class="no"&gt;    MARKUP&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="no"&gt;Liquid&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Template&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;register_tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'qr'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;QrCodeTag&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I&amp;rsquo;ve also included a variable from my Jekyll &lt;code&gt;_config.yml&lt;/code&gt;, the &lt;code&gt;site.url&lt;/code&gt;. This is just the full url to the website as the QR code will need to have this as well or it will only get a relative URL.&lt;/p&gt;
+
+&lt;h3&gt;A sprinkle of CSS&lt;/h3&gt;
+
+&lt;p&gt;Now we&amp;rsquo;ve got our custom Liquid tag ready to go! We now need a small amount of CSS to finish the job so the &lt;code&gt;.qrcode&lt;/code&gt; class is hidden by default but on print media is displayed.&lt;/p&gt;
+&lt;pre class="highlight css"&gt;&lt;code&gt;&lt;span class="nc"&gt;.qrcode&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nl"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;none&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;@media&lt;/span&gt; &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="nc"&gt;.qrcode&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nl"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;block&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you can just drop in the new tag to your article or add it as part of one of your layouts – this is how I&amp;rsquo;ve used it so it appears on all my articles. Try it out, bring up print preview and you should see in the top right corner of the first page a QR code for this article.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A Practical Guide to Using rsync</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/"/>
+    <id>http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/</id>
+    <published>2014-02-25T11:00:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;If you&amp;rsquo;ve never used &lt;a href="http://rsync.samba.org/"&gt;rsync&lt;/a&gt; before then today is going to be a great day for you. Firstly, rsync is not new it&amp;rsquo;s been around for quite a while and chances are you&amp;rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It can perform differential uploads and downloads (synchronization) of files across the network, transferring only data that has changed. The rsync remote-update protocol allows rsync to transfer just the differences between two sets of files across the network connection.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What this means is instead of uploading everything it will upload only the files that have changed. Not only that, it uses compression while sending so it can reduce the amount of bandwidth used over other methods.&lt;/p&gt;
+
+&lt;h2&gt;Preparation&lt;/h2&gt;
+
+&lt;p&gt;Most machines will have &lt;code&gt;rsync&lt;/code&gt; available, you can check by running &lt;code&gt;which rsync&lt;/code&gt; in your terminal to show you where it is located. If you don&amp;rsquo;t get a response then you will need to install it.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# On Redhat based systems (CentOS etc)
+$ yum install rsync
+
+# On Debian based systems (Ubuntu etc)
+$ apt-get install rsync
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;OS X already has &lt;code&gt;rsync&lt;/code&gt; available so you don&amp;rsquo;t need to worry about installing it again.&lt;/p&gt;
+
+&lt;h2&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Using rsync is easy, there are a few options that you will use the most so you can mix and match these depending on what you would like to achieve.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rsync [options] [source] [destination]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt;, &lt;code&gt;--verbose&lt;/code&gt;, this will increase the verbosity, showing the path for every file copied.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-a&lt;/code&gt;, &lt;code&gt;--archive&lt;/code&gt;, archive mode is very useful for backups, it will preserve everything about the file such as timestamps and permissions. The only thing it does not preserve is hardlinks, because finding multiply-linked files is expensive.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-z&lt;/code&gt;, &lt;code&gt;--compress&lt;/code&gt;, compress file data during the transfer to reduce bandwidth, this is particularly useful when working with a remote server.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt;, &lt;code&gt;--dry-run&lt;/code&gt;, perform a trial run with no changes made, very useful to do this before combining with the option below.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-h&lt;/code&gt;, &lt;code&gt;--human-readable&lt;/code&gt;, output numbers in a human-readable format. (If you use &lt;code&gt;-h&lt;/code&gt; without anything else it is also the help)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--delete&lt;/code&gt;, this will delete the files in the destination not present in the source, use this to truly sync changes.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--help&lt;/code&gt;, probably the most useful one of them all, show the help for &lt;code&gt;rsync&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;You said Practical Guide?&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ve used &lt;code&gt;rsync&lt;/code&gt; most extensively for synchronising folders on my local machine with an external hard-drive for backups and for managing files on remote servers at times too. The &lt;code&gt;rsync&lt;/code&gt; command can also be used more creatively and I intend to demonstrate a few of those use cases below along side the basics.&lt;/p&gt;
+
+&lt;h3&gt;1. Copy/sync a directory on your local machine&lt;/h3&gt;
+
+&lt;p&gt;A classic, simply creates an exact (recursive) replica of another directory. Make the destination a path to your USB storage and you&amp;rsquo;ve got an efficient backup tool. You can always use the &lt;code&gt;--dry-run&lt;/code&gt; option to check what&amp;rsquo;s going to change.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Please note:&lt;/strong&gt; the trailing &lt;code&gt;/&lt;/code&gt; on the source is important to copy the contents of the directory and not the directory itself.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rsync -azvh --delete /my/source/directory/ /my/backup/directory
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To get a touch of the secret symlink sauce, you might want any symlinks in your directory to be resolved into real files. In which case add &lt;code&gt;-L&lt;/code&gt; to your options.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-L&lt;/code&gt;, &lt;code&gt;--copy-links&lt;/code&gt;, transforms a symlink into the real file or directory it targets.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--safe-links&lt;/code&gt;, consider this option if you want to ignore symlinks that point outside the directory you&amp;rsquo;re copying.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;2. Copy/sync a directory to a remote server&lt;/h3&gt;
+
+&lt;p&gt;Another classic use case. The main difference here is we are specifying the username and host(or IP) of the machine we wish to connect to, the remote server will also need to have &lt;code&gt;rsync&lt;/code&gt; installed.&lt;/p&gt;
+
+&lt;p&gt;I would also opt for using rsync over ssh as it will encrypt your data as it travels over the internet, if you don&amp;rsquo;t want this remove the &lt;code&gt;-e ssh&lt;/code&gt; option.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rsync -azvh -e ssh /my/source/directory/ root@123.123.123.123:/my/backup/directory
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add the &lt;code&gt;--delete&lt;/code&gt; option if you want to remove any files that exist in the destination but don&amp;rsquo;t in the source directory.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-e&lt;/code&gt;, &lt;code&gt;--rsh=COMMAND&lt;/code&gt;, allows you to specify the remote shell to use. In our case &lt;code&gt;ssh&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;3. Sync files but make backups of any deleted files&lt;/h3&gt;
+
+&lt;p&gt;If the idea of the &lt;code&gt;--delete&lt;/code&gt; option makes your buttocks clench it&amp;rsquo;s understandable since there is no recovering the deleted files. However, you can pass in the &lt;code&gt;--backup&lt;/code&gt; option, this will make copies of any files due to be deleted or updated.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;--backup&lt;/code&gt; command needs a friend to work best, introducing &lt;code&gt;--backup-dir&lt;/code&gt;. These options allow you to specify the location of the backups and a string to add to the end of the filename.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ rsync -avz --delete --backup --backup-dir="backup_$(date +\%Y-\%m-\%d)" /source/path/ /dest/path
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By using &lt;code&gt;$(date +\%Y-\%m-\%d)&lt;/code&gt; I&amp;rsquo;m telling it to use today&amp;rsquo;s date in the folder name.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-b&lt;/code&gt;, &lt;code&gt;--backup&lt;/code&gt;, with this option, preexisting destination files are renamed as each file is transferred or deleted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--backup-dir=DIR&lt;/code&gt;, this tells rsync to store all backups in the specified directory on the receiving side.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Please sir, I want some more!&lt;/h2&gt;
+
+&lt;p&gt;More! That&amp;rsquo;s all for now but as I think of/remember other use cases for the brilliant &lt;code&gt;rsync&lt;/code&gt; tool I will update this list. Or feel free to contribute your own by &lt;a href="https://twitter.com/createdbypete"&gt;tweeting me @createdbypete&lt;/a&gt; or on &lt;a href="https://plus.google.com/+PeterRhoades"&gt;Google+&lt;/a&gt; or &lt;a href="https://github.com/createdbypete/createdbypete.github.io/issues"&gt;create and issue on GitHub&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Ruby on Rails development setup for Mac OSX</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/ruby-on-rails-development-setup-for-mac-osx/"/>
+    <id>http://www.createdbypete.com/articles/ruby-on-rails-development-setup-for-mac-osx/</id>
+    <published>2014-02-03T06:13:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;Most developers like to spend a bit of time setting up their development workspace. I&amp;rsquo;m no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks/Yosemite.&lt;/p&gt;
+&lt;p&gt;There has always been a consistent criteria my development environment needed to meet:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Unobtrusive, no modifying core files&lt;/li&gt;
+&lt;li&gt;Flexibility with Ruby versions&lt;/li&gt;
+&lt;li&gt;Minimal configuration&lt;/li&gt;
+&lt;li&gt;Easy to setup new/existing projects&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;So if you&amp;rsquo;re a Ruby developer with the same ideals this should help you get started quickly.&lt;/p&gt;
+
+&lt;p&gt;This article assumes a clean install of Mac OS X Mavericks/Yosemite but I&amp;rsquo;ve added notes for Mountain Lion and those stuck on Lion should also be able to follow along.&lt;/p&gt;
+
+&lt;h2&gt;The Essentials&lt;/h2&gt;
+
+&lt;h3&gt;Install Homebrew&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;rsquo;ve not used &lt;a href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; before you&amp;rsquo;re going to love it. The self proclaimed &lt;em&gt;missing package manager for OS X&lt;/em&gt; allows us to easily install the stuff we need that Apple doesn&amp;rsquo;t include. Installation is simple, open Terminal (Applications » Utilities » Terminal) and copy this command:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;/usr/bin/ruby -e &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Add Homebrews binary path to the front of the $PATH&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'export PATH=/usr/local/bin:$PATH'&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now check our environment is correctly configured for Homebrew.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew doctor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If there are any problems the &lt;code&gt;brew doctor&lt;/code&gt; will give you details about the it and sometimes even how to fix it. If not your probably not the only one so look it up in Google.
+Now we want to update Homebrew to make sure we&amp;rsquo;re getting the latest formulas:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Install Ruby&lt;/h3&gt;
+
+&lt;p&gt;OS X comes with Ruby installed (Mavericks/Yosemite even gets version 2.0.0, previously it was only 1.8.7), as we don&amp;rsquo;t want to be messing with core files we&amp;rsquo;re going to use the brilliant &lt;a href="https://github.com/sstephenson/rbenv"&gt;rbenv&lt;/a&gt; and &lt;a href="https://github.com/sstephenson/ruby-build"&gt;ruby-build&lt;/a&gt; to manage and install our Ruby versions for our development environment.&lt;/p&gt;
+
+&lt;p&gt;Lets get &lt;em&gt;brewing&lt;/em&gt;! We can install both of the required packages using Homebrew, once done we add a line to our &lt;code&gt;~/.bash_profile&lt;/code&gt; and reload our terminal profile.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install rbenv ruby-build rbenv-gem-rehash
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'eval "$(rbenv init -)"'&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now close terminal and open it again, this ensure everything has been reloaded in your shell.&lt;/p&gt;
+
+&lt;p&gt;The package we just installed allow us to install different versions of Ruby and specify which version to use on a per project basis and globally. This is very useful to keep a consistent development environment if you need to work in a particular Ruby version.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;re going to install the latest stable of Ruby (at the time of writing) you can find this out by visiting the &lt;a href="https://www.ruby-lang.org/en/downloads/"&gt;Ruby website&lt;/a&gt;. Or to see a list of all available versions to install &lt;code&gt;rbenv install --list&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rbenv install 2.3.0
+rbenv rehash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&amp;rsquo;s set this version as the one to use globally so we can make use of it in our terminal.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rbenv global 2.3.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can checkout more commands in the &lt;a href="https://github.com/sstephenson/rbenv#command-reference"&gt;rbenv readme on Github&lt;/a&gt;. It&amp;rsquo;s worth bookmarking that page for reference later, or there is always &lt;code&gt;rbenv --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Install Bundler&lt;/h3&gt;
+
+&lt;p&gt;Bundler manages an application&amp;rsquo;s dependencies, kind of like a shopping list of other libraries the application needs to work. If you&amp;rsquo;re just starting out with Ruby on Rails you will soon see just how important and helpful this gem is.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;gem install bundler
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can also make use of the &lt;a href="https://github.com/sstephenson/rbenv-default-gems"&gt;rbenv-default-gems&lt;/a&gt; plugin to install bundler automatically for us whenever we install a new version of Ruby. I had some trouble with this working on the first version of Ruby you install but any others seemed to go ok.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install rbenv-default-gems
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"bundler&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &amp;gt;&amp;gt; ~/.rbenv/default-gems
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Skip rdoc generation&lt;/h4&gt;
+
+&lt;p&gt;If you use Google for finding your Gem documentation like I do you might consider saving a bit of time when installing gems by skipping the documentation.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"gem: --no-document&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &amp;gt;&amp;gt; ~/.gemrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;rsquo;s all, as you&amp;rsquo;ll see from &lt;code&gt;rbenv install --list&lt;/code&gt; there are loads of Ruby versions available including &lt;a href="http://jruby.org/"&gt;JRuby&lt;/a&gt;. You will need to re-install any gems for each version as they are not shared.&lt;/p&gt;
+
+&lt;h2&gt;Install Ruby on Rails&lt;/h2&gt;
+
+&lt;p&gt;So far you&amp;rsquo;ve installed Ruby, if you&amp;rsquo;re not going to be working with Rails you can pat yourself on the back and start working with Ruby! If you intend to work with Rails then you&amp;rsquo;ve just got a couple more things to do.&lt;/p&gt;
+
+&lt;h3&gt;Install SQLite3&lt;/h3&gt;
+
+&lt;p&gt;SQLite is lightweight SQL service and handy to have installed since Rails defaults to using it with new projects. You may find OS X already provides an (older) version of SQLite3, but in the interests of being thorough we&amp;rsquo;ll install it anyway as Homebrew will set it to &amp;lsquo;keg-only&amp;rsquo; and not interfere with the system version if that is the case.&lt;/p&gt;
+
+&lt;p&gt;Installation is simple with Homebrew: (&lt;em&gt;are you loving Homebrew yet!?&lt;/em&gt;)&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install sqlite3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Install Rails&lt;/h3&gt;
+
+&lt;p&gt;With Ruby installed and the minimum dependencies ready to go &lt;a href="http://rubyonrails.org/"&gt;Rails&lt;/a&gt; can be installed as a &lt;a href="http://rubygems.org/"&gt;Ruby Gem&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;gem install rails
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you would like Rails to be a default gem in the future when you install a new version of Ruby you can add it to the &lt;code&gt;default-gems&lt;/code&gt; file.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;"rails&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt; &amp;gt;&amp;gt; ~/.rbenv/default-gems
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Rails has quite a number of other gem dependencies so don&amp;rsquo;t be surprised if you see loads of other gems being installed at the same time.&lt;/p&gt;
+
+&lt;h2&gt;Your first Rails project&lt;/h2&gt;
+
+&lt;p&gt;Ready to put all this to good use and start your first project? Good, we&amp;rsquo;re going to create a new project called &lt;code&gt;helloworld&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails new helloworld
+cd helloworld
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we&amp;rsquo;re going to set the local Ruby version for this project to make sure this stays constant, even if we change the global version later on. This command will write automatically to &lt;code&gt;.ruby-version&lt;/code&gt; in your project directory. This file will automatically change the Ruby version within this folder and warn you if you don&amp;rsquo;t have it installed.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rbenv local 2.3.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If your gems start causing problems you can just run &lt;code&gt;gem pristine --all&lt;/code&gt; to restore them to pristine condition.&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s test our application is working:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;bin/rails server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;The Options Pack&lt;/h2&gt;
+
+&lt;p&gt;Below are some extras you may wish to install. Again &lt;a href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; to the rescue to make installation a breeze, so open your terminal and get brewing!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; It&amp;rsquo;s recommended you run &lt;code&gt;brew update&lt;/code&gt; before installing anything new to make sure all the formulas are up to date.&lt;/p&gt;
+
+&lt;p&gt;I also find it helps to make use of &lt;a href="https://github.com/Homebrew/homebrew-services"&gt;Homebrew services&lt;/a&gt;, it can be installed very simply:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew tap homebrew/services
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Install MySQL&lt;/h3&gt;
+
+&lt;p&gt;One of the most commonly used SQL services, many projects end up using MySQL as a datasource. Homebrew does have formulas for alternatives such as &lt;a href="http://mariadb.org/"&gt;MariaDB&lt;/a&gt; if you prefer.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install mysql
+brew services start mysql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will download and compile MySQL for you and anything else MySQL requires to work. Once finished the second command will &lt;code&gt;start&lt;/code&gt; the MySQL service. If you want it to start every time you login check out &lt;code&gt;brew info mysql&lt;/code&gt; for details.&lt;/p&gt;
+
+&lt;p&gt;To start a new Rails app with MySQL instead of the default SQLite3 as the datastore just use the &lt;code&gt;-d&lt;/code&gt; flag like so:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails new helloworld -d mysql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can find more information about the other options available with &lt;code&gt;rails --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Install PostgreSQL&lt;/h3&gt;
+
+&lt;p&gt;OS X already comes with &lt;a href="http://www.postgresql.org/"&gt;PostgreSQL&lt;/a&gt; installed however as with Ruby it is an older version (again).
+We want the latest so using Homebrew install PostgreSQL.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install postgresql
+brew services start postgresql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To start a new Rails app with PostgreSQL instead of the default SQLite3 as the datastore just use the &lt;code&gt;-d&lt;/code&gt; flag like so:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails new helloworld -d postgresql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can find more information about the other options available with &lt;code&gt;rails --help&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Install Redis&lt;/h3&gt;
+
+&lt;p&gt;All the cool kids are using &lt;a href="http://redis.io/"&gt;Redis&lt;/a&gt; these days and for good reason. Redis is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.&lt;/p&gt;
+
+&lt;p&gt;Redis is required by projects such as &lt;a href="https://github.com/defunkt/resque"&gt;Resque&lt;/a&gt; for super fast storage.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install redis
+brew services start redis
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The above is usually fine but when you have a few projects on the go all using Redis you&amp;rsquo;ll want to have a project specific config for it so you can set a different port for example. Thankfully this is no problem, first take a copy of the default config.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;cd /my/rails/project
+cp /usr/local/etc/redis.conf ./config/redis.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With that done I usually commit the default into Git so it&amp;rsquo;s always there as a reference before I make any customisations. To launch a new Redis process using this config we need to call &lt;code&gt;redis-server&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;redis-server /my/rails/project/config/redis.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To connect to this custom Redis process instead of the default we need to use &lt;code&gt;redis-cli&lt;/code&gt; with some extra flags:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;redis-cli --help
+  Usage: redis-cli &lt;span class="o"&gt;[&lt;/span&gt;OPTIONS] &lt;span class="o"&gt;[&lt;/span&gt;cmd &lt;span class="o"&gt;[&lt;/span&gt;arg &lt;span class="o"&gt;[&lt;/span&gt;arg ...]]]
+    -h &amp;lt;hostname&amp;gt;    Server hostname &lt;span class="o"&gt;(&lt;/span&gt;default: 127.0.0.1&lt;span class="o"&gt;)&lt;/span&gt;
+    -p &amp;lt;port&amp;gt;        Server port &lt;span class="o"&gt;(&lt;/span&gt;default: 6379&lt;span class="o"&gt;)&lt;/span&gt;
+    -s &amp;lt;socket&amp;gt;      Server socket &lt;span class="o"&gt;(&lt;/span&gt;overrides hostname and port&lt;span class="o"&gt;)&lt;/span&gt;
+    ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Upgrade Git&lt;/h3&gt;
+
+&lt;p&gt;As with most of the packages on OS X the version of Git is a few versions behind. We can correct this however with a little help from Homebrew, and because we added the Homebrew binary location to the front of our &lt;code&gt;$PATH&lt;/code&gt; the Homebrew version will be picked up first.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;What about the kitchen sink?&lt;/h3&gt;
+
+&lt;p&gt;That&amp;rsquo;s all you need for most Ruby on Rails applications. It has been serving me pretty well and meets all the requirements I outlined at the beginning of the article.&lt;/p&gt;
+
+&lt;p&gt;An alternative to &lt;code&gt;rbenv&lt;/code&gt; is &lt;a href="https://rvm.io/"&gt;rvm&lt;/a&gt; the idea behind them both is the same but I find working with &lt;code&gt;rbenv&lt;/code&gt; more comfortable but that maybe because I haven&amp;rsquo;t spent much time with &lt;code&gt;rvm&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re just starting out don&amp;rsquo;t worry there&amp;rsquo;s a lot to take in, start off with this setup and you&amp;rsquo;ll find your sweet spot as you get more experienced.&lt;/p&gt;
+
+&lt;h2&gt;Further reading for Ruby on Rails&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;re looking for some further reading to improve your knowledge of Rails and Ruby here are a couple of places to take a look (in no particular order):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://guides.rubyonrails.org/"&gt;Rails Guides&lt;/a&gt;, you can&amp;rsquo;t beat the documentation!&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://api.rubyonrails.org/"&gt;Rails API&lt;/a&gt;, always handy to have this bookmarked.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://referrals.trhou.se/createdbypete"&gt;Treehouse&lt;/a&gt;, brilliant Ruby course using videos, quizzes and challenges to help you learn. Also offers courses on many other languages.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://railscasts.com/"&gt;RailsCasts.com&lt;/a&gt;, superb website operated by the talented &lt;a href="https://twitter.com/rbates"&gt;@ryanbates&lt;/a&gt; loads of screencasts on a range of topics in the Rails world. Worth the $9 a month subscription for the Pro episodes.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://tryruby.org/"&gt;Try Ruby&lt;/a&gt;, operated by &lt;a href="http://www.codeschool.com/"&gt;Code School&lt;/a&gt; this is focused on Ruby but if you&amp;rsquo;re new to Ruby it&amp;rsquo;s definitely worth a look.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://pragprog.com/book/rails4/agile-web-development-with-rails"&gt;Agile Web Development with Rails&lt;/a&gt;, available in various formats this is another great book to guide you through working with Rails.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Simple way to find broken links with Wget</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/"/>
+    <id>http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/</id>
+    <published>2013-09-11T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;After writing the previous post singing the praises of Wget by show it can be used to &lt;a href="/articles/make-a-local-website-mirror-with-wget/"&gt;mirror and entire website locally&lt;/a&gt;. I have stumbled across another useful feature, it can be used to &lt;a href="http://en.wikipedia.org/wiki/Web_crawler"&gt;spider a website&lt;/a&gt; following every link it finds (including those of assets such as stylesheets etc) and log the results.&lt;/p&gt;
+&lt;p&gt;In short, it&amp;rsquo;s a pretty effective broken link finder, brilliant news for anyone with a long standing blog for example as most CMS systems such as &lt;a href="http://wordpress.org/"&gt;Wordpress&lt;/a&gt; will not update any article references you have put in your blog posts for you.&lt;/p&gt;
+
+&lt;h2&gt;Shut up and show me this thing!&lt;/h2&gt;
+
+&lt;p&gt;First, you&amp;rsquo;ll need to make sure you have &lt;a href="http://www.gnu.org/software/wget/"&gt;Wget&lt;/a&gt;, on OS X you can just use &lt;a href="http://brew.sh/"&gt;Homebrew&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install wget
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command to give Wget is as follows, note this will output the resulting file to your home directory &lt;code&gt;~/&lt;/code&gt;. It may take a little while depending on the size of your website.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;wget --spider -o ~/wget.log -e robots=off -w 1 -r -p http://www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Let&amp;rsquo;s break this command down so you can see what Wget is being told to do:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--spider&lt;/code&gt;, this tells Wget not to download anything since we only want a report so it will only do a HEAD request not a GET.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o ~/wget.log&lt;/code&gt;, log messages to the declared file, in this case a file called &lt;code&gt;wget.log&lt;/code&gt; that will be saved to your home directory, you can change this to a more convenient location and filename.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-e robots=off&lt;/code&gt;, this one tells wget to ignore the &lt;code&gt;robots.txt&lt;/code&gt; file. &lt;a href="http://www.robotstxt.org/"&gt;Learn more about robots.txt&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-w 1&lt;/code&gt;, adds a 1 second wait between requests, this slows down Wget to more consistent rate to minimise stress on the hosting server so you don&amp;rsquo;t get back any false positives.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-r&lt;/code&gt;, this means recursive so Wget will keep trying to follow links deeper into your sites until it can find no more!&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt;, get all page requisites such as images, etc. needed to display HTML page so we can find broken image links too.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;http://www.example.com&lt;/code&gt;, finally the website url to start from.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Reading the log&lt;/h3&gt;
+
+&lt;p&gt;If you take a look inside the log file created by the Wget output you&amp;rsquo;ll wonder how you&amp;rsquo;d get any useful information out of it. Simple, our old friend &lt;a href="http://en.wikipedia.org/wiki/Grep"&gt;Grep&lt;/a&gt;. Obviously if you changed the location of the log file update the command accordingly.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;grep -B 2 '404' ~/wget.log
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will find all references to the &lt;a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes"&gt;HTTP Code&lt;/a&gt; &lt;code&gt;404&lt;/code&gt; indicating a page not found failure. It will also return the 2 lines above that line so that you can see the url concerned. If you&amp;rsquo;re lucky you will get no output but if you do have some broken links you will get something similar to this:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;--2013-09-11 07:12:25--  http://createdbypete.com/something-not-found.html
+Reusing existing connection to createdbypete.com:80.
+HTTP request sent, awaiting response... 404 Not Found
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Unfortunately this doesn&amp;rsquo;t show you where it found the link but it at least tells you the link that is trying to be called so you might be able to start your own investigation. I will update this article if I find a way to get more details about the links location but Wget is not really designed as a website debugging tool.&lt;/p&gt;
+
+&lt;h3&gt;Try it out!&lt;/h3&gt;
+
+&lt;p&gt;Give it a go on your website and see what comes back, you might be suprised even on a small site typos can creep in. You could even search the log for other HTTP response codes.&lt;/p&gt;
+
+&lt;h3&gt;More options&lt;/h3&gt;
+
+&lt;p&gt;Check out the &lt;a href="http://www.gnu.org/software/wget/manual/wget.html"&gt;manual for wget&lt;/a&gt; as there are many more options available. Or as usual with any command you can use &lt;code&gt;man wget&lt;/code&gt; in your terminal.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>The internet is down! Google downtime caused a 40% drop in global traffic</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/the-internet-is-down-google-downtime/"/>
+    <id>http://www.createdbypete.com/articles/the-internet-is-down-google-downtime/</id>
+    <published>2013-08-17T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;Google.com was down for a few minutes between 23:52 and 23:57 BST on Aug 16, 2013. This result of this downtime was a massive drop in global internet traffic.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.gosquared.com/r/ODU5MTM4"&gt;GoSquared&lt;/a&gt; a service providing real-time analytics for websites reported a &lt;strong&gt;40% drop&lt;/strong&gt; in the number of pageviews. That&amp;rsquo;s a massive drop for only a few seconds downtime and highlights just how much we rely on Google as internet users.&lt;/p&gt;
+
+&lt;div class="img-centered"&gt;&lt;img src="/media/articles/the-internet-is-down-google-downtime/live-free-or-die-hard_s.jpg" alt="John McClane (Bruce Willis) in Die Hard 4.0"&gt;&lt;/div&gt;
+
+&lt;p&gt;Google has not yet released a statement regarding the outage but I&amp;rsquo;m sure who ever tripped over the plug socket has gone into hiding and &lt;a href="http://www.imdb.com/title/tt0337978/"&gt;John McClane&lt;/a&gt; can put away his vest… for now.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Make a local website mirror with Wget</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/"/>
+    <id>http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/</id>
+    <published>2013-07-15T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;You&amp;rsquo;ve probably used the &lt;a href="http://www.gnu.org/software/wget/"&gt;Wget&lt;/a&gt; command-line tool before but you may not be aware of a pretty neat feature it has tucked away.&lt;/p&gt;
+&lt;p&gt;You can download the resulting HTML of a website (including any linked assets)to your local machine. Not only that it will update any links to the local file reference. This can be useful for getting hold of a site you want to view offline (perhaps you are travelling).&lt;/p&gt;
+
+&lt;h2&gt;Let&amp;rsquo;s get to it, mirroring a website!&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;rsquo;re on OS X you won&amp;rsquo;t have wget installed by default so once again it&amp;rsquo;s &lt;a href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; to the rescue.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;brew install wget
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With wget now available let&amp;rsquo;s create a local mirror of a website. In it&amp;rsquo;s simplest form you can use it like this:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;wget -mk http://www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to be a good citizen and avoid being blocked by any well configured firewalls you might also want to add a delay to the download of each asset. You can do this with the &lt;code&gt;-w&lt;/code&gt; flag, the example below will add a 1 second delay, it will take a bit longer but you can award yourself +1 internet point.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;wget -mk -w 1 http://www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Making it more intelligent&lt;/h2&gt;
+
+&lt;p&gt;There are a few extra settings you can add to make it more &amp;ldquo;intelligent&amp;rdquo; as you probably don&amp;rsquo;t want to try and download the internet (&lt;strong&gt;wget&lt;/strong&gt; will follow all the links in a site so you could end up with a lot of clutter).&lt;/p&gt;
+
+&lt;h3&gt;Set the domain&lt;/h3&gt;
+
+&lt;p&gt;The example below will not follow any links outside of &lt;code&gt;example.com&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;wget -mk --domains example.com http://www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;More options&lt;/h3&gt;
+
+&lt;p&gt;Check out the &lt;a href="http://www.gnu.org/software/wget/manual/wget.html"&gt;manual for wget&lt;/a&gt; as there are many more options available. Or as usual with any command you can use &lt;code&gt;man wget&lt;/code&gt; in your terminal.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Working with nested forms and a many-to-many association in Rails 4</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/"/>
+    <id>http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/</id>
+    <published>2013-05-07T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;Recently a project I was working on needed a &lt;em&gt;many-to-many&lt;/em&gt; relationship that would also store some extra data in the pivot table.&lt;/p&gt;
+&lt;p&gt;Rails provides helpers to make working with this sort of relationship a breeze but when you start to include the nested forms and requirement to add data to that connecting table the solution may not be that obvious.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll be using Rails 4, the code will be the same for Rails 3.2 for the most part the major difference is &lt;a href="https://github.com/rails/strong_parameters"&gt;Strong Parameters&lt;/a&gt; is now used in place of &lt;code&gt;attr_accessible&lt;/code&gt;. You can find out &lt;a href="/articles/ruby-on-rails-development-setup-for-mac-osx/"&gt;how to install Rails 4 yourself here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;For this example I&amp;rsquo;m going to use a Survey application, unfortunately this was a survey done in the street on paper and now the results need to be manually added to the system.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Each Survey will have some Questions, these Questions will be answered by a Participant.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So in this example we need an Answers table to be our many-to-many table that will link our Participant to our Question and keep the Answer the participant provided in an additional column.&lt;/p&gt;
+
+&lt;p&gt;So let&amp;rsquo;s start a new Rails application.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails new SurveyApp
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Generate some models and scaffolds to save a little bit of typing later.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails generate scaffold Participant name
+rails generate scaffold Survey name
+rails generate model Question content:text survey:references
+rails generate model Answer question:references participant:references content:text
+
+rake db:migrate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;First, we&amp;rsquo;ll sort out the models, the file names are above each class as a comment.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/models/participant.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Participant&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:answers&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:questions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;through: :answers&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# app/models/survey.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Survey&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:questions&lt;/span&gt;
+
+  &lt;span class="n"&gt;accepts_nested_attributes_for&lt;/span&gt; &lt;span class="ss"&gt;:questions&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# app/models/question.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Question&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:survey&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:answers&lt;/span&gt;
+  &lt;span class="n"&gt;has_many&lt;/span&gt; &lt;span class="ss"&gt;:participants&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;through: :answers&lt;/span&gt;
+
+  &lt;span class="n"&gt;accepts_nested_attributes_for&lt;/span&gt; &lt;span class="ss"&gt;:answers&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Answer&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:participant&lt;/span&gt;
+  &lt;span class="n"&gt;belongs_to&lt;/span&gt; &lt;span class="ss"&gt;:question&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&amp;rsquo;ll notice I&amp;rsquo;m not worrying about validation in this guide because it&amp;rsquo;s a simple enough example and this post is concentrating on the nested forms and many-to-many associations.&lt;/p&gt;
+
+&lt;p&gt;You should be familiar with what you see here, I&amp;rsquo;ve used &lt;code&gt;through:&lt;/code&gt; as this is recommended in the documentation as we have extra fields we want to access on the pivot table.&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s tackle the controllers, in fact we only need to tackle the Survey controller.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# app/controllers/surveys_controller.rb&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SurveysController&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ApplicationController&lt;/span&gt;
+  &lt;span class="n"&gt;before_action&lt;/span&gt; &lt;span class="ss"&gt;:set_survey&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;only: &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:show&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:edit&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:update&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:destroy&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:answers&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# ... ignoring content that hasn't changed from scaffold&lt;/span&gt;
+
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;answers&lt;/span&gt;
+    &lt;span class="vi"&gt;@participants&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Participant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;all&lt;/span&gt;
+    &lt;span class="vi"&gt;@questions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@survey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;questions&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+
+  &lt;span class="kp"&gt;private&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# ... ignoring content that hasn't changed from scaffold&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Never trust parameters from the scary internet, only allow the white list through.&lt;/span&gt;
+  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;survey_params&lt;/span&gt;
+    &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;require&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:survey&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nf"&gt;permit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="ss"&gt;:questions_attributes&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="ss"&gt;:answers_attributes&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:content&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:participant_id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+      &lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because of &lt;a href="https://github.com/rails/strong_parameters"&gt;Strong Parameters&lt;/a&gt; replacing &lt;code&gt;attr_accessible&lt;/code&gt; in Rails 4 we tell the application which attributes to allow through to our model to avoid mass-assignment security issues. The way it works is similar but you need to specify &lt;em&gt;everything&lt;/em&gt; this includes the attributes within our nested models. (Don&amp;rsquo;t forget the &lt;code&gt;id&lt;/code&gt; attribute!)&lt;/p&gt;
+
+&lt;p&gt;Next we setup a &lt;a href="http://guides.rubyonrails.org/routing.html#adding-more-restful-actions"&gt;member route&lt;/a&gt; we can use to enter our answers and associate them with a survey.&lt;/p&gt;
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/routes.rb&lt;/span&gt;
+&lt;span class="no"&gt;SurveyApp&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;draw&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:surveys&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s1"&gt;'answers'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;on: :member&lt;/span&gt;
+  &lt;span class="k"&gt;end&lt;/span&gt;
+  &lt;span class="n"&gt;resources&lt;/span&gt; &lt;span class="ss"&gt;:participants&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;em&gt;behind the scenes&lt;/em&gt; work is done so lets sort out our views. Specifically the form so we can add the answers&lt;/p&gt;
+&lt;pre class="highlight erb"&gt;&lt;code&gt;# app/views/survey/answers.html.erb
+&lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="vi"&gt;@survey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt; Answers&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;form_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@survey&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="vi"&gt;@participants&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;participant&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;participant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;table&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;thead&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;td&amp;gt;&lt;/span&gt;Questions&lt;span class="nt"&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;td&amp;gt;&lt;/span&gt;Answer&lt;span class="nt"&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/thead&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;tbody&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="vi"&gt;@questions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;each&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;td&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;content&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;td&amp;gt;&lt;/span&gt;
+        &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fields_for&lt;/span&gt; &lt;span class="ss"&gt;:questions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+          &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;fields_for&lt;/span&gt; &lt;span class="ss"&gt;:answers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;answers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_or_initialize_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;participant: &lt;/span&gt;&lt;span class="n"&gt;participant&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+            &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;text_area&lt;/span&gt; &lt;span class="ss"&gt;:content&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+            &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;hidden_field&lt;/span&gt; &lt;span class="ss"&gt;:participant_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;participant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;id&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+          &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+        &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+      &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/tbody&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/table&amp;gt;&lt;/span&gt;
+  &lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;class=&lt;/span&gt;&lt;span class="s"&gt;"actions"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;submit&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;&amp;lt;%&lt;/span&gt; &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="cp"&gt;-%&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What we have done there is create a table for the Survey model in the usual, then nested within that &lt;code&gt;fields_for&lt;/code&gt; Questions and within that &lt;code&gt;fields_for&lt;/code&gt; Answers. This allows Rails to make use of the &lt;code&gt;accepts_nested_attributes_for&lt;/code&gt; method we used in the models.&lt;/p&gt;
+
+&lt;p&gt;For the Answers &lt;code&gt;fields_for&lt;/code&gt; we are using the &lt;code&gt;find_or_initialize_by&lt;/code&gt; method so that our answer &lt;code&gt;text_area&lt;/code&gt; will populate with data if it&amp;rsquo;s available and if there isn&amp;rsquo;t a record for that Participant and Question combination it initializes a model so the form builder has an object to map on to.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll also notice a &lt;code&gt;hidden_field&lt;/code&gt; where we set the &lt;code&gt;participant_id&lt;/code&gt; for the record to ensure the answer gets associated to a participant (&lt;code&gt;fields_for&lt;/code&gt; will automatically create a &lt;code&gt;hidden_field&lt;/code&gt; for &lt;code&gt;question_id&lt;/code&gt; as we use that model to build the answers object, view source on the page and you will see).&lt;/p&gt;
+
+&lt;p&gt;The way I have chosen to display this is perhaps not the most efficient but it demonstrates how you might tackle this scenario where you need to display all these options and still handle the data submission. If you have another solution to this please let me know on &lt;a href="https://twitter.com/createdbypete"&gt;Twitter @createdbypete&lt;/a&gt; or &lt;a href="https://github.com/createdbypete/createdbypete.github.io/issues"&gt;create an issue on GitHub&lt;/a&gt; it would be interesting to compare.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Getting Started with Rails 4</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/getting-started-with-rails-4/"/>
+    <id>http://www.createdbypete.com/articles/getting-started-with-rails-4/</id>
+    <published>2013-04-13T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;With a new major version of Rails -on the horizon- now released it makes sense to start taking a look and what&amp;rsquo;s going on. I&amp;rsquo;m going to show you how to install the Rails 4 gem so you can start playing with the latest version.&lt;/p&gt;
+&lt;h2&gt;Setup your development environment&lt;/h2&gt;
+
+&lt;p&gt;If you are new to Rails then you will might want to check out my other post about &lt;a href="http://createdbypete.com/articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/"&gt;setting up a Ruby on Rails development environment on OS X&lt;/a&gt; as the following steps will assume a similar setup.&lt;/p&gt;
+
+&lt;h2&gt;Installing Rails 4&lt;/h2&gt;
+
+&lt;p&gt;Rails 4 is now the latest stable release so it&amp;rsquo;s much easier to get going with it.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;gem install rails
+rbenv rehash # if you're using rbenv
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Once the gem installer has done it&amp;rsquo;s thing you can now check the Rails version with &lt;code&gt;rails -v&lt;/code&gt; and start a new project in the usual way.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails new myproject
+
+# Or if you crave the bleeding edge from the repo
+rails new myproject --edge
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;How to create a Rails 3 project with Rails 4 installed&lt;/h3&gt;
+
+&lt;p&gt;With Rails 4 now taking priority over Rails 3 in your gem list how do you make a new Rails 3.2 project without going through the hassle of uninstalling Rails 4.&lt;/p&gt;
+
+&lt;p&gt;Simple really, check the versions of Rails you have installed already with &lt;code&gt;gem list rails&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;*** LOCAL GEMS ***
+rails (4.0.0, 3.2.13)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output shows I have the Rails &lt;code&gt;4.0.0&lt;/code&gt; and &lt;code&gt;3.2.13&lt;/code&gt; installed and you can simply append that version number to your &lt;code&gt;rails&lt;/code&gt; command like so.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rails _3.2.13_ new myproject
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will create a project in the usual way but this time using the &lt;code&gt;3.2.13&lt;/code&gt; version of the gem.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Don&amp;rsquo;t forget&lt;/strong&gt; that you should use &lt;code&gt;bundle exec&lt;/code&gt; within your project when calling &lt;code&gt;rails generate&lt;/code&gt; and friends so that the correct gem version according to the projects &lt;code&gt;Gemfile&lt;/code&gt; is used. For example: &lt;code&gt;bundle exec rails generate model User&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Find out more about what&amp;rsquo;s new in Rails 4&lt;/h2&gt;
+
+&lt;p&gt;The Rails team have made a number of changes, improvements and deprecations that I&amp;rsquo;m not going to go into here but instead direct you to the following resources to learn more:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html"&gt;RailsGuides (edge)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://railscasts.com/episodes/400-what-s-new-in-rails-4"&gt;RailsCasts.com, What&amp;rsquo;s new on Rails 4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Personalise the Google URL shortening service with your own domain</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/personalise-the-google-url-shortening-service-with-your-own-domain/"/>
+    <id>http://www.createdbypete.com/articles/personalise-the-google-url-shortening-service-with-your-own-domain/</id>
+    <published>2013-04-11T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;In this short article I&amp;rsquo;ll show you one way to personalise the Google URL Shortening service known as &lt;a href="http://goo.gl"&gt;goo.gl&lt;/a&gt; so you can use your own short URL domain. You can probably use this with any other URL shortening service as well but I have a Google account so this is just easy.&lt;/p&gt;
+&lt;h3&gt;But why would to do this?&lt;/h3&gt;
+
+&lt;p&gt;First, with so many services on offer these days (we really are spoilt) I see little point inventing your own system for the sake of some branding. Secondly, why not?! We live in adventurous times and it&amp;rsquo;s only going to take a few minutes to set this up.&lt;/p&gt;
+
+&lt;h2&gt;What do I need?&lt;/h2&gt;
+
+&lt;p&gt;This is the best part, you only need a couple of things which in this day and age you have probably already got access to.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;A domain name, I&amp;rsquo;m going to be using &lt;code&gt;crtdby.pt&lt;/code&gt; (notice the lack of vowels, a must have for any short url domain!). This domain should not be used for anything else.&lt;/li&gt;
+&lt;li&gt;Hosting space for the domain, this can be &lt;a href="http://httpd.apache.org/"&gt;Apache&lt;/a&gt; or &lt;a href="http://wiki.nginx.org/"&gt;Nginx&lt;/a&gt; driven I&amp;rsquo;ll provide examples for both, you just need to be able to make a change to the vhost configuration. For Apache we can do this easily via the &lt;code&gt;.htaccess&lt;/code&gt; file. Nginx people will probably be running a VPS or similar so I&amp;rsquo;ll assume you have access to create a new vhost configuration.&lt;/li&gt;
+&lt;li&gt;A Google account, if you want to have the URLs you generate with &lt;a href="http://goo.gl"&gt;goo.gl&lt;/a&gt; be unique to your account and kept in your dashboard to track number of clicks etc. Otherwise anonymous access will work just fine to generate the URL.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;I&amp;rsquo;m ready to go, what&amp;rsquo;s next?&lt;/h2&gt;
+
+&lt;p&gt;Everything ready to go we can make the magic happen!&lt;/p&gt;
+
+&lt;h3&gt;Apache configuration&lt;/h3&gt;
+
+&lt;p&gt;Apache people create a &lt;code&gt;.htaccess&lt;/code&gt; file in the root web directory and add the following lines to it. Of course if you have access to the main vhost configuration then use that to save Apache a little bit of leg work reading in the &lt;code&gt;.htaccess&lt;/code&gt; file.&lt;/p&gt;
+&lt;pre class="highlight apache"&gt;&lt;code&gt;&lt;span class="nc"&gt;RewriteEngine&lt;/span&gt; On
+&lt;span class="nc"&gt;RewriteRule&lt;/span&gt; ^(.*)$ http://goo.gl/$1 [L,R=301]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code above is very simple. This rewrite rule simply takes the requested URL and swaps out your domain for the &lt;code&gt;goo.gl&lt;/code&gt; domain and marks it as a permanent (301) redirect.&lt;/p&gt;
+
+&lt;h3&gt;Nginx Configuration&lt;/h3&gt;
+
+&lt;p&gt;Nginx people you need to create a server block, I&amp;rsquo;ve always followed the &lt;code&gt;sites-available&lt;/code&gt;, &lt;code&gt;sites-enabled&lt;/code&gt; pattern used by Nginx on Ubuntu as I find this to be the most organised method but do it however you&amp;rsquo;ve been working so long as Nginx can read this server block it will answer any calls to the domain.&lt;/p&gt;
+&lt;pre class="highlight nginx"&gt;&lt;code&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kn"&gt;server_name&lt;/span&gt; &lt;span class="s"&gt;crtdby.pt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kn"&gt;rewrite&lt;/span&gt; &lt;span class="s"&gt;^&lt;/span&gt; &lt;span class="s"&gt;http://goo.gl&lt;/span&gt;&lt;span class="nv"&gt;$request_uri&lt;/span&gt; &lt;span class="s"&gt;permanent&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The server block does the same as the Apache rule above and it redirects any requests onto &lt;code&gt;goo.gl&lt;/code&gt;. Simple.&lt;/p&gt;
+
+&lt;h2&gt;How do I use this to make my own short urls?&lt;/h2&gt;
+
+&lt;p&gt;By now you&amp;rsquo;ve probably figured it out but just in case. Visit &lt;a href="http://goo.gl/"&gt;goo.gl&lt;/a&gt; and sign in if you want to keep statistics on your links otherwise you will just see the input box &lt;strong&gt;Paste your long URL here:&lt;/strong&gt; follow the instructions and paste in your long URL and shorten that URL!&lt;/p&gt;
+
+&lt;p&gt;In return you&amp;rsquo;ll get a short URL in the form of &lt;code&gt;http://goo.gl/nY8J2&lt;/code&gt; all we are interested in is the bit after the domain. We can then append that to our custom domain &lt;a href="http://crtdby.pt/nY8J2"&gt;crtdby.pt/nY8J2&lt;/a&gt; like so and you&amp;rsquo;re done!&lt;/p&gt;
+
+&lt;p&gt;Now when you use that URL it will first take a trip to your server where it will find the rewrite rules we setup, these will then send the request onto &lt;a href="http://goo.gl"&gt;goo.gl&lt;/a&gt; to be translated into the long URL and the correct page.&lt;/p&gt;
+
+&lt;h4&gt;Seriously is that it!?&lt;/h4&gt;
+
+&lt;p&gt;Yup, that&amp;rsquo;s it. This method ensures you can still use the analytical data collected by the &lt;code&gt;goo.gl&lt;/code&gt; service in their pretty graphs and you get to use your own domain.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Installing Gitlab on Mac OS X and Mac OS X Server</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/installing-gitlab-on-mac-os-x-and-mac-os-x-server/"/>
+    <id>http://www.createdbypete.com/articles/installing-gitlab-on-mac-os-x-and-mac-os-x-server/</id>
+    <published>2013-03-20T11:00:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;div class="alert"&gt;  &lt;p&gt;This article is now outdated and I recommend you check one of the many &lt;a href="https://github.com/gitlabhq/gitlabhq#installation"&gt;installation methods&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;I would also recommend &lt;a href="https://gitlab.com/gitlab-org/cookbook-gitlab/blob/master/doc/development.md"&gt;running GitLab on a virtual machine&lt;/a&gt; in OS X that way you don&amp;rsquo;t need to mess around with OS X internals, you could still host the database and files on your OS X filesystem if that makes you feel more comfortable. As with everything though, backup and backup again!&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href="http://gitlab.org"&gt;Gitlab&lt;/a&gt; is self hosted Git management software, not only that but it&amp;rsquo;s also &lt;em&gt;free and open-source&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;While Gitlab has a brilliant &lt;a href="https://github.com/gitlabhq/gitlabhq/blob/stable/doc/install/installation.md"&gt;installation guide&lt;/a&gt; available, it is focused on Ubuntu/Debian and not all those instructions carry over to OS X so after a bit of tinkering I&amp;rsquo;ve put together this guide for anyone else looking to run Gitlab on OS X.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;ll be working on 10.8 (Mountain Lion) but these instructions will most likely work on 10.7 (Lion) as well. My original install of Gitlab was on an Xserve machine that also had &lt;a href="http://www.apple.com/uk/osx/server/"&gt;OS X Server&lt;/a&gt; installed so these steps will work with that also.&lt;/p&gt;
+
+&lt;h4&gt;Disclaimer&lt;/h4&gt;
+
+&lt;p&gt;This guide has allowed me to setup Gitlab (v4.2) on a private local network with around 10 users and nearly 200 repositories. Any serious production use I highly recommend using system Gitlab recommends to allow for consistent support and I accept no responsibility for any problems you encounter while following this guide.&lt;/p&gt;
+
+&lt;p&gt;I have only managed to get Gitlab 4.2 working on OS X so far which uses Gitolite so this guide will be installing Gitlab 4.2 and assumes a clean installation of OS X.&lt;/p&gt;
+
+&lt;h2&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;The Gitlab team suggests at least 1GB RAM in your machine to run the Gitlab application, since Mountain Lion requires about 2GB+ RAM you can go ahead and tick that off the list.&lt;/p&gt;
+
+&lt;h3&gt;Install Command Line Tools and Homebrew&lt;/h3&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t have &lt;a href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt; installed already then before you start copy &amp;amp; pasting into Terminal you had better check you have &lt;a href="https://developer.apple.com/downloads"&gt;Command Line Tools&lt;/a&gt; installed first. Done that? OK, time to install Homebrew.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;ruby -e &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -fsSL https://raw.github.com/mxcl/homebrew/go&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Add Homebrew binary path to the front of the $PATH&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'export PATH=/usr/local/bin:$PATH'&lt;/span&gt; &amp;gt;&amp;gt; ~/.bash_profile
+&lt;span class="nb"&gt;source&lt;/span&gt; ~/.bash_profile
+
+&lt;span class="c"&gt;# Update some permissions for later on&lt;/span&gt;
+sudo chgrp -R staff /usr/local
+sudo chmod -R g+w /usr/local
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A simple script that will automatically install Homebrew on your machine, once it&amp;rsquo;s done we need to check it&amp;rsquo;s all working and update the formulas.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew doctor &lt;span class="c"&gt;# Raring to brew?&lt;/span&gt;
+brew update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Packages and dependencies&lt;/h3&gt;
+
+&lt;p&gt;We actually have most of what we need on OS X already, but we are missing a few core packages that we&amp;rsquo;ll install with Homebrew now, these are mainly required for RVM to compile Ruby a little later on. Some of the other packages such as MySQL and Redis I will go through separately.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew tap homebrew/dupes
+brew install bash curl git icu4c
+brew install autoconf automake apple-gcc42 libtool pkg-config openssl readline libyaml sqlite libxml2 libxslt libksba curl-ca-bundle
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;What&amp;rsquo;s better than one Python? Two apparently!&lt;/h4&gt;
+
+&lt;p&gt;We need to create a symlink to Python for compatibility reasons not relating to OS X but for some other Linux distributions that are in limbo between version 2 and 3 of Python.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo ln -sv /usr/bin/python /usr/bin/python2
+python2 --version &lt;span class="c"&gt;# Should be Python 2.7.X&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We also need to install Pygments for colourful syntax highlighting.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo easy_install Pygments
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Create user accounts&lt;/h2&gt;
+
+&lt;p&gt;Gitolite and Gitlab need a user to operate as. In OS X you can create this user using the GUI via System Preferences or via the command line like we are about to do. For this example I recommend the command line due to the extra options we need to set.&lt;/p&gt;
+
+&lt;h4&gt;The Git user&lt;/h4&gt;
+
+&lt;p&gt;Create a new group called &lt;code&gt;git&lt;/code&gt; with the ID of &lt;code&gt;1050&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo dscl . -create /Groups/git
+sudo dscl . -create /Groups/git PrimaryGroupID 1050
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we create a &lt;code&gt;git&lt;/code&gt; user account with the recently created &lt;code&gt;git&lt;/code&gt; group as the primary group.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Check the id is available&lt;/span&gt;
+id 1050
+
+sudo dscl . -create /Users/git
+sudo dscl . -create /Users/git UserShell /bin/bash
+sudo dscl . -create /Users/git RealName &lt;span class="s2"&gt;"Git"&lt;/span&gt;
+sudo dscl . -create /Users/git UniqueID 1050
+sudo dscl . -create /Users/git PrimaryGroupID 1050
+sudo dscl . -create /Users/git NFSHomeDirectory /Users/git
+
+&lt;span class="c"&gt;# Obviously change "mysupersecurepassword123" to something better ;)&lt;/span&gt;
+sudo dscl . -passwd /Users/git mysupersecurepassword123
+
+&lt;span class="c"&gt;# Check our new Git user exists&lt;/span&gt;
+dscl . -read /Users/git
+
+&lt;span class="c"&gt;# Create home directory&lt;/span&gt;
+sudo createhomedir -c -u git
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;The Gitlab user&lt;/h4&gt;
+
+&lt;p&gt;Now we have a &lt;code&gt;git&lt;/code&gt; user for Gitolite, we want to create the application user for Gitlab this time with id &lt;code&gt;1051&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Check the id is available&lt;/span&gt;
+id 1051
+
+sudo dscl . -create /Users/gitlab
+sudo dscl . -create /Users/gitlab UserShell /bin/bash
+sudo dscl . -create /Users/gitlab RealName &lt;span class="s2"&gt;"Gitlab HQ"&lt;/span&gt;
+sudo dscl . -create /Users/gitlab UniqueID 1051
+sudo dscl . -create /Users/gitlab PrimaryGroupID 1050
+sudo dscl . -create /Users/gitlab NFSHomeDirectory /Users/gitlab
+
+&lt;span class="c"&gt;# Add user to staff group so RVM can access Homebrew files later&lt;/span&gt;
+sudo dseditgroup -o edit -a gitlab -t user staff
+
+&lt;span class="c"&gt;# Obviously change "mysupersecurepassword123" to something better ;)&lt;/span&gt;
+sudo dscl . -passwd /Users/gitlab mysupersecurepassword123
+
+&lt;span class="c"&gt;# Check our new Git user exists&lt;/span&gt;
+dscl . -read /Users/gitlab
+
+&lt;span class="c"&gt;# Create home directory&lt;/span&gt;
+sudo createhomedir -c -u gitlab
+
+&lt;span class="c"&gt;# Generate the SSH key for the gitlab user, this is used to access Gitolite&lt;/span&gt;
+sudo -u gitlab -H ssh-keygen -q -N &lt;span class="s1"&gt;''&lt;/span&gt; -t rsa -f /Users/gitlab/.ssh/id_rsa
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Install and setup Gitolite&lt;/h2&gt;
+
+&lt;p&gt;Clone GitLab&amp;rsquo;s fork of the Gitolite source code:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/git
+sudo -u git -H git clone -b gl-v320 https://github.com/gitlabhq/gitolite.git /Users/git/gitolite
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Setup Gitolite with Gitlab as its admin. &lt;strong&gt;Important Note:&lt;/strong&gt; GitLab assumes &lt;em&gt;full and unshared&lt;/em&gt; control over this Gitolite installation.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Add Gitolite scripts to $PATH&lt;/span&gt;
+sudo -u git -H mkdir /Users/git/bin
+sudo -u git -H sh -c &lt;span class="s1"&gt;'printf "%b\n%b\n" "PATH=\$PATH:/Users/git/bin" "export PATH" &amp;gt;&amp;gt; /Users/git/.profile'&lt;/span&gt;
+sudo -u git -H sh -c &lt;span class="s1"&gt;'/Users/git/gitolite/install -ln /Users/git/bin'&lt;/span&gt;
+
+&lt;span class="c"&gt;# Copy the gitlab user's (public) SSH key ...&lt;/span&gt;
+sudo cp /Users/gitlab/.ssh/id_rsa.pub /Users/git/gitlab.pub
+sudo chmod 0444 /Users/git/gitlab.pub
+
+&lt;span class="c"&gt;# ... and use it as the admin key for the Gitolite setup&lt;/span&gt;
+sudo -u git -H sh -c &lt;span class="s2"&gt;"PATH=/Users/git/bin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;; gitolite setup -pk /Users/git/gitlab.pub"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fix the directory permissions for the configuration directory:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Make sure the Gitolite config dir is owned by git&lt;/span&gt;
+sudo chmod 750 /Users/git/.gitolite/
+sudo chown -R git:git /Users/git/.gitolite/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fix the directory permissions for the repositories:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Make sure the repositories dir is owned by git and it stays that way&lt;/span&gt;
+sudo chmod -R ug+rwX,o-rwx /Users/git/repositories/
+sudo chown -R git:git /Users/git/repositories/
+sudo -u git -H find /Users/git/repositories -type d -print0 | sudo xargs -0 chmod g+s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Add domains to the list of known_hosts&lt;/h3&gt;
+
+&lt;p&gt;To avoid problems later we will be manually adding the system the known_hosts file of the gitlab user. We will do this for a couple of hostnames.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Check SSH access to your system is on&lt;/span&gt;
+sudo systemsetup -setremotelogin on
+sudo -u gitlab -H ssh git@localhost
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That&amp;rsquo;s the &lt;code&gt;localhost&lt;/code&gt; added but we should also add the machines &lt;code&gt;.local&lt;/code&gt; hostname too. For server using an external FQDN you will see that hostname returned and not a &lt;code&gt;.local&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;By using a &lt;code&gt;.local&lt;/code&gt; domain you are only able to access Gitlab on your local network. It is possible to expand this to the outside world but this involves opening ports on your router and mapping your external IP address to a FQDN. All of which is outside the scope of this guide.&lt;/em&gt;&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Find out your hostname, should output your-machine-name.local&lt;/span&gt;
+hostname
+sudo -u gitlab -H ssh git@your-machine-name.local
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Test everything works so far&lt;/h3&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Clone the admin repo to be sure your users have access to Gitolite&lt;/span&gt;
+sudo -u gitlab -H git clone git@localhost:gitolite-admin.git /tmp/gitolite-admin
+
+&lt;span class="c"&gt;# If it succeeded without errors you can remove the cloned repo&lt;/span&gt;
+sudo rm -rf /tmp/gitolite-admin
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you can&amp;rsquo;t clone the &lt;code&gt;gitolite-admin&lt;/code&gt; repository: &lt;strong&gt;DO NOT PROCEED WITH INSTALLATION!&lt;/strong&gt; Check the &lt;a href="https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide#ssh"&gt;Trouble Shooting Guide&lt;/a&gt; and make sure you have followed all of the above steps carefully.&lt;/p&gt;
+
+&lt;h2&gt;Install and setup MySQL Database for Gitlab&lt;/h2&gt;
+
+&lt;p&gt;Gitlab recommends MySQL as the datastore so we&amp;rsquo;ll follow that recommendation. You may already have MySQL installed, if you have and it was installed using Homebrew you will just need to move the &lt;code&gt;.plist&lt;/code&gt; file from &lt;code&gt;~/Library/LaunchAgents&lt;/code&gt; to &lt;code&gt;/Library/LaunchDaemons&lt;/code&gt; as this will start the service when the machine starts instead of when your user logs in otherwise Gitlab won&amp;rsquo;t be available unless you login which is not what we want.&lt;/p&gt;
+
+&lt;p&gt;Run the following commands as your &lt;code&gt;sudo&lt;/code&gt; capable user.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install mysql
+
+&lt;span class="c"&gt;# Some problems with permissions have been reported&lt;/span&gt;
+sudo chmod -R g+w /usr/loca/var/mysql
+
+&lt;span class="c"&gt;# Add MySQL to launchctl to let OS X manage the process and start when you login, note the LaunchDaemons location to start service when machine starts not when user logs in.&lt;/span&gt;
+sudo cp /usr/local/opt/mysql/&lt;span class="k"&gt;*&lt;/span&gt;.plist /Library/LaunchDaemons
+sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.mysql.plist
+
+&lt;span class="c"&gt;# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password.&lt;/span&gt;
+mysql_secure_installation
+
+&lt;span class="c"&gt;# Login to MySQL&lt;/span&gt;
+mysql -u root -p
+
+&lt;span class="c"&gt;# Create a user for GitLab. (change $password to a real password)&lt;/span&gt;
+&lt;span class="gp"&gt;mysql&amp;gt; &lt;/span&gt;CREATE USER &lt;span class="s1"&gt;'gitlab'&lt;/span&gt;@&lt;span class="s1"&gt;'localhost'&lt;/span&gt; IDENTIFIED BY &lt;span class="s1"&gt;'$password'&lt;/span&gt;;
+
+&lt;span class="c"&gt;# Create the GitLab production database&lt;/span&gt;
+&lt;span class="gp"&gt;mysql&amp;gt; &lt;/span&gt;CREATE DATABASE IF NOT EXISTS &lt;span class="sb"&gt;`&lt;/span&gt;gitlabhq_production&lt;span class="sb"&gt;`&lt;/span&gt; DEFAULT CHARACTER SET &lt;span class="sb"&gt;`&lt;/span&gt;utf8&lt;span class="sb"&gt;`&lt;/span&gt; COLLATE &lt;span class="sb"&gt;`&lt;/span&gt;utf8_unicode_ci&lt;span class="sb"&gt;`&lt;/span&gt;;
+
+&lt;span class="c"&gt;# Grant the GitLab user necessary permissions on the table.&lt;/span&gt;
+&lt;span class="gp"&gt;mysql&amp;gt; &lt;/span&gt;GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON &lt;span class="sb"&gt;`&lt;/span&gt;gitlabhq_production&lt;span class="sb"&gt;`&lt;/span&gt;.&lt;span class="k"&gt;*&lt;/span&gt; TO &lt;span class="s1"&gt;'gitlab'&lt;/span&gt;@&lt;span class="s1"&gt;'localhost'&lt;/span&gt;;
+
+&lt;span class="c"&gt;# Quit the database session&lt;/span&gt;
+&lt;span class="gp"&gt;mysql&amp;gt; &lt;/span&gt;&lt;span class="se"&gt;\q&lt;/span&gt;
+
+&lt;span class="c"&gt;# Try connecting to the new database with the new user&lt;/span&gt;
+sudo -u gitlab -H mysql -u gitlab -p -D gitlabhq_production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Install and setup Redis&lt;/h2&gt;
+
+&lt;p&gt;Gitlab uses the fantastic &lt;a href="http://mperham.github.io/sidekiq/"&gt;Sidekiq&lt;/a&gt; project to handle the scheduling of background jobs such as sending out emails and repo management tasks. Sidekiq uses &lt;a href="http://redis.io/"&gt;Redis&lt;/a&gt; as a datastore so let&amp;rsquo;s set that up now. We will also want Redis to start up with the machine so we will be adding it to the &lt;code&gt;LaunchDaemons&lt;/code&gt; directory also.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install redis
+
+sudo cp /usr/local/opt/redis/&lt;span class="k"&gt;*&lt;/span&gt;.plist /Library/LaunchDaemons
+sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.redis.plist
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will run Redis with defaults, you can change these defaults but to do so I recommend duplicating the defaults first so you always have a reference. You can update &lt;code&gt;/Library/LaunchDaemons/homebrew.mxcl.redis.plist&lt;/code&gt; to the new config location. It&amp;rsquo;s also best the run Redis with &lt;code&gt;daemonize&lt;/code&gt; set to &lt;code&gt;no&lt;/code&gt; so that OS X can manage the process correctly.&lt;/p&gt;
+
+&lt;h2&gt;Install RVM and Ruby&lt;/h2&gt;
+
+&lt;p&gt;Before we start trying to install RVM we need to login as the right user to make thing easier. Only the &lt;code&gt;gitlab&lt;/code&gt; user will need RVM and Ruby installed.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;su - gitlab &lt;span class="c"&gt;# The hyphen is important&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We will be using &lt;a href="https://rvm.io"&gt;RVM&lt;/a&gt; to install Ruby. I&amp;rsquo;m installing Ruby 1.9.3 as at the time of writing this is the supported version for Gitlab. If you have any problems installing Ruby you should check &lt;code&gt;rvm requirements&lt;/code&gt; to make sure you have everything it needs installed — this guide should remain correct but just incase.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;curl -L https://get.rvm.io | bash -s stable
+&lt;span class="nb"&gt;source&lt;/span&gt; ~/.rvm/scripts/rvm
+
+rvm autolibs &lt;span class="nb"&gt;enable
+&lt;/span&gt;rvm install 1.9.3
+
+rvm use 1.9.3
+
+&lt;span class="c"&gt;# Check our shell is using the correct Ruby version&lt;/span&gt;
+ruby -v
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Create RVM Gemset for Gitlab&lt;/h4&gt;
+
+&lt;p&gt;With Ruby installed and our shell now running the correct version of Ruby we need to make a gemset to make it easier to manage the gems we will install for Gitlab. We then set this gemset as the default. After this is done we need &lt;a href="http://gembundler.com"&gt;Bundler&lt;/a&gt; installed to that gemset.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;rvm gemset create gitlab
+rvm use 1.9.3@gitlab --default
+
+&lt;span class="c"&gt;# Skip Rdoc generation&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'gem: --no-rdoc --no-ri'&lt;/span&gt; &amp;gt;&amp;gt; ~/.gemrc
+gem install bundler
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Install and setup Gitlab!&lt;/h2&gt;
+
+&lt;p&gt;At last now we are going to clone the Gitlab repository and setup the application.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Clone the Gitlabhq repo from Github&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab
+sudo -u gitlab -H git clone https://github.com/gitlabhq/gitlabhq.git /Users/gitlab/gitlab
+&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab/gitlab
+
+&lt;span class="c"&gt;# Checkout to 4-2-stable release&lt;/span&gt;
+sudo -u gitlab -H git checkout 4-2-stable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We are using branch &lt;code&gt;4-2-stable&lt;/code&gt; because at the time of writing this is the branch I have working.&lt;/p&gt;
+
+&lt;h3&gt;Configure Gitlab&lt;/h3&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab/gitlab
+
+&lt;span class="c"&gt;# Copy the example GitLab config&lt;/span&gt;
+sudo -u gitlab -H cp config/gitlab.yml.example config/gitlab.yml
+
+&lt;span class="c"&gt;# Make sure to change "localhost" to the fully-qualified domain name of your host serving GitLab where necessary&lt;/span&gt;
+&lt;span class="c"&gt;# IMPORTANT: Also update any paths from /home/ to /Users/&lt;/span&gt;
+sudo -u gitlab -H vim config/gitlab.yml
+
+&lt;span class="c"&gt;# Make sure GitLab can write to the log/ and tmp/ directories&lt;/span&gt;
+sudo chown -R gitlab log/
+sudo chown -R gitlab tmp/
+sudo chmod -R u+rwX  log/
+sudo chmod -R u+rwX  tmp/
+
+&lt;span class="c"&gt;# Make directory for satellites&lt;/span&gt;
+sudo -u gitlab -H mkdir /Users/gitlab/gitlab-satellites
+
+&lt;span class="c"&gt;# Copy the example Unicorn config&lt;/span&gt;
+sudo -u gitlab -H cp config/unicorn.rb.example config/unicorn.rb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Configure Gitlab database settings&lt;/h3&gt;
+
+&lt;p&gt;Since we&amp;rsquo;re using MySQL we want to use the &lt;code&gt;database.yml&lt;/code&gt; template for MySQL. Make sure to update username/password in config/database.yml.
+I hope you&amp;rsquo;re keeping up!&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab/gitlab
+sudo -u gitlab -H cp config/database.yml.mysql config/database.yml
+
+&lt;span class="c"&gt;# Update config with credentials from earlier when we setup MySQL. You only need to do the production group.&lt;/span&gt;
+sudo -u gitlab -H vim config/database.yml
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Install gems&lt;/h3&gt;
+
+&lt;p&gt;Using Bundler we can install all the gems required by Gitlab, we will be installing the gems &lt;em&gt;without&lt;/em&gt; the &lt;code&gt;development&lt;/code&gt;, &lt;code&gt;test&lt;/code&gt; and &lt;code&gt;postgresql&lt;/code&gt; groups as we won&amp;rsquo;t be needing those.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Login as gitlab user&lt;/span&gt;
+su - gitlab
+&lt;span class="nb"&gt;cd&lt;/span&gt; ~/gitlab
+
+&lt;span class="c"&gt;# Please note the -- below is not a mistake&lt;/span&gt;
+gem install charlock_holmes -- --version &lt;span class="s1"&gt;'0.6.9'&lt;/span&gt; --with-icu-dir&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/opt/icu4c
+
+&lt;span class="c"&gt;# Configure bundler to always use icu4c from Homebrew and install Gitlab gems&lt;/span&gt;
+bundle config build.charlock_holmes --with-icu-dir&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/opt/icu4c
+bundle install --deployment --without development &lt;span class="nb"&gt;test &lt;/span&gt;postgres
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Configure Git&lt;/h3&gt;
+
+&lt;p&gt;GitLab needs to be able to commit and push changes to Gitolite. In order to do that Git requires a username and email. (It&amp;rsquo;s recommended to  use the same address used for the email.from setting in config/gitlab.yml)&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo -u gitlab -H git config --global user.name &lt;span class="s2"&gt;"GitLab"&lt;/span&gt;
+sudo -u gitlab -H git config --global user.email &lt;span class="s2"&gt;"gitlab@localhost"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Setup GitLab Hooks&lt;/h4&gt;
+
+&lt;p&gt;This will setup the custom hooks between Gitlab and Gitolite.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab/gitlab
+
+sudo cp ./lib/hooks/post-receive /Users/git/.gitolite/hooks/common/post-receive
+sudo chown git:git /Users/git/.gitolite/hooks/common/post-receive
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Initialise database and activate features&lt;/h3&gt;
+
+&lt;p&gt;Now it&amp;rsquo;s time to initialise the Gitlab database by running all the migrations and adding the first admin user. Make a note of the credentials it gives you at the end so you can login.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;su - gitlab
+&lt;span class="nb"&gt;cd&lt;/span&gt; ~/gitlab
+
+bundle &lt;span class="nb"&gt;exec &lt;/span&gt;rake gitlab:setup &lt;span class="nv"&gt;RAILS_ENV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;production
+
+&lt;span class="c"&gt;# Precompile the assets into the public directory&lt;/span&gt;
+bundle &lt;span class="nb"&gt;exec &lt;/span&gt;rake assets:precompile &lt;span class="nv"&gt;RAILS_ENV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With that done run the following command to output and the environment info used by Gitlab so you check it all looks right for your machine.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;bundle &lt;span class="nb"&gt;exec &lt;/span&gt;rake gitlab:env:info &lt;span class="nv"&gt;RAILS_ENV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;production
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Quick test&lt;/h4&gt;
+
+&lt;p&gt;Let&amp;rsquo;s skip ahead quickly a check out Gitlab! You won&amp;rsquo;t be able to make any projects as Sidekiq is not running but it shows that all the work above has achieved something. Use the credentials from above to login.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Still as the gitlab user&lt;/span&gt;
+su - gitlab
+&lt;span class="nb"&gt;cd&lt;/span&gt; ~/gitlab
+
+&lt;span class="c"&gt;# Start the rails WEBrick server&lt;/span&gt;
+&lt;span class="nv"&gt;RAILS_ENV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;production bundle &lt;span class="nb"&gt;exec &lt;/span&gt;rails s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Open &lt;code&gt;http://127.0.0.1:3000&lt;/code&gt; in your browser. Use &lt;kbd&gt;ctrl&lt;/kbd&gt; + &lt;kbd&gt;c&lt;/kbd&gt; to close the server once you&amp;rsquo;ve had a look. It will be quite slow initially as it is only intended as a development webserver.&lt;/p&gt;
+
+&lt;h2&gt;Setting up Gitlab with Apache and Unicorn&lt;/h2&gt;
+
+&lt;p&gt;Since OS X comes with Apache we will use that as our webserver to Gitlab. You can of course use &lt;a href="http://wiki.nginx.org/Main"&gt;Nginx&lt;/a&gt; if you desire but I will not be going over that option in this guide yet. Although I hope to go over that option in the future.&lt;/p&gt;
+
+&lt;h3&gt;Configure Unicorn&lt;/h3&gt;
+
+&lt;p&gt;Although not 100% compatible with Apache for &lt;a href="http://rubyforge.org/pipermail/mongrel-unicorn/2011-July/001057.html"&gt;various reasons&lt;/a&gt;, Unicorn will be responsible for processing the Gitlab application. We need to a make a few alterations to the config to make it &amp;ldquo;OS X friendly&amp;rdquo;.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /Users/gitlab/gitlab
+
+&lt;span class="c"&gt;# Update: app_dir to /Users/ instead of /home/&lt;/span&gt;
+&lt;span class="c"&gt;# Uncomment: listen "127.0.0.1:8080" and change 8080 to 5000&lt;/span&gt;
+&lt;span class="c"&gt;# Comment: listen "#{app_dir}/tmp/sockets/gitlab.socket" as Apache cannot use sockets&lt;/span&gt;
+sudo -u gitlab -H vim config/unicorn.rb
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Unicorn needs to startup with the machine but we need to do some work with RVM. We need to make a wrapper around the &lt;code&gt;bundle&lt;/code&gt; command so it can be used at bootup.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;su - gitlab
+rvm wrapper ruby-1.9.3-p392@gitlab bootup bundle
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we can make a &lt;code&gt;launchctl&lt;/code&gt; plist file. I&amp;rsquo;ve created these plists for you and saved them as a (gist)[https://gist.github.com/createdbypete/5345563] so you can grab that directly:&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo curl --output /Library/LaunchDaemons/gitlab.unicorn.plist https://gist.github.com/createdbypete/5345563/raw/gitlab.unicorn.plist
+
+&lt;span class="c"&gt;# Load service with launchctl&lt;/span&gt;
+sudo launchctl load /Library/LaunchDaemons/gitlab.unicorn.plist
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Please note:&lt;/strong&gt; Unicorn can take a few seconds to start up.&lt;/p&gt;
+
+&lt;h3&gt;Configure Sidekiq&lt;/h3&gt;
+
+&lt;p&gt;We also need Sidekiq to start up with the machine, thankfully the steps above have shortened some of the work we need to do now and we only need to create the plist as the &lt;code&gt;bundle&lt;/code&gt; wrapper is already available. The plist command used below is an extraction from the &lt;a href="https://github.com/gitlabhq/gitlabhq/blob/4-2-stable/lib/tasks/sidekiq.rake"&gt;rake task&lt;/a&gt; that should be used but it is not compatible with OS X.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo curl --output /Library/LaunchDaemons/gitlab.sidekiq.plist https://gist.github.com/createdbypete/5345563/raw/gitlab.sidekiq.plist
+
+&lt;span class="c"&gt;# Load service with launchctl&lt;/span&gt;
+sudo launchctl load /Library/LaunchDaemons/gitlab.sidekiq.plist
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Configure Apache&lt;/h3&gt;
+
+&lt;p&gt;In Mountain Lion Apple decided to remove the web sharing option from the System Preferences panel but Apache is still there so it just means we need to start it via terminal.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo apachectl start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We need to tell Apache about Gitlab by creating a configuration for it. Thankfully Apache on OS X loads in all &lt;code&gt;.conf&lt;/code&gt; files in the &lt;code&gt;/etc/apache2/other/&lt;/code&gt; directory so we can create a file in there to avoid tampering with the main config, this is also easier to manage.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;sudo curl --output /etc/apache2/other/gitlab.conf https://gist.github.com/createdbypete/5345563/raw/gitlab.conf
+
+&lt;span class="c"&gt;# Change ServerName to your machine hostname&lt;/span&gt;
+sudo vim /etc/apache2/other/gitlab.conf
+
+&lt;span class="c"&gt;# Restart Apache&lt;/span&gt;
+sudo apachectl restart
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;OS X Server People&lt;/strong&gt; You can use the Server.app to setup a new VirtualHost and Allow Overrides. You can then edit the generated configuration file as required to &lt;a href="https://gist.github.com/createdbypete/5345563#file-gitlab-conf"&gt;match the gist&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can open &lt;code&gt;http://my-hostname.local&lt;/code&gt; in your browser and you should be greeted by the Gitlab login screen. Again use the details from earlier:&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;admin@local.host
+5iveL!fe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Important Note:&lt;/strong&gt; This user should be disabled or deleted once you have got some real users in place with administrator privileges.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enjoy!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;If all this is too much for you I recommend checking out the &lt;a href="http://blog.gitlab.com/cloud/"&gt;GitLab paid service&lt;/a&gt;. Huge thanks to the &lt;a href="https://github.com/gitlabhq?tab=members"&gt;GitLab Team&lt;/a&gt; and all the contributors.&lt;/p&gt;
+
+&lt;p&gt;Found a typo or a part of this guide not working? Let me know &lt;a href="http://twitter.com/createdbypete"&gt;@createdbypete&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Jet Set Radio released on iOS and Android</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/jet-set-radio-released-on-ios-and-android/"/>
+    <id>http://www.createdbypete.com/articles/jet-set-radio-released-on-ios-and-android/</id>
+    <published>2012-11-29T11:00:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;Today Sega has released &lt;a href="http://www.sega.co.uk/games/jet-set-radio/"&gt;Jet Set Radio&lt;/a&gt; on &lt;a href="https://itunes.apple.com/gb/app/jet-set-radio/id554531935?mt=8"&gt;iOS&lt;/a&gt; and &lt;a href="https://play.google.com/store/apps/details?id=com.sega.jetsetradio"&gt;Android&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Jet Set Radio was one of my favourite titles from the Dreamcast era (a console that should and could have done a lot better) amongst so many other titles on the unappreciated console. I&amp;rsquo;m glad someone has taken the time to revive this title.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Jet Set Radio sees you playing as a member of a rebellious gang called The GGs as they fight to gain control of the fictional Tokyo-to whilst dealing with rival gangs and the police. Your character rides using inline skates and is able to jump, grind on rails and skitch on the back of cars. &lt;small&gt;&lt;cite&gt;Wikipedia&lt;/cite&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I really liked the cell shaded style of the whole game coupled with a quirkiness only the Japanese seem to manage. The game had already seen a revival on the Xbox Arcade but the big deal with the mobile release is the touch screen graffiti control, previously you would follow the on screen indicators with your analogue stick to draw the graffiti but with the touch screen you now gesture your &amp;ldquo;tag&amp;rdquo; on the screen which works really well.&lt;/p&gt;
+
+&lt;div class="img-centered"&gt;&lt;img src="/media/articles/jet-set-radio-released-on-ios-and-android/touchtastic.jpg" alt="Jet Set Radio"&gt;&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;ve seen a few reviews slating the on screen controls for movement, while they are a bit tricky to get used to a 3rd person rotating environment, it was still tricky with a gamepad until you got used to it.&lt;/p&gt;
+
+&lt;p&gt;In any case I was very pleased to see this game on the mobile devices, it&amp;rsquo;s an example of how far technology has come and how fast! I look forward to seeing what else gets &lt;em&gt;app&amp;rsquo;d&lt;/em&gt;. &lt;a href="http://wikipedia.org/wiki/Shenmue"&gt;Shenmue&lt;/a&gt; perhaps?&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>PHP 5.4 development on OS X with MySQL and Laravel 4</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/"/>
+    <id>http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/</id>
+    <published>2012-11-12T22:23:00+11:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;As a developer I&amp;rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &amp;ldquo;if it isn&amp;rsquo;t broken don&amp;rsquo;t upgrade it&amp;rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.&lt;/p&gt;
+&lt;p&gt;Most hosts should be able to offer you at least 5.3 by now (if not find someone else right now!). In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here&amp;rsquo;s how to install it on OS X. I&amp;rsquo;m running Mavericks but since most of this guide uses Homebrew I have included a few notes for differences installing on Mountain Lion and I would think any previous versions that can also run Homebrew can follow along.&lt;/p&gt;
+
+&lt;h2&gt;The Essentials&lt;/h2&gt;
+
+&lt;h3&gt;Install Command Line Tools&lt;/h3&gt;
+
+&lt;p&gt;Installion of Command Line Tools for Mavericks has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.&lt;/p&gt;
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;xcode-select --install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see a pop-up window appear asking you to install, after clicking install just sit back and wait for it to finish.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mountain Lion:&lt;/strong&gt; If you&amp;rsquo;re on Mountain Lion (or Lion) you will need to &lt;a href="https://developer.apple.com/downloads"&gt;download Command Line Tools&lt;/a&gt; from Apple. The Apple Developer site requires you to sign in to access the downloads page but once you&amp;rsquo;re in search for the Command Line Tools for your version, download and install.&lt;/p&gt;
+
+&lt;h3&gt;What about Xcode?&lt;/h3&gt;
+
+&lt;p&gt;You can install &lt;a href="http://itunes.apple.com/gb/app/xcode/id497799835?mt=12"&gt;Xcode&lt;/a&gt; from the App Store but you don&amp;rsquo;t actually need it. I find the FileMerge application comes in very useful but it&amp;rsquo;s a large download just for that so be prepared to wait a little if you&amp;rsquo;ve not got a high-speed connection. Once it&amp;rsquo;s downloaded, launch Xcode to make sure it&amp;rsquo;s setup.&lt;/p&gt;
+
+&lt;h3&gt;Install Homebrew&lt;/h3&gt;
+
+&lt;p&gt;If you’ve not used &lt;a href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; before you&amp;rsquo;re going to love it over the next few steps as it makes the whole process so much easier! Installation is a simple &amp;ldquo;one liner&amp;rdquo;.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;ruby -e &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+
+&lt;span class="c"&gt;# Check every is configured properly&lt;/span&gt;
+brew doctor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If there are any problems the &lt;code&gt;brew doctor&lt;/code&gt; will give you details about the problem and sometimes even how to fix it. Homebrew formulas are updated all the time so make sure we&amp;rsquo;re getting the latest formulas before we start.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew update
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Install MySQL using Homebrew&lt;/h3&gt;
+
+&lt;p&gt;MySQL and PHP go hand in hand just about everywhere these days you just can&amp;rsquo;t keep them apart. Homebrew also has formulas for alternatives such as &lt;a href="https://mariadb.org"&gt;MariaDB&lt;/a&gt; and &lt;a href="http://www.percona.com/software/percona-server"&gt;Percona Server&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install mysql
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you just sit back and let Homebrew do its magic and not only install MySQL but also any dependencies. Once it&amp;rsquo;s finished it will display some post installation instructions; I&amp;rsquo;m going to go through the steps here but please double check you&amp;rsquo;re not following out of date steps.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Add MySQL to launchctl to let OS X manage the process and start when you login&lt;/span&gt;
+ln -sfv /usr/local/opt/mysql/&lt;span class="k"&gt;*&lt;/span&gt;.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+&lt;span class="c"&gt;# Or if you want to control it yourself&lt;/span&gt;
+mysql.server start
+&lt;span class="c"&gt;# Usage: mysql.server {start|stop|restart|reload|force-reload|status}&lt;/span&gt;
+
+&lt;span class="c"&gt;# "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password&lt;/span&gt;
+mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And you&amp;rsquo;re done setting up MySQL for now. If you&amp;rsquo;re looking for a good client application for MySQL &lt;a href="http://www.sequelpro.com/"&gt;Sequel Pro&lt;/a&gt; is the best in my eyes, if you love it please donate as the team have done a fantastic job.&lt;/p&gt;
+
+&lt;h3&gt;Install PHP 5.4 and Composer&lt;/h3&gt;
+
+&lt;p&gt;With Homebrew already brewing we want to run a quick search for PHP to see what&amp;rsquo;s available in Homebrew&amp;rsquo;s formula repository. This is a useful command to remember.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew search php54
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This command should return a list of formulas that can be installed, you&amp;rsquo;ll notice that they are all under a formula repository &lt;code&gt;homebrew/php&lt;/code&gt; so we need to tap that repository so Homebrew knows can use it.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew tap homebrew/php
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You&amp;rsquo;ll see some familiar git cloning feedback as Homebrew clones the repository but once it has been done run the &lt;code&gt;brew search php54&lt;/code&gt; command again and you&amp;rsquo;ll see all the formulas without that repository prefix now. Before we install PHP though we need to tap another repository for some dependencies. I&amp;rsquo;m also going to install the &lt;a href="http://xdebug.org/"&gt;Xdebug&lt;/a&gt; module for PHP at the same time as it&amp;rsquo;s a useful development aid.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew tap homebrew/dupes
+brew install php54 php54-xdebug
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A number of other dependency libraries will be installed that PHP relies on when compiling itself, once complete we should install &lt;a href="http://getcomposer.org/"&gt;Composer&lt;/a&gt; the &lt;em&gt;Dependency Manager for PHP&lt;/em&gt;. Laravel 4 uses this to install it&amp;rsquo;s dependencies and is slowly trying to cement itself as the standard for PHP, much like &lt;a href="http://gembundler.com/"&gt;Bundler&lt;/a&gt; is for Ruby Gems.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install composer
+composer --version &lt;span class="c"&gt;# Check we have access to it&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Laravel 4&lt;/h2&gt;
+
+&lt;p&gt;With more PHP frameworks than it&amp;rsquo;s worth making joke about, &lt;a href="http://laravel.com"&gt;Laravel&lt;/a&gt; by &lt;a href="https://github.com/taylorotwell"&gt;Taylor Otwell&lt;/a&gt; and &lt;a href="https://github.com/laravel?tab=members"&gt;team&lt;/a&gt; looks to me like a step in the right direction.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It&amp;rsquo;s like a dirty weekend away from Rails&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;What I really like with the Laravel, is the adoption of the latest PHP syntax features, Composer to manage the packages, completely unit tested and has a really clean way to work with multiple environments. I&amp;rsquo;ll stop stalling and get it setup so we can play! First install the PHP Mcrypt module that Laravel requires.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;brew install php54-mcrypt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Using Composer we can follow Laravel&amp;rsquo;s one liner &lt;a href="http://laravel.com/docs/quick#installation"&gt;quickstart&lt;/a&gt;. Obviously change &lt;code&gt;your-project-name&lt;/code&gt; for something more meaningful.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /where/projects/are/kept
+composer create-project laravel/laravel your-project-name --prefer-dist
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Using the PHP 5.4 built-in webserver&lt;/h3&gt;
+
+&lt;p&gt;With Laravel now ready to go, let&amp;rsquo;s fire up the &lt;a href="http://php.net/manual/features.commandline.webserver.php"&gt;PHP built-in webserver&lt;/a&gt;. Having enjoyed the ease of using the &lt;code&gt;rails server&lt;/code&gt; command in Rails this addition was particularly exciting. It allows you to spawn a development webserver from the command line. No need to configure Apache and you get a live (and colourful) log output which during development is incredibly useful!&lt;/p&gt;
+
+&lt;p&gt;Laravel 4 comes with a routing script so we can still work with pretty URLs (usually you would need to have index.php in the URL which is not a big deal in development).&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# While inside the projects directory&lt;/span&gt;
+php -S localhost:4000 server.php
+
+&lt;span class="c"&gt;# Open the URL in your default browser&lt;/span&gt;
+open http://localhost:4000
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In your browser you should see the customary &amp;ldquo;Hello World!&amp;rdquo; message confirming everything is working.&lt;/p&gt;
+
+&lt;p&gt;You&amp;rsquo;ll notice I&amp;rsquo;ve used &lt;code&gt;localhost:4000&lt;/code&gt; above you can use any hostname/IP or port number with a few limitations:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The port number must be above 1024, any lower and you will need to use &lt;code&gt;sudo&lt;/code&gt; as these are reserved for system use.&lt;/li&gt;
+&lt;li&gt;The hostname/IP must resolve to your machine. You can use &lt;code&gt;0.0.0.0&lt;/code&gt; as a wild card to match any IP your machine can answer to. This is if another machine needs access to the application.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are a number of other options you can use with the command line webserver. I&amp;rsquo;ve also used different hostname/IP combinations.&lt;/p&gt;
+&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="c"&gt;# Starting webserver in the current directory&lt;/span&gt;
+php -S my-machine-name.local:4000
+
+&lt;span class="c"&gt;# Starting with a specific document root directory&lt;/span&gt;
+php -S 0.0.0.0:4000 -t /path/to/web/root
+php -S myproject.dev:5000 -t ./path/can/be/relative/too
+
+&lt;span class="c"&gt;# Using a router script (this is method we used with Laravel)&lt;/span&gt;
+php -S localhost:8000 my-router-script.php
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can find out more details from the &lt;a href="http://php.net/manual/features.commandline.webserver.php"&gt;PHP documentation&lt;/a&gt;. You can also find out &lt;a href="http://php.net/manual/migration54.changes.php"&gt;what&amp;rsquo;s changed in PHP 5.4&lt;/a&gt; and how to migrate/test your older projects if you are upgrading.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Removing Heroku Toolbelt</title>
+    <link rel="alternate" href="http://www.createdbypete.com/articles/removing-heroku-toolbelt/"/>
+    <id>http://www.createdbypete.com/articles/removing-heroku-toolbelt/</id>
+    <published>2012-08-24T10:00:00+10:00</published>
+    <updated>2017-03-04T18:03:30+11:00</updated>
+    <content type="html">&lt;p&gt;So you would like to uninstall the &lt;a href="http://toolbelt.heroku.com/"&gt;Heroku Toolbelt&lt;/a&gt; from OS X and you&amp;rsquo;ve noticed there is no information in the documentation. No worries, you can run the following commands in a Terminal prompt:&lt;/p&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rm -rf ~/.heroku
+sudo rm -rf /usr/local/heroku /usr/bin/heroku
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will delete the directories Heroku Toolbelt created during installation.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

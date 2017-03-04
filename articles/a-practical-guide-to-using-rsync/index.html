@@ -1,0 +1,174 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>A Practical Guide to Using rsync - Created by Pete</title>
+  <meta name="description" content="If you&rsquo;ve never used rsync before then today is going to be a great day for you. Firstly, rsync is not new it&rsquo;s been around for quite a while and chances are you&rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/">
+
+  <meta content="A Practical Guide to Using rsync" itemprop="name">
+<meta content="If you&rsquo;ve never used rsync before then today is going to be a great day for you. Firstly, rsync is not new it&rsquo;s been around for quite a while and chances are you&rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="A Practical Guide to Using rsync" property="og:title">
+<meta content="article" property="og:type">
+<meta content="If you&rsquo;ve never used rsync before then today is going to be a great day for you. Firstly, rsync is not new it&rsquo;s been around for quite a while and chances are you&rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection." property="og:description">
+<meta content="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/" property="og:url">
+<meta content="2014-02-25T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="A Practical Guide to Using rsync" name="twitter:title">
+<meta content="If you&rsquo;ve never used rsync before then today is going to be a great day for you. Firstly, rsync is not new it&rsquo;s been around for quite a while and chances are you&rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">A Practical Guide to Using rsync</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADVklEQVR4nKWTaTCUcRzHt2Wyk2Nq21yRM5RQ8gLtWOOoHYvMumawQo6d2Fw7RDzs5hhE0ibJsURmSodKzhjkGBMjmpZsbay1Yy3DOFo72H7Pm+q9/6vPfOb7//7n+c3zwyr+nn0s5t85ECuUW75I+eHcKRZ4WdZELnGgbc4JuBR3ZNq/Xs5cQPOunkSiwj0IvavQk+Xk8S2EKCfuTi4gGnvxesAq2pKe/d01Xj8Ge2j3FtMp9NOCVhb4yqefDXnU+u/n4a3QjeaA7pu9GSrgtzYSeCH0IpE95NNlXIqrJZKwCZm9QlGo+SUHTSXwd4Zb39719vv1CnysEtWG0KmRoAZe6xS5/D2H0siAHrtcVg0iHs9cQTOpVSrqfexZCXhijeQC26opjQpchQlWnMBrLBkAlw0VCmrPxtmj7/LVBt2j1Gix3XD3mu5jc/ct/ogIvMe71579Ng10O/Cq3GqScLhObgR+/KqFKMzadHwZerpJP7tkxJSgNuDIErKbuMHkHAV4MlBqkF6Gtz0J3DAj1B5tRW5kQo80xPJ06dps5WHwNON7juK91fVA6Eze4XkGx8QtO0OGE316MotG4+WBb9JHHkzVLO3RwS+p45vivBt9yHA3aoC7u9XVNxMLGdWiQdtg8mCYDLzVUO226E1xrRB4kdU7l4rrtYoB1unWGGoZ8fBRQE9AVN59jglbZwudw3LctMeGsCsCegR5wdix8MUX6HzSOC+xBczmwhzgVSJWcMU7zE0Md/XUJnpMQySSHsi7/WgnFyibfHUFX6byTd99MjvIDPKbJSQOVjrC2IdMRqCXXSBGlW+OznaFxEjDCurZ4HWLajP6BJ01deA/Up+Vmc6zLSLBVybTri8pDzDnoSf+W8vzqQma0Qaw0kVmND2afuwdsGi9XKtivDS7A9iX+cgxwZg15gOcRHB46WJTRTgDnXbWOo6UYkYKHjrj8yv7LEdwljA3hR/B0IeveHL0OPjbhlF0XXkH2xf9rvykJ1YSavUUeEJYBL/nFWImQPciifnBn1h+F/4NzM7DNy6pOXJjZ3QvEG2jLPw2zhzdBU3S2vxvk9xqdEc6Flg6l8VcdIaJSHuF6Ry+EZ0JTlsvGglgeF1A9yJttHiHIncRHmxn/+M/wCtrsuGhficAAAAASUVORK5CYII=" alt="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>If you&rsquo;ve never used <a href="http://rsync.samba.org/">rsync</a> before then today is going to be a great day for you. Firstly, rsync is not new it&rsquo;s been around for quite a while and chances are you&rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection.</p>
+
+<blockquote>
+<p>It can perform differential uploads and downloads (synchronization) of files across the network, transferring only data that has changed. The rsync remote-update protocol allows rsync to transfer just the differences between two sets of files across the network connection.</p>
+</blockquote>
+
+<p>What this means is instead of uploading everything it will upload only the files that have changed. Not only that, it uses compression while sending so it can reduce the amount of bandwidth used over other methods.</p>
+
+<h2>Preparation</h2>
+
+<p>Most machines will have <code>rsync</code> available, you can check by running <code>which rsync</code> in your terminal to show you where it is located. If you don&rsquo;t get a response then you will need to install it.</p>
+<pre class="highlight plaintext"><code># On Redhat based systems (CentOS etc)
+$ yum install rsync
+
+# On Debian based systems (Ubuntu etc)
+$ apt-get install rsync
+</code></pre>
+<p>OS X already has <code>rsync</code> available so you don&rsquo;t need to worry about installing it again.</p>
+
+<h2>Usage</h2>
+
+<p>Using rsync is easy, there are a few options that you will use the most so you can mix and match these depending on what you would like to achieve.</p>
+<pre class="highlight plaintext"><code>$ rsync [options] [source] [destination]
+</code></pre>
+<ul>
+<li><code>-v</code>, <code>--verbose</code>, this will increase the verbosity, showing the path for every file copied.</li>
+<li><code>-a</code>, <code>--archive</code>, archive mode is very useful for backups, it will preserve everything about the file such as timestamps and permissions. The only thing it does not preserve is hardlinks, because finding multiply-linked files is expensive.</li>
+<li><code>-z</code>, <code>--compress</code>, compress file data during the transfer to reduce bandwidth, this is particularly useful when working with a remote server.</li>
+<li><code>-n</code>, <code>--dry-run</code>, perform a trial run with no changes made, very useful to do this before combining with the option below.</li>
+<li><code>-h</code>, <code>--human-readable</code>, output numbers in a human-readable format. (If you use <code>-h</code> without anything else it is also the help)</li>
+<li><code>--delete</code>, this will delete the files in the destination not present in the source, use this to truly sync changes.</li>
+<li><code>--help</code>, probably the most useful one of them all, show the help for <code>rsync</code>.</li>
+</ul>
+
+<h2>You said Practical Guide?</h2>
+
+<p>I&rsquo;ve used <code>rsync</code> most extensively for synchronising folders on my local machine with an external hard-drive for backups and for managing files on remote servers at times too. The <code>rsync</code> command can also be used more creatively and I intend to demonstrate a few of those use cases below along side the basics.</p>
+
+<h3>1. Copy/sync a directory on your local machine</h3>
+
+<p>A classic, simply creates an exact (recursive) replica of another directory. Make the destination a path to your USB storage and you&rsquo;ve got an efficient backup tool. You can always use the <code>--dry-run</code> option to check what&rsquo;s going to change.</p>
+
+<p><strong>Please note:</strong> the trailing <code>/</code> on the source is important to copy the contents of the directory and not the directory itself.</p>
+<pre class="highlight plaintext"><code>$ rsync -azvh --delete /my/source/directory/ /my/backup/directory
+</code></pre>
+<p>To get a touch of the secret symlink sauce, you might want any symlinks in your directory to be resolved into real files. In which case add <code>-L</code> to your options.</p>
+
+<ul>
+<li><code>-L</code>, <code>--copy-links</code>, transforms a symlink into the real file or directory it targets.</li>
+<li><code>--safe-links</code>, consider this option if you want to ignore symlinks that point outside the directory you&rsquo;re copying.</li>
+</ul>
+
+<h3>2. Copy/sync a directory to a remote server</h3>
+
+<p>Another classic use case. The main difference here is we are specifying the username and host(or IP) of the machine we wish to connect to, the remote server will also need to have <code>rsync</code> installed.</p>
+
+<p>I would also opt for using rsync over ssh as it will encrypt your data as it travels over the internet, if you don&rsquo;t want this remove the <code>-e ssh</code> option.</p>
+<pre class="highlight plaintext"><code>$ rsync -azvh -e ssh /my/source/directory/ root@123.123.123.123:/my/backup/directory
+</code></pre>
+<p>Add the <code>--delete</code> option if you want to remove any files that exist in the destination but don&rsquo;t in the source directory.</p>
+
+<ul>
+<li><code>-e</code>, <code>--rsh=COMMAND</code>, allows you to specify the remote shell to use. In our case <code>ssh</code>.</li>
+</ul>
+
+<h3>3. Sync files but make backups of any deleted files</h3>
+
+<p>If the idea of the <code>--delete</code> option makes your buttocks clench it&rsquo;s understandable since there is no recovering the deleted files. However, you can pass in the <code>--backup</code> option, this will make copies of any files due to be deleted or updated.</p>
+
+<p>The <code>--backup</code> command needs a friend to work best, introducing <code>--backup-dir</code>. These options allow you to specify the location of the backups and a string to add to the end of the filename.</p>
+<pre class="highlight plaintext"><code>$ rsync -avz --delete --backup --backup-dir="backup_$(date +\%Y-\%m-\%d)" /source/path/ /dest/path
+</code></pre>
+<p>By using <code>$(date +\%Y-\%m-\%d)</code> I&rsquo;m telling it to use today&rsquo;s date in the folder name.</p>
+
+<ul>
+<li><code>-b</code>, <code>--backup</code>, with this option, preexisting destination files are renamed as each file is transferred or deleted.</li>
+<li><code>--backup-dir=DIR</code>, this tells rsync to store all backups in the specified directory on the receiving side.</li>
+</ul>
+
+<h2>Please sir, I want some more!</h2>
+
+<p>More! That&rsquo;s all for now but as I think of/remember other use cases for the brilliant <code>rsync</code> tool I will update this list. Or feel free to contribute your own by <a href="https://twitter.com/createdbypete">tweeting me @createdbypete</a> or on <a href="https://plus.google.com/+PeterRhoades">Google+</a> or <a href="https://github.com/createdbypete/createdbypete.github.io/issues">create and issue on GitHub</a>.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2014-02-25T00:00:00Z" pubdate>Feb 25, 2014</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

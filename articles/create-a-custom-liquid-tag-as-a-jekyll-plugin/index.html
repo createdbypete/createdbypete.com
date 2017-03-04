@@ -1,0 +1,187 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Create a custom Liquid tag as a Jekyll plugin - Created by Pete</title>
+  <meta name="description" content="If you didn&rsquo;t know already, this site was built in Jekyll (more recently in Middleman) and Jekyll makes use of the Liquid templating language to process templates. All the standard tags and filters for Liquid are supported, but sometimes you need a bit more!">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/">
+
+  <meta content="Create a custom Liquid tag as a Jekyll plugin" itemprop="name">
+<meta content="If you didn&rsquo;t know already, this site was built in Jekyll (more recently in Middleman) and Jekyll makes use of the Liquid templating language to process templates. All the standard tags and filters for Liquid are supported, but sometimes you need a bit more!" itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Create a custom Liquid tag as a Jekyll plugin" property="og:title">
+<meta content="article" property="og:type">
+<meta content="If you didn&rsquo;t know already, this site was built in Jekyll (more recently in Middleman) and Jekyll makes use of the Liquid templating language to process templates. All the standard tags and filters for Liquid are supported, but sometimes you need a bit more!" property="og:description">
+<meta content="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/" property="og:url">
+<meta content="2014-03-08T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Create a custom Liquid tag as a Jekyll plugin" name="twitter:title">
+<meta content="If you didn&rsquo;t know already, this site was built in Jekyll (more recently in Middleman) and Jekyll makes use of the Liquid templating language to process templates. All the standard tags and filters for Liquid are supported, but sometimes you need a bit more!" name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Create a custom Liquid tag as a Jekyll plugin</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADWklEQVR4nKWTfTCTcRzAN6yVNGMrXFoyQqSQCy3RvK+2brrij5K3LoQtumrsSKtbXrLlLUzexeKcrFbcMCc1K71JN/SywkXyGnmp1vf5p/q/31+f+9zn+/ye5+75amn+nF9aqL/nv1ijs13NUjUKbS+CX+w+tMnVWF7uDiygR28+LM7cNYz0Kt2xHdkyDjKrmelh14UGkRFm76W8O4ZTYk2BseGoR3jKV2wnSgv9o7lit1WV+mwK+CJfiU2Y42efnXAXMYWGHsG7XsqDZl//2Cp/sqxSAU16Tnwx2rzD0gv415zNuFhe2PsUel17eUslfdcWKvhAX9qtk+7jxhth1soXa34oeeoF4gkM57DYAoGABpybQmpnPWhbiwXuqjobheeumXgIbPeKQ52f1Zs2AM4ZEXEFnCs1N4CJTle3pUVUJuyBuwgXeaw33LIOIjw/JcDOUn//MksHmuBg/sToqL+4ERrcwP2XirjHkx/BUzxE3UZDuo4d0A/79XjSLGgH/MEbUvFbGUyi2ybguxhuaLs3x00CsxsyF4y1Z4oG0NB/GvWhZqxrUdhAo2UiiTeITJ5zgeZejfKuMKTiWSg04QfTUPRSAaYQGqUoPbGW+d3PGpr8N7zsMqlFnRAaprctRs/L5UQTNNW1qtbMhhUVBZphd09Jk3dBRCQ0x21n97VIB/sw4J26P7qQGBeONoA3XKmP3ECqneTAbIlh3rmHjU2ntYFX5qroznyny1Jge4z5mLS30ksNbHpA3CwyLcPB96J4Ngu09RHhRDd4pmHbTbJ6lrVgBl7KcOEVtVjHrQAnZSTlhLglDcQCk+sYQ1NeUh8l3CvqY+mldQacuQWzI9ULcc+8018ehcaxUfwtaLoVB/8SGnskTtHKes1gg/9yPkY/vm1Rmw/8k2gpZF4xS7eD2YwOP4x/xWKdAPrAWAMFkTAhcABPtrp2FXfwcnQ/+L0xEr+3pdbvE8EXqzZmjaT+jL4Nnksn4iLa5CR4Hw3JLn/e+t0THyPwhLLeD/X0tJ5BZC9CeZ1hlOvLXXDvkuy5e0JXqocHshcMvgnf8ZQxAdmF8fKlRcuS5ChkR5JPJ007sD+/R/YCr1d1p1w02wu82n76ZMyPqFwZshc6uqlZT1xltv+3s//wb/H3WbLBoFS8AAAAAElFTkSuQmCC" alt="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>If you didn&rsquo;t know already, this site was built in <a href="http://jekyllrb.com/">Jekyll</a> (more recently in <a href="http://middlemanapp.com/">Middleman</a>) and Jekyll makes use of the <a href="http://liquidmarkup.org/">Liquid</a> templating language to process templates. All the standard <a href="http://docs.shopify.com/themes/liquid-basics/logic">tags</a> and <a href="http://docs.shopify.com/themes/liquid-basics/output">filters</a> for Liquid are supported, but sometimes you need a bit more!</p>
+
+<p>I wanted to show a <a href="http://en.wikipedia.org/wiki/QR_code">QR code</a> in the top corner of my article pages when it is printed off so you can scan the code and return to the page form a mobile device. A little bit of a gimmick but I wanted something real to base this article on.</p>
+
+<h2>The plan</h2>
+
+<p>This plugin will need to do a couple of things:</p>
+
+<ol>
+<li>Turn a page url into a QR code</li>
+<li>Not rely on any third party services</li>
+<li>Use base64 to encode the image directly into the page</li>
+<li>Provide me with a convenient tag to use in my pages</li>
+</ol>
+
+<h2>Creating a Liquid tag</h2>
+
+<p>Creating a new tag for Liquid is very simple, you just need to inherit from <a href="https://github.com/Shopify/liquid/blob/master/lib/liquid/tag.rb">Liquid::Tag</a> and register your new tag.</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">QrCodeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+    <span class="k">super</span>
+    <span class="vi">@url</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="c1"># Create the QR code here</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'qr'</span><span class="p">,</span> <span class="no">QrCodeTag</span><span class="p">)</span>
+</code></pre>
+<p>You would then be able to use your new tag in templates like so:</p>
+<pre class="highlight html"><code>{% qr http://createdbypete.com %}
+</code></pre>
+<h2>Creating a QR code</h2>
+
+<p>Again this is very simple thanks to the <a href="https://rubygems.org/gems/rqrcode_png">rqrcode_png</a> gem. With this gem it is trivial to produce a QR code, as you can see below:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'rqrcode_png'</span>
+
+<span class="n">qr</span> <span class="o">=</span> <span class="no">RQRCode</span><span class="o">::</span><span class="no">QRCode</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'http://createdbypete.com'</span><span class="p">)</span>
+<span class="n">png</span> <span class="o">=</span> <span class="n">qr</span><span class="p">.</span><span class="nf">to_img</span>
+
+<span class="c1"># Now we have a chunky_png to work with we can base64 encode the image</span>
+<span class="n">png</span><span class="p">.</span><span class="nf">to_data_url</span>
+</code></pre>
+<p>As you can see in the last line <a href="https://rubygems.org/gems/chunky_png">chunky_png</a> has a very useful method to allow for the image data to be converted into a data url for use in an ordinary <code>&lt;img&gt;</code> tag.</p>
+
+<h2>Putting it all together</h2>
+
+<p>The following code is what I ended up with. You&rsquo;ll notice a new <code>lookup</code> method, this allow me to pass in the <code>page.url</code> variable into this tag since I don&rsquo;t want to be maintaining individual URLs here when I can let Jekyll and Liquid do it for me.</p>
+
+<p>Thanks to <a href="http://stackoverflow.com/a/8771374">this StackOverflow post</a> for helping me solve this one.</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">QrCodeTag</span> <span class="o">&lt;</span> <span class="no">Liquid</span><span class="o">::</span><span class="no">Tag</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">tag_name</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">tokens</span><span class="p">)</span>
+    <span class="k">super</span>
+    <span class="vi">@url</span> <span class="o">=</span> <span class="n">url</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
+    <span class="n">lookup</span> <span class="o">=</span> <span class="n">context</span>
+    <span class="nb">name</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">).</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">value</span><span class="o">|</span> <span class="n">lookup</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="p">}</span>
+    <span class="n">lookup</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">page_url</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">lookup</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s1">'site.url'</span><span class="p">)</span><span class="si">}#{</span><span class="n">lookup</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="vi">@url</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">qr</span> <span class="o">=</span> <span class="no">RQRCode</span><span class="o">::</span><span class="no">QRCode</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span> <span class="ss">size: </span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Size increased because URLs can be long</span>
+    <span class="n">png</span> <span class="o">=</span> <span class="n">qr</span><span class="p">.</span><span class="nf">to_img</span>
+    <span class="o">&lt;&lt;-</span><span class="no">MARKUP</span><span class="p">.</span><span class="nf">strip</span><span class="sh">
+    &lt;div class="qrcode"&gt;
+      &lt;img src="</span><span class="si">#{</span><span class="n">png</span><span class="p">.</span><span class="nf">to_data_url</span><span class="si">}</span><span class="sh">" alt="</span><span class="si">#{</span><span class="n">page_url</span><span class="si">}</span><span class="sh">"&gt;
+    &lt;/div&gt;
+</span><span class="no">    MARKUP</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="no">Liquid</span><span class="o">::</span><span class="no">Template</span><span class="p">.</span><span class="nf">register_tag</span><span class="p">(</span><span class="s1">'qr'</span><span class="p">,</span> <span class="no">QrCodeTag</span><span class="p">)</span>
+</code></pre>
+<p>I&rsquo;ve also included a variable from my Jekyll <code>_config.yml</code>, the <code>site.url</code>. This is just the full url to the website as the QR code will need to have this as well or it will only get a relative URL.</p>
+
+<h3>A sprinkle of CSS</h3>
+
+<p>Now we&rsquo;ve got our custom Liquid tag ready to go! We now need a small amount of CSS to finish the job so the <code>.qrcode</code> class is hidden by default but on print media is displayed.</p>
+<pre class="highlight css"><code><span class="nc">.qrcode</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@media</span> <span class="n">print</span> <span class="p">{</span>
+  <span class="nc">.qrcode</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>Now you can just drop in the new tag to your article or add it as part of one of your layouts – this is how I&rsquo;ve used it so it appears on all my articles. Try it out, bring up print preview and you should see in the top right corner of the first page a QR code for this article.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2014-03-08T00:00:00Z" pubdate data-updated="true">Mar 08, 2014</time>
+
+      (<time datetime="2014-09-15T00:00:00Z" class="updated">Updated on Sep 15, 2014</time>)
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

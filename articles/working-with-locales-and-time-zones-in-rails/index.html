@@ -1,0 +1,206 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Working with Locales and Time Zones in Rails - Created by Pete</title>
+  <meta name="description" content="Rails handles internationalization (i18n) really well, and you can set the default locale and time zone for your application very simply:">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/">
+
+  <meta content="Working with Locales and Time Zones in Rails" itemprop="name">
+<meta content="Rails handles internationalization (i18n) really well, and you can set the default locale and time zone for your application very simply:" itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Working with Locales and Time Zones in Rails" property="og:title">
+<meta content="article" property="og:type">
+<meta content="Rails handles internationalization (i18n) really well, and you can set the default locale and time zone for your application very simply:" property="og:description">
+<meta content="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/" property="og:url">
+<meta content="2014-06-25T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Working with Locales and Time Zones in Rails" name="twitter:title">
+<meta content="Rails handles internationalization (i18n) really well, and you can set the default locale and time zone for your application very simply:" name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Working with Locales and Time Zones in Rails</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADVklEQVR4nGP6Dwf/mBgQgCL2fxb7l8xhkbXRjUDx7zd/77mVEWNoB2RPbNt3c/l6JZYnIPV5SVrCU/iTwHoXZ3vI2mZlg9j5kg/uP15noy4DZHM8jjl0cM9v9UMMTIx/rKdYpB4JjakHij9eN0nlt1DasXlA9paFBoney56fKwSyWy2rcqNb9s9PAbJNY/qepWxk7w0Dso0iNjcLVza49wLdlqf7QrFsa6XfbKB4t+DE75NM9eSOgvSyPd0y9SDn7mlAuyZZzzdx11XY6Q9U/2zpt09dnTfXzQGKJ8+q4bgXe26uDVB9afcvpblHJ64HmS+0s59NeGmD60Qgu+/VFYNPC039pgP1Zl6YO+MS56qHB4F62SJ0XeTW9gbPAqphuvN+BqPukk37gey8EKMXwX2hU+4A1d9xT9s/o8Zrxwmg+iO+C+y6Wc6WWQHFg1ZcUL0s1DFLEai+/NIEx6NNhvdPAtUIT1nON/HcvLgKoJqpHnfWX+dZfnQdUM2krx86jii2FIPC/4qowYsLjWYtkkD1X3Yl3Z+6d65XCVD9nvQ5crfurVQGhi1Dyv9LW89ZtPqCzH/MNyHxBLNJVyVQPc//Recmlsy4uAeofnrylXzrfO1PIPXdF795+LOfzOQFxcsdi4wGq611IPFc20vzl4pLynIB2Yx77iQ/atG83QnU2yMW3faV1zP8CFB9n2TA40d6ppteAsVjLk47obpnmh7QfMYWBiHzLU98NpgDxYWEXbRCJ+3kUgaKz3sgLV+w5jL3K6CZXppOAUsP/fYCsUU/vLt/LdKyGmT+tH9V11jdLBZfAaqveXnpudB51+XbgeKCE4OnPNpTlQMME8Z3Nx41XIoOMgWF1V/lpelmmntqgTHBGLll1pzJ/esug8Jt+87JJsur/nZNAbLvvJ70lzsz3NgdqN6SL9Dk/X+nRQpAcRXXy+krhYQ36gPZsm2ay9eZzY6KA5pT3XricP/cYP8VQPUyDp5LxPj2LBIEiosdbXrwmW/tpvugfLFNZsd2m7cxoLD68VTL3vpIeownkD1BwE71/iWjaXKgcHNdK3CSP3jzJFC+qHvweV5Idbo1kF3Q61YhP9H6XAYoX7i4iabN2BJ5GBT+3/syvhdLnvlNWZ5FYgMAqN1nss5NSgUAAAAASUVORK5CYII=" alt="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p><a href="http://guides.rubyonrails.org/i18n.html">Rails handles internationalization (i18n) really well</a>, and you can set the default locale and time zone for your application very simply:</p>
+<pre class="highlight ruby"><code><span class="c1"># config/application.rb</span>
+
+<span class="k">module</span> <span class="nn">I18nTest</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">i18n</span><span class="p">.</span><span class="nf">default_locale</span> <span class="o">=</span> <span class="s1">'en'</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">time_zone</span> <span class="o">=</span> <span class="s1">'London'</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<h2>Setting the locale from the URL</h2>
+
+<p>First you need to wrap your applications routes in a scope defining the <code>:locale</code> parameter. Your application URLs will then look like <code>/en/controller/action</code> with the first segment telling Rails which locale it should use. The following regular expression just places a constraint on the locale parameter so that it must match one of the locales the application knows about.</p>
+<pre class="highlight ruby"><code><span class="c1"># config/routes.rb</span>
+
+<span class="n">scope</span> <span class="s1">':locale'</span><span class="p">,</span> <span class="ss">locale: </span><span class="sr">/</span><span class="si">#{</span><span class="no">I18n</span><span class="p">.</span><span class="nf">available_locales</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"|"</span><span class="p">)</span><span class="si">}</span><span class="sr">/</span> <span class="k">do</span>
+  <span class="c1"># application routes...</span>
+<span class="k">end</span>
+
+<span class="c1"># Catch all requests without a locale and redirect to the default...</span>
+<span class="n">match</span> <span class="s1">'*path'</span><span class="p">,</span> <span class="ss">to: </span><span class="n">redirect</span><span class="p">(</span><span class="s2">"/</span><span class="si">#{</span><span class="no">I18n</span><span class="p">.</span><span class="nf">default_locale</span><span class="si">}</span><span class="s2">/%{path}"</span><span class="p">),</span> <span class="ss">constraints: </span><span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">req</span><span class="o">|</span> <span class="o">!</span><span class="n">req</span><span class="p">.</span><span class="nf">path</span><span class="p">.</span><span class="nf">starts_with?</span> <span class="s2">"/</span><span class="si">#{</span><span class="no">I18n</span><span class="p">.</span><span class="nf">default_locale</span><span class="si">}</span><span class="s2">/"</span> <span class="p">}</span>
+<span class="n">match</span> <span class="s1">''</span><span class="p">,</span> <span class="ss">to: </span><span class="n">redirect</span><span class="p">(</span><span class="s2">"/</span><span class="si">#{</span><span class="no">I18n</span><span class="p">.</span><span class="nf">default_locale</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre>
+<p>Contrary to the Rails guides examples, I prefer to use the <a href="http://api.rubyonrails.org/classes/AbstractController/Callbacks/ClassMethods.html#method-i-around_action"><code>around_action</code></a> hook with <a href="https://github.com/svenfuchs/i18n/blob/master/lib/i18n.rb#L252"><code>I18n.with_locale</code></a> class method to set the locale. Even though we may not be running in a multi-threaded environment, I feel it is more responsible way to handle the locale on a per-request basis like this.</p>
+
+<p>We also override the <code>#default_url_options</code> method so the locale is automatically set when we use any of the <code>*_url</code> or <code>*_path</code> helper methods in our controller or views.</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/application_controller.rb</span>
+
+<span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">around_action</span> <span class="ss">:with_locale</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">with_locale</span>
+    <span class="no">I18n</span><span class="p">.</span><span class="nf">with_locale</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:locale</span><span class="p">])</span> <span class="p">{</span> <span class="k">yield</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">default_url_options</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{})</span>
+    <span class="p">{</span> <span class="ss">locale: </span><span class="no">I18n</span><span class="p">.</span><span class="nf">locale</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>And there we have it, the application can respond with the correct content based on the URL. To make use of this in your application use the <a href="http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-t"><code>t</code></a> and <a href="http://api.rubyonrails.org/classes/AbstractController/Translation.html#method-i-l"><code>l</code></a> helpers, these can be used in your controllers and views.</p>
+
+<h2>Using i18n in your application</h2>
+
+<p>I recommend using them for everything, it will save <strong>a lot</strong> of pain if you ever need to handle multiple locales in the future; or you might just want to change the format of your dates.</p>
+
+<p>First in Rails 4.1 you&rsquo;ll want to <code>raise_on_missing_translations</code> so Rails will shout at you if any translations are missing.</p>
+<pre class="highlight ruby"><code><span class="c1"># config/environments/{test,development}.rb</span>
+
+<span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">configure</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+  <span class="n">config</span><span class="p">.</span><span class="nf">action_view</span><span class="p">.</span><span class="nf">raise_on_missing_translations</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span>
+</code></pre>
+<p>The <code>t</code> or <code>translate</code> helper accepts a simple dot.notation string to specify the translation you are trying to access (there are short hand options available but <a href="http://guides.rubyonrails.org/i18n.html">check the Rails documentation for more information</a>). You can also pass in a hash to replace named keys in the translation string:</p>
+<pre class="highlight yaml"><code><span class="c1"># config/locales/en.yml</span>
+
+<span class="na">en</span><span class="pi">:</span>
+  <span class="na">dot</span><span class="pi">:</span>
+    <span class="na">notation</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Hello,</span><span class="nv"> </span><span class="s">my</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">%{name}"</span>
+</code></pre><pre class="highlight ruby"><code><span class="c1"># Example</span>
+<span class="n">t</span><span class="p">(</span><span class="s1">'dot.notation'</span><span class="p">,</span> <span class="ss">name: </span><span class="s1">'Pete'</span><span class="p">)</span> <span class="c1">#=&gt; Hello, my name is Pete</span>
+</code></pre>
+<p>The <code>l</code> or <code>localize</code> helper doesn&rsquo;t get as much attention as it deserves, it&rsquo;s very useful for localising dates, numbers, money and so on.</p>
+<pre class="highlight yaml"><code><span class="c1"># config/locales/en.yml</span>
+
+<span class="na">en</span><span class="pi">:</span>
+  <span class="na">time</span><span class="pi">:</span>
+    <span class="na">formats</span><span class="pi">:</span>
+      <span class="na">short</span><span class="pi">:</span> <span class="s1">'</span><span class="s">%d</span><span class="nv"> </span><span class="s">%b</span><span class="nv"> </span><span class="s">%H:%M'</span>
+</code></pre><pre class="highlight ruby"><code><span class="c1"># Example</span>
+<span class="n">l</span><span class="p">(</span><span class="no">Time</span><span class="p">.</span><span class="nf">current</span><span class="p">,</span> <span class="ss">format: :short</span><span class="p">)</span> <span class="c1">#=&gt; 25 Apr 11:40</span>
+</code></pre>
+<p><strong>Note:</strong> Rails only provides the US English locale by default, but you can get hold of you locale from the <a href="https://github.com/svenfuchs/rails-i18n">rails-i18n</a> gem.</p>
+
+<h2>Find missing or unused i18n translations</h2>
+
+<p>As your application grows you&rsquo;ll find the translation files can quickly become large difficult to keep track of everything in them. Thankfully <a href="https://github.com/glebm/i18n-tasks">i18n-tasks</a> can ease the pain and help you track down missing or unused translations (credit to <a href="https://twitter.com/jessieay">Jessie Young</a> for letting me know about this one):</p>
+<pre class="highlight plaintext"><code>i18n-tasks health
+</code></pre>
+<p>Check out the readme for <a href="https://github.com/glebm/i18n-tasks">i18n-tasks</a> for more details on using the tool, along with the <a href="https://github.com/glebm/i18n-tasks#configuration">configuration</a> options available.</p>
+
+<h2>Setting the time zone</h2>
+
+<p>It&rsquo;s recommended to use the <code>around_action</code> hook and <a href="http://api.rubyonrails.org/classes/Time.html#method-i-use_zone"><code>Time.use_zone</code></a> as <code>Time.zone</code> is known to leak into other threads. In the example below the time zone is stored as an attribute on the user; a list of valid time zone values can be found by running <code>rake time:zones:all</code>.</p>
+
+<p><strong>Note:</strong> The <code>Time.use_zone</code> method is a core extension provided by ActiveSupport.</p>
+<pre class="highlight ruby"><code><span class="c1"># app/controllers/application_controller.rb</span>
+
+<span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="no">ActionController</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">around_action</span> <span class="ss">:with_time_zone</span><span class="p">,</span> <span class="ss">if: :current_user</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">with_time_zone</span>
+    <span class="no">Time</span><span class="p">.</span><span class="nf">use_zone</span><span class="p">(</span><span class="n">current_user</span><span class="p">.</span><span class="nf">time_zone</span><span class="p">)</span> <span class="p">{</span> <span class="k">yield</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Working with time zones can be tricky, Rails helps you in some places and then leaves you hanging in others (for good reason, but it can still catch you out). Let&rsquo;s examine some of the gotchas:</p>
+
+<h3>Working with ActiveRecord attributes and time zones</h3>
+
+<p>Good news! ActiveRecord helps you out by converting all values to UTC for storing in the database. When it fetches the record the value is converted to the expect time zone for that request (either from <code>config.time_zone</code> or if you&rsquo;re using <code>Time.use_zone</code>).</p>
+
+<h3>Working with the <code>Time</code> class</h3>
+
+<p>If you are using the <a href="http://www.ruby-doc.org/core-2.1.2/Time.html"><code>Time</code></a> class it&rsquo;s important to specify the time zone you want to use. The easiest way to do this is to include the <code>zone</code> with <code>Time.zone</code>; this will use the expected time zone. If you just use <code>Time</code> then it will use the servers system time zone. For example <a href="http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html">Rails provides some helpers</a>:</p>
+<pre class="highlight ruby"><code><span class="no">Time</span><span class="p">.</span><span class="nf">current</span> <span class="c1"># Rails helper for Time.zone.now</span>
+<span class="no">Time</span><span class="p">.</span><span class="nf">zone</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="s1">'2014-04-25 11:30:00'</span><span class="p">)</span>
+</code></pre>
+<p>Method calls like <code>2.hours.ago</code> use the time zone you&rsquo;ve configured so these are safe to use as well. Even if you&rsquo;re not building an application that cares about time zones at the moment, it could save you some pain in the future to use the time zone safe methods.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2014-06-25T00:00:00Z" pubdate data-updated="true">Jun 25, 2014</time>
+
+      (<time datetime="2014-09-20T00:00:00Z" class="updated">Updated on Sep 20, 2014</time>)
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

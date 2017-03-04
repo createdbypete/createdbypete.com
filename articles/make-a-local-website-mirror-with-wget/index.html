@@ -1,0 +1,119 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Make a local website mirror with Wget - Created by Pete</title>
+  <meta name="description" content="You&rsquo;ve probably used the Wget command-line tool before but you may not be aware of a pretty neat feature it has tucked away.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/">
+
+  <meta content="Make a local website mirror with Wget" itemprop="name">
+<meta content="You&rsquo;ve probably used the Wget command-line tool before but you may not be aware of a pretty neat feature it has tucked away." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Make a local website mirror with Wget" property="og:title">
+<meta content="article" property="og:type">
+<meta content="You&rsquo;ve probably used the Wget command-line tool before but you may not be aware of a pretty neat feature it has tucked away." property="og:description">
+<meta content="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/" property="og:url">
+<meta content="2013-07-15T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Make a local website mirror with Wget" name="twitter:title">
+<meta content="You&rsquo;ve probably used the Wget command-line tool before but you may not be aware of a pretty neat feature it has tucked away." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Make a local website mirror with Wget</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADVUlEQVR4nGP6Dwf/mBgQgCL2fxan77zbJH2cG4HiPzrf5pbwTtloB2T3c8hPnSciVfMEpJ4n/cmaVZ+8QHoZd/0W8bF9HQxiFzxf8uxzXmy/DJDNrr1o3w+Zcv5DDEyMf3cb2O1nia6pB4qfOv9JxkJI6OIXIPvK5rmz6860WTwF2ruOcc7OKXEbXr4Bqt/iG1312mZWcR5QXFNGyNr/V1HHO6D680e/TFwmfn/KI6CaSj/90gITn/rNQHGx2VZX5dV3eQDVM6hI9W2X22WruwCol0uyRtTq4Y3564HiT/ssjrgu0DIHqmH0/nHyw4G95ilLgGrm2r/jZeN4kWQEFGdJnxcpWTtpRQFQ/TNdz78slzZ2PwSqSelvuvjGfQrbKqC44M7+zN0WZXphQLafj8zLS36LrW4C2XNO7NvyY8+KE+eA7JSwZy71Kt9+AM1kmJSWolyxSbVJAci+P/3Z9ZgSiQ0gvSGN92sXr/32fROQPbn07quTi4J7QOG2OvnU1ekMT9aC9Jbxrmh4sqPvmx6QnZ1mrvs9aOm+F0B20OEnatW5C/vMgOz3Tett2ipLXU4B2ZyZuwIOdF4xZQGy3Q5ulVRty7VvA7KL6koaM3ybZ4Li8ewE26IfB9/WCwD9O8+g59yjhdIHL4HMDFB0m34tm/Ee0L9xW+9NE82+pzkHKB6o633lft6i/iKger1LQveenOuXAMWXzOI1+/znLAnbCQrz8jjHahdFPheQOX8nKfkVmd6SBaqv+9Isyfs9uOsRKK4jnzwVffyW5TBQr8ix34XapV+O1wHFZ9923Z5x+m8tyPzF/8+dcF8k07MfqCY+59vO5L9czoJANZ8yhbgWLJ72bg/I/WrBOzhD/Frvg+LLcbpdoPJU+yyguEu5rp/U1MM3lIF6bd6z65wqjxPyBYpztWju4w65cPEukH33XbDwhClXMzSB7CfFi7fWq0X/aAaaUz290HTjhJ73DUC98v/T1X83/yxVAooL/+p4bpSnMuExKF+EPDjw/U+kFtBtDD+5lpmvY9kq4ArKF1Pz1I2ELgVJg/LFQdvm5souT1A6ZFwpfiw05Yh0FyhfHHun++L7uwxQmudYEMmmsNFrJtDvjH+yPpQrVD260EtZnkViAwCiYmSyD3FszwAAAABJRU5ErkJggg==" alt="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>You&rsquo;ve probably used the <a href="http://www.gnu.org/software/wget/">Wget</a> command-line tool before but you may not be aware of a pretty neat feature it has tucked away.</p>
+
+<p>You can download the resulting HTML of a website (including any linked assets)to your local machine. Not only that it will update any links to the local file reference. This can be useful for getting hold of a site you want to view offline (perhaps you are travelling).</p>
+
+<h2>Let&rsquo;s get to it, mirroring a website!</h2>
+
+<p>If you&rsquo;re on OS X you won&rsquo;t have wget installed by default so once again it&rsquo;s <a href="http://brew.sh/">Homebrew</a> to the rescue.</p>
+<pre class="highlight plaintext"><code>brew install wget
+</code></pre>
+<p>With wget now available let&rsquo;s create a local mirror of a website. In it&rsquo;s simplest form you can use it like this:</p>
+<pre class="highlight plaintext"><code>wget -mk http://www.example.com
+</code></pre>
+<p>If you want to be a good citizen and avoid being blocked by any well configured firewalls you might also want to add a delay to the download of each asset. You can do this with the <code>-w</code> flag, the example below will add a 1 second delay, it will take a bit longer but you can award yourself +1 internet point.</p>
+<pre class="highlight plaintext"><code>wget -mk -w 1 http://www.example.com
+</code></pre>
+<h2>Making it more intelligent</h2>
+
+<p>There are a few extra settings you can add to make it more &ldquo;intelligent&rdquo; as you probably don&rsquo;t want to try and download the internet (<strong>wget</strong> will follow all the links in a site so you could end up with a lot of clutter).</p>
+
+<h3>Set the domain</h3>
+
+<p>The example below will not follow any links outside of <code>example.com</code>.</p>
+<pre class="highlight plaintext"><code>wget -mk --domains example.com http://www.example.com
+</code></pre>
+<h3>More options</h3>
+
+<p>Check out the <a href="http://www.gnu.org/software/wget/manual/wget.html">manual for wget</a> as there are many more options available. Or as usual with any command you can use <code>man wget</code> in your terminal.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2013-07-15T00:00:00Z" pubdate>Jul 15, 2013</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

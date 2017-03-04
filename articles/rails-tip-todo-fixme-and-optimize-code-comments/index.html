@@ -1,0 +1,120 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Rails Tip: TODO, FIXME and OPTIMIZE code comments - Created by Pete</title>
+  <meta name="description" content="Ruby on Rails has so much that it&rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/">
+
+  <meta content="Rails Tip: TODO, FIXME and OPTIMIZE code comments" itemprop="name">
+<meta content="Ruby on Rails has so much that it&rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:" itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Rails Tip: TODO, FIXME and OPTIMIZE code comments" property="og:title">
+<meta content="article" property="og:type">
+<meta content="Ruby on Rails has so much that it&rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:" property="og:description">
+<meta content="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/" property="og:url">
+<meta content="2015-04-19T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Rails Tip: TODO, FIXME and OPTIMIZE code comments" name="twitter:title">
+<meta content="Ruby on Rails has so much that it&rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:" name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Rails Tip: TODO, FIXME and OPTIMIZE code comments</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADWklEQVR4nGP6Dwf/mBgQgCL2fxYndvltkj7ejUDxH525HCW8UzbaAdn9HPz260RmlTwBqecJ+9SzqsgLpJdx1581Prarg0HsgufnHjDnze2XAbLZtTmO/5Ap5z/EwMT4d3eCsz3L7fJ6oPipi6fEKoQmXfsCtCtkg/GCfW+OWTwFiq9rtkoR8St4/QbINjkj/3qxjFReHlCv5h2p2eG/NnV9A4r7H3kjuOx7/NRbQHZlv/bWPSU8dZuB5kybZTb1MvsvTZB6Fdlp5nG3an0WANVkidVM3fVwRuN6IPvoBJcjrQeyLIBqGLJ/7P3YsHJ/4xKg3r02z/4c47mSbATU65y5brpk77wVBUA16mtl/7dsW9v9EMhO+bts4lOVBd9WAdULckyvdFNPswsDivvZ8rz0yVttBXQ/45yTx7Yc2rNixTag+JPnz1zqWz5JuAHVC21KUS41km2SAIrf0X92PXibygaQ3rC192sXvvn6fROQPenp3Vdn7cJ7dIDsNZdPXZ3N8HCtE5Ddbrui4dquGd+0gOyYa+a6jKGL9q0Bud/5iVpl1qy+OCD7dsJ6m96KkiO7gGy23F0Buxuubv0DZLts2CqpMi3Hvg3ILlpc0liwu0XSC8g+/cm2SMPn7X+gexjn3+g515ImdfAsUDzky0K3X2G5jBuBbo5yvTftNfc9zVdA8WBd3hvnTy/iDwCq17sWcOtJX9+M50A1MpPfnIqfs0lsN1CNSvcC02wX5j5nIDvoZZ+S3iZXKWAaYKzjaJGM3e3s9QgofsjzydOrs3ldgoF6dR79K7QtfuIPcv/abuft5RP/ZjIB1Tdrnz7hEqYz5yBQjX9Lxc7izlf2/UA1jzofCyQ9XvbsF5D999vHlT9F7HqVgep5HDO9GpWXWr8Aub9axYlLdPMdoPh/1ffrLWdp1/GB/PW5RdD1dMKBi3dBdr2zcRKYfLRAE8hWLv5su1+z+8thoDlV04vrCvty3h8A6pX/bzrzd/PP0kVAceFfVg+N8lQmPAblixC7w9//ROrtB+r9yaVmc49lK48rKF9MfaDxSOhSkDQoXxycXbm4qstzHShfrHQ/U5p6RLoLlC+Ocvl7fH2XAUxvDBwLXRkTNnrNrAOa/yeLIy6h6tGFuZTlWSQ2AOH7aLJjwAxnAAAAAElFTkSuQmCC" alt="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>Ruby on Rails has so much that it&rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:</p>
+<pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="c1"># TODO Refactor this class, it's way too big!</span>
+  <span class="c1"># FIXME broke some_method during refactor</span>
+  <span class="c1"># OPTIMIZE moar speed!!!</span>
+  <span class="p">.</span><span class="nf">.</span><span class="p">.</span>
+<span class="nf">end</span>
+</code></pre>
+<p>You get the idea. I called them special comments in the previous paragraph but
+really they are just your usual comments but the <code>TODO</code>, <code>FIXME</code> and
+<code>OPTIMIZE</code> keywords make them special when you run the following rake task:</p>
+<pre class="highlight plaintext"><code>$ rake notes
+app/models/user.rb:
+  * [2] [TODO] Refactor this class, it's way too big!
+  * [3] [FIXME] broke some_method during refactor
+  * [4] [OPTIMIZE] moar speed!!!
+</code></pre>
+<p>For the power users out there you can add support for new file extensions using
+<code>config.annotations.register_extensions</code> option, which receives a list of the
+extensions with its corresponding regex to match it up.</p>
+<pre class="highlight ruby"><code><span class="c1"># Match .scss, .sass or .less comments. Example // TODO make some notes</span>
+<span class="n">config</span><span class="p">.</span><span class="nf">annotations</span><span class="p">.</span><span class="nf">register_extensions</span><span class="p">(</span><span class="s2">"scss"</span><span class="p">,</span> <span class="s2">"sass"</span><span class="p">,</span> <span class="s2">"less"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">annotation</span><span class="o">|</span>
+  <span class="sr">/\/\/\s*(</span><span class="si">#{</span><span class="n">annotation</span><span class="si">}</span><span class="sr">):?\s*(.*)$/</span>
+<span class="k">end</span>
+</code></pre>
+<p>You should checkout the <a href="http://guides.rubyonrails.org/command_line.html#notes">short section in the Rails Guides</a> to
+find out more about this handy Rake task, including how to list your own
+annotations.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2015-04-19T00:00:00Z" pubdate>Apr 19, 2015</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

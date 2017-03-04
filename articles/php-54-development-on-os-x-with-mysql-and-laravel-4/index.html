@@ -1,0 +1,205 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>PHP 5.4 development on OS X with MySQL and Laravel 4 - Created by Pete</title>
+  <meta name="description" content="As a developer I&rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &ldquo;if it isn&rsquo;t broken don&rsquo;t upgrade it&rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/">
+
+  <meta content="PHP 5.4 development on OS X with MySQL and Laravel 4" itemprop="name">
+<meta content="As a developer I&rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &ldquo;if it isn&rsquo;t broken don&rsquo;t upgrade it&rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="PHP 5.4 development on OS X with MySQL and Laravel 4" property="og:title">
+<meta content="article" property="og:type">
+<meta content="As a developer I&rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &ldquo;if it isn&rsquo;t broken don&rsquo;t upgrade it&rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing." property="og:description">
+<meta content="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/" property="og:url">
+<meta content="2012-11-12T11:23:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="PHP 5.4 development on OS X with MySQL and Laravel 4" name="twitter:title">
+<meta content="As a developer I&rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &ldquo;if it isn&rsquo;t broken don&rsquo;t upgrade it&rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">PHP 5.4 development on OS X with MySQL and Laravel 4</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADW0lEQVR4nKWTfTCTcRzAx810yNto8tIppVUseUnW8jaJ1cTqvKxy0XGVY8R1R5uXUSFFmUvLWBmLFOdM59qSzIqWxLBVTpjuiC7yVrT1ff6p/u/563Of+zy/53l+v+erq/1zaXRRf6//Yi3auaNA1XjTIQf8ioxf72XVUecNXBKyana8vshdjfSqIs3RYkkGcq92zuN5QUykDcIpB5bUVOPXOFtg/TPlXfakWe0LlK7OWnOvj1AQk5IFnksZx4274ikuwAoWi1aDSs8tQ9aJrDkS7Cap7oZ3MOjHfqWaZ+sHgM9MOVA4NKeafQNssEdEnPBeMCEDD2BObF8i7MTYwPpC8nJsEJOhB15bGuoXm3i1hHEYvEX2pvamtkxrfejzhKy6vsvd013ADYoL/iJzo29m0GPH0q6VsK+0lUM/sHfM2X+rMHU/NLezmGG4HH6fBTSr5TMBOd7zoWho6Hacj26Yg9xGaIytpP2GSX1fP0NDiuTLNogNaWLwar7Mj6sOJAVDf2vZ1NGz35RoCd4jihXTHZ9Lb4HeUrpkZVh8l/sLmsmLgWQWoWHKGRqdjS0Ms/j876ehEYW/FpVFV72NgiZVwkZReRy969CIqYVptdSfQSRoKjzyigVt9lPp0FBXdukZB3meFkEjUKqe5j1Zi0LOdPKBX4sw/7aAB83JS/M+HW0fFCPg3fvH952qTY/4At7SxyluqKn+8RG4907hYGq75+MGN+C14XFaXLf7ZdgfFGFRPfLyxv2AT8C2kTs7mSerjJ8je2vXemhQHacgwprmPZUOm12TL9qDbz3slUdfwRNWgZml6aVVXSfeU4EdymgfTUjDGDk8l7PAMGI/oxPhXLTr674nFcsyepXQEB86L0TUPqRwodFuie6RNy3m7gFfXTGNYTxT4l4B21mQOf7h9pkE5IzEbHRUJf5RH/Sdib7vFMfknDnwM9vbOTeCy2KHwLMSZkS8aquJNPASFSlsW86v88i3M0OktK3iDutr4G2dapLxo3IKDjyW3zvWEMLu+YDMRUzgy1jSLY0UnvtDEup3TJpN8kXm4ije4oHrWVMs8g9PZ80pHXlFO5AZYaaxTF1SFKPIXJjkC5rvVWg0wOt2u3gmrJ3jjCBzgZa1XJd7SWz+b2b/4d+samiytuebUwAAAABJRU5ErkJggg==" alt="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>As a developer I&rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &ldquo;if it isn&rsquo;t broken don&rsquo;t upgrade it&rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.</p>
+
+<p>Most hosts should be able to offer you at least 5.3 by now (if not find someone else right now!). In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here&rsquo;s how to install it on OS X. I&rsquo;m running Mavericks but since most of this guide uses Homebrew I have included a few notes for differences installing on Mountain Lion and I would think any previous versions that can also run Homebrew can follow along.</p>
+
+<h2>The Essentials</h2>
+
+<h3>Install Command Line Tools</h3>
+
+<p>Installion of Command Line Tools for Mavericks has changed from the previous versions, there is now a single command you can run in the terminal to trigger the install.</p>
+<pre class="highlight plaintext"><code>xcode-select --install
+</code></pre>
+<p>You should see a pop-up window appear asking you to install, after clicking install just sit back and wait for it to finish.</p>
+
+<p><strong>Mountain Lion:</strong> If you&rsquo;re on Mountain Lion (or Lion) you will need to <a href="https://developer.apple.com/downloads">download Command Line Tools</a> from Apple. The Apple Developer site requires you to sign in to access the downloads page but once you&rsquo;re in search for the Command Line Tools for your version, download and install.</p>
+
+<h3>What about Xcode?</h3>
+
+<p>You can install <a href="http://itunes.apple.com/gb/app/xcode/id497799835?mt=12">Xcode</a> from the App Store but you don&rsquo;t actually need it. I find the FileMerge application comes in very useful but it&rsquo;s a large download just for that so be prepared to wait a little if you&rsquo;ve not got a high-speed connection. Once it&rsquo;s downloaded, launch Xcode to make sure it&rsquo;s setup.</p>
+
+<h3>Install Homebrew</h3>
+
+<p>If you’ve not used <a href="http://brew.sh/">Homebrew</a> before you&rsquo;re going to love it over the next few steps as it makes the whole process so much easier! Installation is a simple &ldquo;one liner&rdquo;.</p>
+<pre class="highlight shell"><code>ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install<span class="k">)</span><span class="s2">"</span>
+
+<span class="c"># Check every is configured properly</span>
+brew doctor
+</code></pre>
+<p>If there are any problems the <code>brew doctor</code> will give you details about the problem and sometimes even how to fix it. Homebrew formulas are updated all the time so make sure we&rsquo;re getting the latest formulas before we start.</p>
+<pre class="highlight shell"><code>brew update
+</code></pre>
+<h3>Install MySQL using Homebrew</h3>
+
+<p>MySQL and PHP go hand in hand just about everywhere these days you just can&rsquo;t keep them apart. Homebrew also has formulas for alternatives such as <a href="https://mariadb.org">MariaDB</a> and <a href="http://www.percona.com/software/percona-server">Percona Server</a>.</p>
+<pre class="highlight shell"><code>brew install mysql
+</code></pre>
+<p>Now you just sit back and let Homebrew do its magic and not only install MySQL but also any dependencies. Once it&rsquo;s finished it will display some post installation instructions; I&rsquo;m going to go through the steps here but please double check you&rsquo;re not following out of date steps.</p>
+<pre class="highlight shell"><code><span class="c"># Add MySQL to launchctl to let OS X manage the process and start when you login</span>
+ln -sfv /usr/local/opt/mysql/<span class="k">*</span>.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+
+<span class="c"># Or if you want to control it yourself</span>
+mysql.server start
+<span class="c"># Usage: mysql.server {start|stop|restart|reload|force-reload|status}</span>
+
+<span class="c"># "Secure" your MySQL installation, really it's just a handy way to clean up defaults and set a root password</span>
+mysql_secure_installation
+</code></pre>
+<p>And you&rsquo;re done setting up MySQL for now. If you&rsquo;re looking for a good client application for MySQL <a href="http://www.sequelpro.com/">Sequel Pro</a> is the best in my eyes, if you love it please donate as the team have done a fantastic job.</p>
+
+<h3>Install PHP 5.4 and Composer</h3>
+
+<p>With Homebrew already brewing we want to run a quick search for PHP to see what&rsquo;s available in Homebrew&rsquo;s formula repository. This is a useful command to remember.</p>
+<pre class="highlight shell"><code>brew search php54
+</code></pre>
+<p>This command should return a list of formulas that can be installed, you&rsquo;ll notice that they are all under a formula repository <code>homebrew/php</code> so we need to tap that repository so Homebrew knows can use it.</p>
+<pre class="highlight shell"><code>brew tap homebrew/php
+</code></pre>
+<p>You&rsquo;ll see some familiar git cloning feedback as Homebrew clones the repository but once it has been done run the <code>brew search php54</code> command again and you&rsquo;ll see all the formulas without that repository prefix now. Before we install PHP though we need to tap another repository for some dependencies. I&rsquo;m also going to install the <a href="http://xdebug.org/">Xdebug</a> module for PHP at the same time as it&rsquo;s a useful development aid.</p>
+<pre class="highlight shell"><code>brew tap homebrew/dupes
+brew install php54 php54-xdebug
+</code></pre>
+<p>A number of other dependency libraries will be installed that PHP relies on when compiling itself, once complete we should install <a href="http://getcomposer.org/">Composer</a> the <em>Dependency Manager for PHP</em>. Laravel 4 uses this to install it&rsquo;s dependencies and is slowly trying to cement itself as the standard for PHP, much like <a href="http://gembundler.com/">Bundler</a> is for Ruby Gems.</p>
+<pre class="highlight shell"><code>brew install composer
+composer --version <span class="c"># Check we have access to it</span>
+</code></pre>
+<h2>Laravel 4</h2>
+
+<p>With more PHP frameworks than it&rsquo;s worth making joke about, <a href="http://laravel.com">Laravel</a> by <a href="https://github.com/taylorotwell">Taylor Otwell</a> and <a href="https://github.com/laravel?tab=members">team</a> looks to me like a step in the right direction.</p>
+
+<blockquote>
+<p>It&rsquo;s like a dirty weekend away from Rails</p>
+</blockquote>
+
+<p>What I really like with the Laravel, is the adoption of the latest PHP syntax features, Composer to manage the packages, completely unit tested and has a really clean way to work with multiple environments. I&rsquo;ll stop stalling and get it setup so we can play! First install the PHP Mcrypt module that Laravel requires.</p>
+<pre class="highlight shell"><code>brew install php54-mcrypt
+</code></pre>
+<p>Using Composer we can follow Laravel&rsquo;s one liner <a href="http://laravel.com/docs/quick#installation">quickstart</a>. Obviously change <code>your-project-name</code> for something more meaningful.</p>
+<pre class="highlight shell"><code><span class="nb">cd</span> /where/projects/are/kept
+composer create-project laravel/laravel your-project-name --prefer-dist
+</code></pre>
+<h3>Using the PHP 5.4 built-in webserver</h3>
+
+<p>With Laravel now ready to go, let&rsquo;s fire up the <a href="http://php.net/manual/features.commandline.webserver.php">PHP built-in webserver</a>. Having enjoyed the ease of using the <code>rails server</code> command in Rails this addition was particularly exciting. It allows you to spawn a development webserver from the command line. No need to configure Apache and you get a live (and colourful) log output which during development is incredibly useful!</p>
+
+<p>Laravel 4 comes with a routing script so we can still work with pretty URLs (usually you would need to have index.php in the URL which is not a big deal in development).</p>
+<pre class="highlight shell"><code><span class="c"># While inside the projects directory</span>
+php -S localhost:4000 server.php
+
+<span class="c"># Open the URL in your default browser</span>
+open http://localhost:4000
+</code></pre>
+<p>In your browser you should see the customary &ldquo;Hello World!&rdquo; message confirming everything is working.</p>
+
+<p>You&rsquo;ll notice I&rsquo;ve used <code>localhost:4000</code> above you can use any hostname/IP or port number with a few limitations:</p>
+
+<ul>
+<li>The port number must be above 1024, any lower and you will need to use <code>sudo</code> as these are reserved for system use.</li>
+<li>The hostname/IP must resolve to your machine. You can use <code>0.0.0.0</code> as a wild card to match any IP your machine can answer to. This is if another machine needs access to the application.</li>
+</ul>
+
+<p>There are a number of other options you can use with the command line webserver. I&rsquo;ve also used different hostname/IP combinations.</p>
+<pre class="highlight shell"><code><span class="c"># Starting webserver in the current directory</span>
+php -S my-machine-name.local:4000
+
+<span class="c"># Starting with a specific document root directory</span>
+php -S 0.0.0.0:4000 -t /path/to/web/root
+php -S myproject.dev:5000 -t ./path/can/be/relative/too
+
+<span class="c"># Using a router script (this is method we used with Laravel)</span>
+php -S localhost:8000 my-router-script.php
+</code></pre>
+<p>You can find out more details from the <a href="http://php.net/manual/features.commandline.webserver.php">PHP documentation</a>. You can also find out <a href="http://php.net/manual/migration54.changes.php">what&rsquo;s changed in PHP 5.4</a> and how to migrate/test your older projects if you are upgrading.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2012-11-12T11:23:00Z" pubdate data-updated="true">Nov 12, 2012</time>
+
+      (<time datetime="2014-09-09T00:00:00Z" class="updated">Updated on Sep 09, 2014</time>)
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

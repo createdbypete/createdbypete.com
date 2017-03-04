@@ -1,0 +1,93 @@
+<!DOCTYPE html><html itemscope itemtype="http://schema.org/Article">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Creating Form Objects with ActiveModel and Virtus - Created by Pete</title>
+  <meta name="description" content="You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of SOLID, the single responsibility principle (SRP).">
+  <meta name="viewport" content="width=device-width">
+  <link rel="publisher" href="https://plus.google.com/+PeterRhoades">
+  <link rel="canonical" href="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/">
+
+  <meta content="Creating Form Objects with ActiveModel and Virtus" itemprop="name">
+<meta content="You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of SOLID, the single responsibility principle (SRP)." itemprop="description">
+
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" itemprop="image">
+
+  <meta content="Created by Pete" property="og:site_name">
+<meta content="Creating Form Objects with ActiveModel and Virtus" property="og:title">
+<meta content="article" property="og:type">
+<meta content="You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of SOLID, the single responsibility principle (SRP)." property="og:description">
+<meta content="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/" property="og:url">
+<meta content="2015-04-15T00:00:00Z" property="article:published_time">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" property="og:image">
+
+  <meta content="summary" name="twitter:card" >
+<meta content="Creating Form Objects with ActiveModel and Virtus" name="twitter:title">
+<meta content="You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of SOLID, the single responsibility principle (SRP)." name="twitter:description">
+<meta content="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/" name="twitter:url">
+<meta content="http://www.createdbypete.com/images/logo-with-bg-abcabd39.png" name="twitter:image">
+<meta content="@createdbypete" name="twitter:site">
+<meta content="@createdbypete" name="twitter:creator">
+
+  <link href='//fonts.googleapis.com/css?family=Bitter:400,700,400italic|Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/cbp-ef3f9086.css" rel="stylesheet" type="text/css" />
+</head>
+<body id="articles">
+  <nav class="nav">
+    <a href="/" class="logo" title="Created by Pete">
+  <img width="100%" alt="Created by Pete" src="/images/logo-bbb50d57.png" />
+</a>
+<ul>
+  <li class="articles">
+    <a href="/" title="Articles"><i class="fa fa-pencil"></i></a>
+  </li>
+  <li class="network github">
+    <a rel="me" href="http://github.com/createdbypete" title="Fork me on GitHub"><i class="fa fa-github"></i></a>
+  </li>
+  <li class="network twitter">
+    <a rel="me" href="http://twitter.com/createdbypete" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+  </li>
+  <li class="network google-plus">
+    <a rel="me" href="https://plus.google.com/+PeterRhoades" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+  </li>
+  <li class="network feed">
+    <a href="/atom.xml" title="Feed"><i class="fa fa-rss"></i></a>
+  </li>
+</ul>
+
+  </nav>
+  <article class="hentry category-articles" role="article">
+  <header>
+    <h1 class="entry-title">Creating Form Objects with ActiveModel and Virtus</h1>
+    <div class="qrcode">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFcAAABXAQAAAABZs+TBAAADV0lEQVR4nKWTfTDTcRzHN1mrTRpWJnJJSA8IJ8021tayPMS4c5USqZtWCklpVGu4nOahSN04jdONycMRTivTWoRxejI5i6iuclesTiy/Pr9/qv/7/vW6970+3+ePCfJnLJpg/o7/YsR06zdrXX2h42XI5zQF9B0UlZwBXBD6zMK7Js97EvV1ZTL/fHo6Wot8245vjy21RTmJnv72oDnR2g4Yf8RSSaJNI10YE6yxKZvqUjWeehHy29w4hwlPPscDODJzX/CUR7u4GNZFoq7Wcd8pG3sgJ/BWalU7A2zYUJs5yyU4q2x6+8EhTKuotgxvDxY4zwNZd5sO1Xy0BXbhLJEN5p36juZWe7myurTBa0HAZNH6iw3tDAIeeENlkmtY1vLpJzBn8EsJM3Uk+KsF5BETpxNJmZz7peh+vIqDRPzKFD/g69hmd+vUikEysHDYlENgzYeZwh6ipULjl5f0mnqYR9LTOcSSvNBOgEPzqdDoHxB4neDEu2mYy9lBwVxwLOtJzuwhMnUtOC1TGbEdzenUBnDI3T8o9uHlI1hwJmc4rHMdTT1O4Cy1aT5F4qfNHgan0bm3pSS6duAkONH9IswuWT7uPDgvpLln2iKNgXDPSDVOnF+uWCcvBIeethlHjPI93A6OgqDruCRf0FHAmTQwm4uMN+MTwNkfMeO/kDIS+R1yL96Erx814zUwdjWiODoTdvfeHqiV8lZdUCfVK9A3mtfH8Zw8vLJuAbv9ej/+QVvJRs9rF1j96IS0whzOixE7zPvjqiLIcG+I5UOpo0VTwQ97yFsP+IqPt1ESF4EFVzKux9AujBCB/ZQho/bE1uwQWFfcnWxWErDfMwtqV102JOY+TB+KAoen32JI21RrPgqOO6NWJTFM7T4NOUssXZPvM0d8CowjRebw7EnZ96C2V52MtxnbKC8AfyFhbpD9ePRGI+QCly4zSXjqsVeQnxUMEA5W+eoNaK6bVk2J+hMF6B8LNbWL7xh3hj+D2G3xEmwc62PAHrBWFQ3jilCR5g3aF7FkTRytaFEN6/5UdgakqC8FBqB9sbebwvfkk63QXvjE/ExxKhO6oj0iVOdgtiUNx6B9QaLlye5IFyXAyzaLGZ+NCTf60b7Aa5Ur+nYobf+vZ//h34y0WLLNjA6LAAAAAElFTkSuQmCC" alt="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/">
+    </div>
+  </header>
+  <section class="entry-content">
+    <p>You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of <a href="https://robots.thoughtbot.com/back-to-basics-solid">SOLID</a>, the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">single responsibility principle (SRP)</a>.</p>
+
+  </section>
+  <footer>
+    <p class="meta">
+      <i class="icon-pencil"></i> Written by <a rel="me" href="https://github.com/createdbypete?rel=author" target="_blank" class="vcard author"><span class="fn">Peter Rhoades</span></a> on <time datetime="2015-04-15T00:00:00Z" pubdate>Apr 15, 2015</time>
+
+    </p>
+  </footer>
+</article>
+
+  <footer>
+    <img alt="Created by Pete" src="/images/logo-footer-518d24aa.png" />
+  </footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/javascripts/cbp-eca7008a.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-33629370-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
