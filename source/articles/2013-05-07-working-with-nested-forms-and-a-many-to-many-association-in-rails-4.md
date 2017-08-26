@@ -111,7 +111,7 @@ end
 The _behind the scenes_ work is done so lets sort out our views. Specifically the form so we can add the answers
 
 ```erb
-# app/views/survey/answers.html.erb
+# app/views/surveys/answers.html.erb
 <h1><%= @survey.name %> Answers</h1>
 
 <%= form_for(@survey) do |f| %>
