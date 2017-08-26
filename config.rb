@@ -19,9 +19,7 @@ activate :alias
 page "/404.html", directory_index: false
 
 set :url_root, 'http://www.createdbypete.com'
-activate :search_engine_sitemap do |s|
-  s.exclude_if = ->(resource) { resource.instance_of?(Middleman::Sitemap::AliasResource) }
-end
+activate :search_engine_sitemap, exclude_if: ->(resource) { resource.instance_of?(Middleman::Sitemap::AliasResource) }
 
 activate :syntax
 activate :asset_hash
