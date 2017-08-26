@@ -160,7 +160,7 @@ rake db:migrate
 <span class="k">end</span>
 </code></pre>
 <p>The <em>behind the scenes</em> work is done so lets sort out our views. Specifically the form so we can add the answers</p>
-<pre class="highlight erb"><code># app/views/survey/answers.html.erb
+<pre class="highlight erb"><code># app/views/surveys/answers.html.erb
 <span class="nt">&lt;h1&gt;</span><span class="cp">&lt;%=</span> <span class="vi">@survey</span><span class="p">.</span><span class="nf">name</span> <span class="cp">%&gt;</span> Answers<span class="nt">&lt;/h1&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">form_for</span><span class="p">(</span><span class="vi">@survey</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>

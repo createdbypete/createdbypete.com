@@ -4,7 +4,7 @@
   <id>http://www.createdbypete.com/articles</id>
   <link href="http://www.createdbypete.com/articles"/>
   <link href="http://www.createdbypete.com/atom.xml" rel="self"/>
-  <updated>2015-07-08T10:00:00+10:00</updated>
+  <updated>2015-07-08T00:00:00Z</updated>
   <author>
     <name>Peter Rhoades</name>
   </author>
@@ -12,7 +12,7 @@
     <title>How to organise i18n without losing your… translation_not_found</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/how-to-organise-i18n-without-losing-your/"/>
     <id>http://www.createdbypete.com/articles/how-to-organise-i18n-without-losing-your/</id>
-    <published>2015-07-08T10:00:00+10:00</published>
+    <published>2015-07-08T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;I’ve written before about &lt;a href="articles/working-with-locales-and-time-zones-in-rails/"&gt;Working with Locales and Time Zones in Rails&lt;/a&gt;, but I often feel the i18n library (short for internationalisation) is underused (appreciated?). Perhaps it is even avoided because of the perception it is more effort to develop with and harder to maintain. This article will, I hope, open your mind to the idea that you will be better off using i18n in your application (even for a single language) and that it can be maintainable with some simple organisational pointers.&lt;/p&gt;</content>
   </entry>
@@ -20,7 +20,7 @@
     <title>Rails Tip: TODO, FIXME and OPTIMIZE code comments</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/"/>
     <id>http://www.createdbypete.com/articles/rails-tip-todo-fixme-and-optimize-code-comments/</id>
-    <published>2015-04-19T10:00:00+10:00</published>
+    <published>2015-04-19T00:00:00Z</published>
     <updated>2017-03-04T18:12:00+11:00</updated>
     <content type="html">&lt;p&gt;Ruby on Rails has so much that it&amp;rsquo;s often easy to overlook some of the simple things it can do for you. For example you can leave special comment or notes in your code for Rails to remind you of tasks that you need to do like this:&lt;/p&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;ActiveRecord&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
   &lt;span class="c1"&gt;# TODO Refactor this class, it's way too big!&lt;/span&gt;
@@ -55,7 +55,7 @@ annotations.&lt;/p&gt;
     <title>Creating Form Objects with ActiveModel and Virtus</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/"/>
     <id>http://www.createdbypete.com/articles/creating-form-objects-with-activemodel-and-virtus/</id>
-    <published>2015-04-15T10:00:00+10:00</published>
+    <published>2015-04-15T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;You might have heard of “fat models” referring to (mostly) ActiveRecord models turning into huge classes responsible for everything from user authentication to accepting attributes for entirely different models. This violates one of my favourite rules of &lt;a href="https://robots.thoughtbot.com/back-to-basics-solid"&gt;SOLID&lt;/a&gt;, the &lt;a href="https://en.wikipedia.org/wiki/Single_responsibility_principle"&gt;single responsibility principle (SRP)&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
@@ -63,7 +63,7 @@ annotations.&lt;/p&gt;
     <title>Dynamic OmniAuth Provider Setup</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/"/>
     <id>http://www.createdbypete.com/articles/dynamic-omniauth-provider-setup/</id>
-    <published>2014-09-26T10:00:00+10:00</published>
+    <published>2014-09-26T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;I&amp;rsquo;m a real fan of &lt;a href="https://github.com/intridea/omniauth"&gt;OmniAuth&lt;/a&gt; gem but I think some of it&amp;rsquo;s more powerful features get overlooked. One of these features is the setup phase; the setup phase allows for request-time modification of an OmniAuth strategy. In this article I&amp;rsquo;m going to demonstrate how to dynamically set the strategy options so your application users could specify the API credentials used by OmniAuth.&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;ll be using Rails 4 and Omniauth 1.2 (versions at the time of writing). We&amp;rsquo;ll use the &lt;a href="https://github.com/arunagw/omniauth-twitter"&gt;Twitter strategy&lt;/a&gt; for the examples but the same principles can be applied to any strategy.&lt;/p&gt;
@@ -131,7 +131,7 @@ annotations.&lt;/p&gt;
     <title>Working with Locales and Time Zones in Rails</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/"/>
     <id>http://www.createdbypete.com/articles/working-with-locales-and-time-zones-in-rails/</id>
-    <published>2014-06-25T10:00:00+10:00</published>
+    <published>2014-06-25T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;&lt;a href="http://guides.rubyonrails.org/i18n.html"&gt;Rails handles internationalization (i18n) really well&lt;/a&gt;, and you can set the default locale and time zone for your application very simply:&lt;/p&gt;&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;# config/application.rb&lt;/span&gt;
 
@@ -251,7 +251,7 @@ annotations.&lt;/p&gt;
     <title>Create a custom Liquid tag as a Jekyll plugin</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/"/>
     <id>http://www.createdbypete.com/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/</id>
-    <published>2014-03-08T11:00:00+11:00</published>
+    <published>2014-03-08T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;If you didn&amp;rsquo;t know already, this site was built in &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt; (more recently in &lt;a href="http://middlemanapp.com/"&gt;Middleman&lt;/a&gt;) and Jekyll makes use of the &lt;a href="http://liquidmarkup.org/"&gt;Liquid&lt;/a&gt; templating language to process templates. All the standard &lt;a href="http://docs.shopify.com/themes/liquid-basics/logic"&gt;tags&lt;/a&gt; and &lt;a href="http://docs.shopify.com/themes/liquid-basics/output"&gt;filters&lt;/a&gt; for Liquid are supported, but sometimes you need a bit more!&lt;/p&gt;
 &lt;p&gt;I wanted to show a &lt;a href="http://en.wikipedia.org/wiki/QR_code"&gt;QR code&lt;/a&gt; in the top corner of my article pages when it is printed off so you can scan the code and return to the page form a mobile device. A little bit of a gimmick but I wanted something real to base this article on.&lt;/p&gt;
@@ -352,7 +352,7 @@ annotations.&lt;/p&gt;
     <title>A Practical Guide to Using rsync</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/"/>
     <id>http://www.createdbypete.com/articles/a-practical-guide-to-using-rsync/</id>
-    <published>2014-02-25T11:00:00+11:00</published>
+    <published>2014-02-25T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;If you&amp;rsquo;ve never used &lt;a href="http://rsync.samba.org/"&gt;rsync&lt;/a&gt; before then today is going to be a great day for you. Firstly, rsync is not new it&amp;rsquo;s been around for quite a while and chances are you&amp;rsquo;ve already used it without realising. One of the things I use it for most is to sync directories on your local machine (useful for creating backups to external devices) or you can sync with a remote connection.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -441,7 +441,7 @@ $ apt-get install rsync
     <title>Ruby on Rails development setup for Mac OSX</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/ruby-on-rails-development-setup-for-mac-osx/"/>
     <id>http://www.createdbypete.com/articles/ruby-on-rails-development-setup-for-mac-osx/</id>
-    <published>2014-02-03T06:13:00+11:00</published>
+    <published>2014-02-02T19:13:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;Most developers like to spend a bit of time setting up their development workspace. I&amp;rsquo;m no different, after a number of years tweaking and experimenting the following article details how I setup my environment for Mavericks/Yosemite.&lt;/p&gt;
 &lt;p&gt;There has always been a consistent criteria my development environment needed to meet:&lt;/p&gt;
@@ -636,7 +636,7 @@ cp /usr/local/etc/redis.conf ./config/redis.conf
     <title>Simple way to find broken links with Wget</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/"/>
     <id>http://www.createdbypete.com/articles/simple-way-to-find-broken-links-with-wget/</id>
-    <published>2013-09-11T10:00:00+10:00</published>
+    <published>2013-09-11T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;After writing the previous post singing the praises of Wget by show it can be used to &lt;a href="/articles/make-a-local-website-mirror-with-wget/"&gt;mirror and entire website locally&lt;/a&gt;. I have stumbled across another useful feature, it can be used to &lt;a href="http://en.wikipedia.org/wiki/Web_crawler"&gt;spider a website&lt;/a&gt; following every link it finds (including those of assets such as stylesheets etc) and log the results.&lt;/p&gt;
 &lt;p&gt;In short, it&amp;rsquo;s a pretty effective broken link finder, brilliant news for anyone with a long standing blog for example as most CMS systems such as &lt;a href="http://wordpress.org/"&gt;Wordpress&lt;/a&gt; will not update any article references you have put in your blog posts for you.&lt;/p&gt;
@@ -686,7 +686,7 @@ HTTP request sent, awaiting response... 404 Not Found
     <title>The internet is down! Google downtime caused a 40% drop in global traffic</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/the-internet-is-down-google-downtime/"/>
     <id>http://www.createdbypete.com/articles/the-internet-is-down-google-downtime/</id>
-    <published>2013-08-17T10:00:00+10:00</published>
+    <published>2013-08-17T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;Google.com was down for a few minutes between 23:52 and 23:57 BST on Aug 16, 2013. This result of this downtime was a massive drop in global internet traffic.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.gosquared.com/r/ODU5MTM4"&gt;GoSquared&lt;/a&gt; a service providing real-time analytics for websites reported a &lt;strong&gt;40% drop&lt;/strong&gt; in the number of pageviews. That&amp;rsquo;s a massive drop for only a few seconds downtime and highlights just how much we rely on Google as internet users.&lt;/p&gt;
@@ -700,7 +700,7 @@ HTTP request sent, awaiting response... 404 Not Found
     <title>Make a local website mirror with Wget</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/"/>
     <id>http://www.createdbypete.com/articles/make-a-local-website-mirror-with-wget/</id>
-    <published>2013-07-15T10:00:00+10:00</published>
+    <published>2013-07-15T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;You&amp;rsquo;ve probably used the &lt;a href="http://www.gnu.org/software/wget/"&gt;Wget&lt;/a&gt; command-line tool before but you may not be aware of a pretty neat feature it has tucked away.&lt;/p&gt;
 &lt;p&gt;You can download the resulting HTML of a website (including any linked assets)to your local machine. Not only that it will update any links to the local file reference. This can be useful for getting hold of a site you want to view offline (perhaps you are travelling).&lt;/p&gt;
@@ -734,8 +734,8 @@ HTTP request sent, awaiting response... 404 Not Found
     <title>Working with nested forms and a many-to-many association in Rails 4</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/"/>
     <id>http://www.createdbypete.com/articles/working-with-nested-forms-and-a-many-to-many-association-in-rails-4/</id>
-    <published>2013-05-07T10:00:00+10:00</published>
-    <updated>2017-03-04T18:03:30+11:00</updated>
+    <published>2013-05-07T00:00:00Z</published>
+    <updated>2017-08-26T17:23:26+10:00</updated>
     <content type="html">&lt;p&gt;Recently a project I was working on needed a &lt;em&gt;many-to-many&lt;/em&gt; relationship that would also store some extra data in the pivot table.&lt;/p&gt;
 &lt;p&gt;Rails provides helpers to make working with this sort of relationship a breeze but when you start to include the nested forms and requirement to add data to that connecting table the solution may not be that obvious.&lt;/p&gt;
 
@@ -831,7 +831,7 @@ rake db:migrate
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The &lt;em&gt;behind the scenes&lt;/em&gt; work is done so lets sort out our views. Specifically the form so we can add the answers&lt;/p&gt;
-&lt;pre class="highlight erb"&gt;&lt;code&gt;# app/views/survey/answers.html.erb
+&lt;pre class="highlight erb"&gt;&lt;code&gt;# app/views/surveys/answers.html.erb
 &lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="vi"&gt;@survey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt; Answers&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 
 &lt;span class="cp"&gt;&amp;lt;%=&lt;/span&gt; &lt;span class="n"&gt;form_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@survey&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="cp"&gt;%&amp;gt;&lt;/span&gt;
@@ -879,7 +879,7 @@ rake db:migrate
     <title>Getting Started with Rails 4</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/getting-started-with-rails-4/"/>
     <id>http://www.createdbypete.com/articles/getting-started-with-rails-4/</id>
-    <published>2013-04-13T10:00:00+10:00</published>
+    <published>2013-04-13T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;With a new major version of Rails -on the horizon- now released it makes sense to start taking a look and what&amp;rsquo;s going on. I&amp;rsquo;m going to show you how to install the Rails 4 gem so you can start playing with the latest version.&lt;/p&gt;
 &lt;h2&gt;Setup your development environment&lt;/h2&gt;
@@ -927,7 +927,7 @@ rails (4.0.0, 3.2.13)
     <title>Personalise the Google URL shortening service with your own domain</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/personalise-the-google-url-shortening-service-with-your-own-domain/"/>
     <id>http://www.createdbypete.com/articles/personalise-the-google-url-shortening-service-with-your-own-domain/</id>
-    <published>2013-04-11T10:00:00+10:00</published>
+    <published>2013-04-11T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;In this short article I&amp;rsquo;ll show you one way to personalise the Google URL Shortening service known as &lt;a href="http://goo.gl"&gt;goo.gl&lt;/a&gt; so you can use your own short URL domain. You can probably use this with any other URL shortening service as well but I have a Google account so this is just easy.&lt;/p&gt;
 &lt;h3&gt;But why would to do this?&lt;/h3&gt;
@@ -983,7 +983,7 @@ rails (4.0.0, 3.2.13)
     <title>Installing Gitlab on Mac OS X and Mac OS X Server</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/installing-gitlab-on-mac-os-x-and-mac-os-x-server/"/>
     <id>http://www.createdbypete.com/articles/installing-gitlab-on-mac-os-x-and-mac-os-x-server/</id>
-    <published>2013-03-20T11:00:00+11:00</published>
+    <published>2013-03-20T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;div class="alert"&gt;  &lt;p&gt;This article is now outdated and I recommend you check one of the many &lt;a href="https://github.com/gitlabhq/gitlabhq#installation"&gt;installation methods&lt;/a&gt;.&lt;/p&gt;
   &lt;p&gt;I would also recommend &lt;a href="https://gitlab.com/gitlab-org/cookbook-gitlab/blob/master/doc/development.md"&gt;running GitLab on a virtual machine&lt;/a&gt; in OS X that way you don&amp;rsquo;t need to mess around with OS X internals, you could still host the database and files on your OS X filesystem if that makes you feel more comfortable. As with everything though, backup and backup again!&lt;/p&gt;
@@ -1387,7 +1387,7 @@ sudo apachectl restart
     <title>Jet Set Radio released on iOS and Android</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/jet-set-radio-released-on-ios-and-android/"/>
     <id>http://www.createdbypete.com/articles/jet-set-radio-released-on-ios-and-android/</id>
-    <published>2012-11-29T11:00:00+11:00</published>
+    <published>2012-11-29T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;Today Sega has released &lt;a href="http://www.sega.co.uk/games/jet-set-radio/"&gt;Jet Set Radio&lt;/a&gt; on &lt;a href="https://itunes.apple.com/gb/app/jet-set-radio/id554531935?mt=8"&gt;iOS&lt;/a&gt; and &lt;a href="https://play.google.com/store/apps/details?id=com.sega.jetsetradio"&gt;Android&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Jet Set Radio was one of my favourite titles from the Dreamcast era (a console that should and could have done a lot better) amongst so many other titles on the unappreciated console. I&amp;rsquo;m glad someone has taken the time to revive this title.&lt;/p&gt;
@@ -1409,7 +1409,7 @@ sudo apachectl restart
     <title>PHP 5.4 development on OS X with MySQL and Laravel 4</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/"/>
     <id>http://www.createdbypete.com/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/</id>
-    <published>2012-11-12T22:23:00+11:00</published>
+    <published>2012-11-12T11:23:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;As a developer I&amp;rsquo;m always exited by the latest releases, in contrast for any servers I setup I want solid, stable, time tested releases that are going to work flawlessly. I certainly know why you follow the rule of &amp;ldquo;if it isn&amp;rsquo;t broken don&amp;rsquo;t upgrade it&amp;rdquo;, but when I still hear of hosts offering PHP 5.2 when the latest stable version of PHP at the time of writing is 5.5 it saddens me to think of what people are missing.&lt;/p&gt;
 &lt;p&gt;Most hosts should be able to offer you at least 5.3 by now (if not find someone else right now!). In case your host can offer you PHP 5.4, or you want to start using the new awesomeness here&amp;rsquo;s how to install it on OS X. I&amp;rsquo;m running Mavericks but since most of this guide uses Homebrew I have included a few notes for differences installing on Mountain Lion and I would think any previous versions that can also run Homebrew can follow along.&lt;/p&gt;
@@ -1528,7 +1528,7 @@ php -S localhost:8000 my-router-script.php
     <title>Removing Heroku Toolbelt</title>
     <link rel="alternate" href="http://www.createdbypete.com/articles/removing-heroku-toolbelt/"/>
     <id>http://www.createdbypete.com/articles/removing-heroku-toolbelt/</id>
-    <published>2012-08-24T10:00:00+10:00</published>
+    <published>2012-08-24T00:00:00Z</published>
     <updated>2017-03-04T18:03:30+11:00</updated>
     <content type="html">&lt;p&gt;So you would like to uninstall the &lt;a href="http://toolbelt.heroku.com/"&gt;Heroku Toolbelt&lt;/a&gt; from OS X and you&amp;rsquo;ve noticed there is no information in the documentation. No worries, you can run the following commands in a Terminal prompt:&lt;/p&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rm -rf ~/.heroku
 sudo rm -rf /usr/local/heroku /usr/bin/heroku
