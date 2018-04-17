@@ -8,3 +8,6 @@
 # Ignore cache
 /.sass-cache
 /.cache
+
+/.firebaserc
+/.firebase

@@ -21,7 +21,9 @@ Run the Middleman server for development.
 ./bin/server
 ```
 
-Deploy to Github Pages.
+## Deploy
+
+Ensure [Firebase is setup locally](https://firebase.google.com/docs/hosting/deploying) to deploy the static files.
 
 ```
 ./bin/deploy

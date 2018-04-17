@@ -1,0 +1,49 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "Gemfile*",
+      "Dockerfile",
+      "**/*.rb",
+      "README.md"
+    ],
+    "redirects": [{
+        "source" : "/blog/2012/08/removing-heroku-toolbelt.html",
+        "destination" : "/articles/removing-heroku-toolbelt/",
+        "type" : 301
+      },
+      {
+        "source" : "/blog/2012/11/php-54-development-on-osx.html",
+        "destination" : "/articles/php-54-development-on-os-x-with-mysql-and-laravel-4/",
+        "type" : 301
+      },
+      {
+        "source" : "/blog/2012/11/jet-set-radio-released-on-ios-and-android.html",
+        "destination" : "/articles/jet-set-radio-released-on-ios-and-android/",
+        "type" : 301
+      },
+      {
+        "source" : "/articles/make-a-local-copy-of-any-website-with-wget/",
+        "destination" : "/articles/make-a-local-website-mirror-with-wget/",
+        "type" : 301
+      },
+      {
+        "source" : "/articles/ruby-on-rails-development-with-mac-os-x-mountain-lion/",
+        "destination" : "/articles/ruby-on-rails-development-setup-for-mac-osx/",
+        "type" : 301
+      },
+      {
+        "source" : "/articles/ruby-on-rails-development-with-mac/",
+        "destination" : "/articles/ruby-on-rails-development-setup-for-mac-osx/",
+        "type" : 301
+      },
+      {
+        "source" : "/articles/create-a-custom-liquid-tag-with-a-jekyll-plugin/",
+        "destination" : "/articles/create-a-custom-liquid-tag-as-a-jekyll-plugin/",
+        "type" : 301
+      }
+    ]
+  }
+}
