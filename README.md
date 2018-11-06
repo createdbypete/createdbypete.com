@@ -21,6 +21,15 @@ Run the Middleman server for development.
 ./bin/server
 ```
 
+## Build
+
+You can build the project with Docker as your only dependency.
+
+```
+docker build -t createdbypete.github.io:latest .
+docker -v $(pwd)/build:/src/build createdbypete.github.io:latest bundle exec middleman build
+```
+
 ## Deploy
 
 Ensure [Firebase is setup locally](https://firebase.google.com/docs/hosting/deploying) to deploy the static files.
